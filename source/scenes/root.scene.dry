@@ -19,9 +19,9 @@ go-to: start_menu_2
 
 Select party.
 
--@start_ppp: The <span style="color:rgb(255, 123, 0);">**Popular People's Party**</span>.
+-@start_ppp: The <span style="color:rgb(238, 117, 36);">**Popular People's Party**</span>.
 -@start_unp: The <span style="color:rgb(64, 89, 156);">**United National Party**</span>.
--@start_cpr: The <span style="color:rgb(131, 0, 0);">**Communist Party**</span>.
+-@start_cpr: The <span style="color:rgb(129, 11, 11);">**Communist Party**</span>.
 
 @start_unp
 
