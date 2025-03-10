@@ -10,24 +10,24 @@ go-to: start_menu_2
 
 @start_menu_2
 
-- @start_1: Start game
+- @start: Start game
 - @modinfo: Mod Info
 - @credits: Credits
 - @game_over.achievements
 
-@start_1
-on-arrival: player_beg = 1 if not achievement_game_completed
-go-to: start if achievement_game_completed; pls_player if not achievement_game_completed
-
-
-@pls_player
-
-Read.
-
-- @modinfo.infotext: Mod Info
-
-
 @start
+
+Select party.
+
+-@start_ppp: The <span style="color:rgb(255, 123, 0);">**Popular People's Party**</span>.
+-@start_unp: The <span style="color:rgb(64, 89, 156);">**United National Party**</span>.
+-@start_cpr: The <span style="color:rgb(185, 0, 0);">**Communist Party**</span>.
+
+@start_unp
+
+@start_cpr
+
+@start_ppp
 on-arrival: {!
 Q.started = 1;
 // time elapsed (in months)
@@ -56,25 +56,21 @@ Q.dues = 2;
 Q.dissent = 0.05;
 Q.dissent_percent = 5;
 
-// factions
-Q.factions = ['left', 'center', 'labor', 'reformist', 'neorevisionist'];
+// PPP factions
+Q.factions = ['labor', 'caterinoist', 'scardinaist'];
 // should this be normalized to 100%?
-Q.left_strength = 15;
-Q.left_dissent = 20;
-Q.center_strength = 30;
-Q.center_dissent = 0;
-Q.labor_strength = 25;
-Q.labor_dissent = 5;
-Q.reformist_strength = 25;
-Q.reformist_dissent = 5;
-Q.neorevisionist_strength = 5;
-Q.neorevisionist_dissent = 10;
+Q.caterinoist_strength = 60;
+Q.caterinoist_dissent = 0;
+Q.labor_strength = 20;
+Q.labor_dissent = 15;
+Q.scardinaist_strength = 20;
+Q.scardinaist_dissent = 15;
 
-// secret events...
+
+// events...
 Q.unions_independent = 0;
-Q.centrists_resign = 0;
-Q.left_split = 0;
-Q.reformists_resigned = 0;
+Q.caterinoists_resign = 0;
+Q.scardina_split = 0;
 
 // have we discovered neorevisionism?
 Q.neorevisionism = 0;
