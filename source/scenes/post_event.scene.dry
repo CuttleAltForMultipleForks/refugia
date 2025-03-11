@@ -29,8 +29,8 @@ for (var c of Q.classes) {
             Q[c+'_'+party] = 0;
         }
         class_votes += (Q[c+'_'+party]*Q[party+'_turnout']);
-        Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
-        Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
+        Q[c + '_' + party + '_normalized'] = 100*(Q[c+'_'+party]*Q[party+'_turnout'])/class_votes;
+        Q[c + '_' + party + '_display'] = Math.round(100*(Q[c+'_'+party]*Q[party+'_turnout'])/class_votes);
     }
 }
 // calculate support for each of the parties
