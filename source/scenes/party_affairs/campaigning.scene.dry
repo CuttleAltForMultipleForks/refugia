@@ -59,10 +59,16 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources
 on-arrival: freeholder_ppp += 5*(1-dissent); resources -= 1
 
-@unemployed
+@ppp_unemployed
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: unemployed_ppp += 6*(1-dissent); resources -= 1;
 
 We have increased our campaigning among the unemployed
+
+@pnu
+
+@pcr
+
+
