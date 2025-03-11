@@ -53,11 +53,15 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: peasant_ppp += 6*(1-dissent); resources -= 1
 
+We have increased our campaigning among the peasants.
+
 @ppp_freeholder
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources
 on-arrival: freeholder_ppp += 5*(1-dissent); resources -= 1
+
+We have increased our campaigning among the freeholders.
 
 @ppp_unemployed
 subtitle: -1 resources
@@ -65,10 +69,104 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: unemployed_ppp += 6*(1-dissent); resources -= 1;
 
-We have increased our campaigning among the unemployed
+We have increased our campaigning among the unemployed.
 
 @pnu
 
+- @pnu_workers: The urban working class, a strong base for our radicalism.
+- @pnu_new_middle: The "new middle class" of government employees and white-collar workers.
+- @pnu_old_middle: The "old middle class" of small independent businessmen and artisans, part of our traditional support base.
+- @pnu_peasant: Landless rural workers, traditionally radical.
+- @pnu_freeholder: Landowning farmers, part of our traditional support base.
+- @pnu_unemployed: The unemployed.
+- @root: We either don't want to or cannot campaign right now.
+- @easy_discard
+
+@pnu_workers
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: workers_pnu += 6*(1-dissent); resources -= 1;
+
+We have increased our campaigning among the workers.
+
+@pnu_new_middle
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: new_middle_pnu += 6*(1-dissent); resources -= 1;
+
+We have increased our campaigning among the new middle class.
+
+@pnu_old_middle
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: old_middle_pnu += 5*(1-dissent); resources -= 1; 
+
+We have increased our campaigning among the old middle class.
+
+@pnu_peasant
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: peasant_pnu += 6*(1-dissent); resources -= 1
+
+We have increased our campaigning among the peasants.
+
+@pnu_freeholder
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources
+on-arrival: freeholder_pnu += 5*(1-dissent); resources -= 1
+
+We have increased our campaigning among the freeholders.
+
+@pnu_unemployed
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: unemployed_pnu += 6*(1-dissent); resources -= 1;
+
+We have increased our campaigning among the unemployed.
+
 @pcr
 
+- @pcr_workers: The urban working class, our traditional support base.
+- @pcr_new_middle: The "new middle class" of government employees and white-collar workers.
+- @pcr_peasant: Landless rural workers.
+- @pcr_unemployed: The unemployed, a promising support base.
+- @root: We either don't want to or cannot campaign right now.
+- @easy_discard
 
+@pcr_workers
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: workers_pcr += 6*(1-dissent); resources -= 1;
+
+We have increased our campaigning among the workers.
+
+@pcr_new_middle
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: new_middle_pcr += 6*(1-dissent); resources -= 1;
+
+We have increased our campaigning among the new middle class.
+
+@pcr_peasant
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: peasant_pcr += 6*(1-dissent); resources -= 1
+
+We have increased our campaigning among the peasants.
+
+@pcr_unemployed
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: unemployed_pcr += 6*(1-dissent); resources -= 1;
+
+We have increased our campaigning among the unemployed.
