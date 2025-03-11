@@ -121,7 +121,7 @@ on-arrival: center_dissent += 5; church_dissent += 5; fascist_dissent += 5; busi
 
 We have changed ideologies. Many in the party feel unmoored.
 
-@ppp_ideology
+@cpr_ideology
 
 The <span style="color:rgb(129, 11, 11);">**PCR**</span> is torn between many different ideological currents. What should be our primary ideological guidance for now?
 
