@@ -189,9 +189,9 @@ Q.pdc_formed = 0;
 
 // Support for party by social group
 // they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_ppp = 60;
-Q.workers_pcr = 15;
-Q.workers_pnu = 25;
+Q.workers_ppp = 70;
+Q.workers_pcr = 10;
+Q.workers_pnu = 20;
 Q.workers_turnout = 0.7;
 
 Q.new_middle_ppp = 80;
@@ -241,6 +241,10 @@ Q.pcr_in_government = 0;
 Q.ppp_dissent = 0;
 Q.pnu_dissent = 0;
 Q.pcr_dissent = 0;
+
+Q.ppp_turnout = 1;
+Q.pcr_turnout = 0.7;
+Q.pnu_turnout = 0.7;
 
 
 // is the current government a presidential minority government?

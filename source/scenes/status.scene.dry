@@ -219,11 +219,11 @@ Q.socialism_disp = Math.round(Q.socialism);
 
 (if the election were to be held now):
 
-<span style="color:rgb(238, 117, 36);">**PPP**</span>: [+ ppp_votes +]
+<span style="color:rgb(238, 117, 36);">**PPP**</span>: [+ ppp_votes +]%
 
-<span style="color:rgb(64, 89, 156);">**PNU**</span>: [+ pnu_votes +]
+<span style="color:rgb(64, 89, 156);">**PNU**</span>: [+ pnu_votes +]%
 
-<span style="color:rgb(129, 11, 11);">**PCR**</span>: [+ pcr_votes +]
+<span style="color:rgb(129, 11, 11);">**PCR**</span>: [+ pcr_votes +]%
 
 **Detailed results for each demographic**
 
