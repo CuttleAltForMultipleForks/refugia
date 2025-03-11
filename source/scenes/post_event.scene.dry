@@ -110,17 +110,17 @@ if (Q.unemployed <= 1) {
 }
 
 var total_dissent = 0;
-if (Q.party = "PPP") {
+if (Q.party == "PPP") {
     var total_strength = ppp_total_strength;
     for (var c of Q.ppp_factions) {
         total_dissent += Q[c+'_strength']*Q[c+'_dissent'];
     }
-} else if (Q.party = "PNU") {
+} else if (Q.party == "PNU") {
     var total_strength = pnu_total_strength;
     for (var c of Q.pnu_factions) {
         total_dissent += Q[c+'_strength']*Q[c+'_dissent'];
     }
-} else if (Q.party = "PCR") {
+} else if (Q.party == "PCR") {
     var total_strength = pcr_total_strength;
     for (var c of Q.pcr_factions) {
         total_dissent += Q[c+'_strength']*Q[c+'_dissent'];
