@@ -71,13 +71,13 @@ Q.scardinaist_dissent = 15;
 // PNU factions
 Q.pnu_factions = ['center', 'fascist', 'church', 'business'];
 // should this be normalized to 100%?
-Q.center_strength = 50;
+Q.center_strength = 35;
 Q.center_dissent = 15;
-Q.fascist_strength = 20;
+Q.fascist_strength = 30;
 Q.fascist_dissent = 20;
-Q.church_strength = 10;
+Q.church_strength = 5;
 Q.church_dissent = 20;
-Q.business_strength = 20;
+Q.business_strength = 30;
 Q.business_dissent = 20;
 
 // PCR factions
