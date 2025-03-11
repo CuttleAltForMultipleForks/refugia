@@ -1,0 +1,6 @@
+title: Crisis in Vosallo!
+subtitle: A crisis has broken out in the small city of Vosallo.
+view-if: time >= 2
+tags: event
+
+A crisis has struck the small city of Vosallo following the arrest of Sandro Lorenzo, the local Liberty Guard leader, for playing the piano too loudly. The city's Liberty Guard then burned the police station down in an attempt to free him and fought off a police raid on their headquarters, going further to effectively take control of the city following the resignation of the mayor.
