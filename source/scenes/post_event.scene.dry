@@ -138,61 +138,16 @@ if (Q.dissent < 0) {
 }
 
 // stolen from socdemredux lol
-Q.sa_force = Q.sa_strength*Q.sa_militancy;
-Q.sh_force = Q.sh_strength*Q.sh_militancy;
-Q.rb_force = Q.rb_strength*Q.rb_militancy;
-Q.rfb_force = Q.rfb_strength*Q.rfb_militancy;
-Q.prussia_force = Q.prussian_police_strength*Q.prussian_police_militancy*Q.prussian_police_loyalty;
-var total_force = (Q.sa_force+Q.sh_force+Q.rb_force+Q.rfb_force+Q.prussia_force);
+Q.rg_force = Q.rg_strength*Q.rg_militancy;
+Q.lg_force = Q.lg_strength*Q.lg_militancy;
+Q.army_force = Q.army_strength*Q.army_militancy;
+Q.police_force = Q.police_strength*Q.police_militancy;
+var total_force = (Q.rg_force+Q.lg_force+Q.army_force+Q.police_force);
 
-Q.sa_force = Math.round((Q.sa_force/total_force)*100);
-Q.sh_force = Math.round((Q.sh_force/total_force)*100);
-Q.rb_force = Math.round((Q.rb_force/total_force)*100);
-Q.rfb_force = Math.round((Q.rfb_force/total_force)*100);
-Q.prussia_force = Math.round((Q.prussia_force/total_force)*100);
-
-Q.far_right_force = Q.sh_force + Q.sa_force;
-Q.democracy_force = Q.rb_force + Q.prussia_force;
-
-Q.far_right_paramilitary = 0;
-Q.democracy_paramilitary = 0;
-Q.far_right_paramilitary_highest = 0;
-Q.far_right_paramilitary_high = 0;
-Q.far_right_paramilitary_med = 0;
-Q.far_right_paramilitary_low = 0;
-Q.democracy_paramilitary_highest = 0;
-Q.democracy_paramilitary_high = 0;
-Q.democracy_paramilitary_med = 0;
-Q.democracy_paramilitary_low = 0;
-
-if (Q.far_right_force >= Q.democracy_force) {
-    if (Q.far_right_force - Q.democracy_force >= 40) {
-        Q.far_right_paramilitary_highest = 1;
-    } else if (Q.far_right_force - Q.democracy_force >= 30) {
-        Q.far_right_paramilitary_high = 1;
-    } else if (Q.far_right_force - Q.democracy_force >= 10) {
-        Q.far_right_paramilitary_med = 1;
-    } else if (Q.far_right_force - Q.democracy_force >= 0){
-        Q.far_right_paramilitary_low = 1;
-    }
-    if (Q.sa_force >= Q.sh_force) {
-        Q.sa_paramilitary = 1;
-    } else {
-        Q.sh_paramilitary = 1;
-    }
-    Q.far_right_paramilitary = 1;
-} else if (Q.democracy_force > Q.far_right_force) {
-    if (Q.democracy_force - Q.far_right_force >= 40) {
-        Q.democracy_paramilitary_highest = 1;
-    } else if (Q.democracy_force - Q.far_right_force >= 30) {
-        Q.democracy_paramilitary_high = 1;
-    } else if (Q.democracy_force - Q.far_right_force >= 10) {
-        Q.democracy_paramilitary_med = 1;
-    } else if (Q.democracy_force - Q.far_right_force >= 0){
-        Q.democracy_paramilitary_low = 1;
-    }
-    Q.democracy_paramilitary = 1;
-}
+Q.rg_force = Math.round((Q.rg_force/total_force)*100);
+Q.lg_force = Math.round((Q.lg_force/total_force)*100);
+Q.army_force = Math.round((Q.army_force/total_force)*100);
+Q.police_force = Math.round((Q.police_force/total_force)*100);
 
 Q.dnf_r = Math.round(Q.dnf_r * 10) / 10
 Q.dnvp_r = Math.round(Q.dnvp_r * 10) / 10
@@ -1109,7 +1064,7 @@ if (Q.far_right_paramilitary && Q.year >= 1930) {
         Q.unemployed_spd += 2/12;
         if (Q.pro_republic < 50) Q.pro_republic += Q.strife / 12;
     }
-    if (Q.rfb_force >= Q.rb_force) {
+    if (Q.rfb_force >= Q.army_force) {
         Q.workers_kpd += 4/12;
         Q.workers_spd -= 4/12;
         Q.unemployed_kpd += 6/12;
@@ -2446,7 +2401,7 @@ if (Q.spd_in_government_time >= 6) {
     if (Q.reichswehr_strength > 100) {
         Q.hindenburg_angry -= (Q.reichswehr_strength / 50)
     }
-    if (Q.rb_militancy >= 0.1 || Q.sa_force >= 40 || Q.rfb_force >= 40) {
+    if (Q.rb_militancy >= 0.1 || Q.rg_force >= 40 || Q.rfb_force >= 40) {
         Q.hindenburg_angry += 1;
     }
     if (Q.sh_banned) {
@@ -2562,7 +2517,7 @@ if (Q.bruning_time > 1) {
     if (Q.strife >= 6) {
         Q.hindenburg_angry_bruning += Q.strife / 2;
     }
-    if (Q.rb_militancy >= 0.1 || Q.sa_force >= 30 || Q.rfb_force >= 40) {
+    if (Q.rb_militancy >= 0.1 || Q.rg_force >= 30 || Q.rfb_force >= 40) {
         Q.hindenburg_angry_bruning += 2;
     }
     if (Q.dnvp_ideology == "Moderate" && !Q.dnvp_defect) {
