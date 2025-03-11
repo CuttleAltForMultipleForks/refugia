@@ -238,6 +238,7 @@ Q.economic_records = [];
 
 // State of the government
 Q.president = "Caterino";
+Q.president_party = "PPP";
 // starting chancellor: Wilhelm Marx
 Q.chancellor = "N/A";
 Q.chancellor_party = 'PPP';
