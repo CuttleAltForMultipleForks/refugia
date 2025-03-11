@@ -189,8 +189,8 @@ Q.pdc_formed = 0;
 
 // Support for party by social group
 // they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_ppp = 70;
-Q.workers_pcr = 10;
+Q.workers_ppp = 75;
+Q.workers_pcr = 5;
 Q.workers_pnu = 20;
 Q.workers_turnout = 0.7;
 
