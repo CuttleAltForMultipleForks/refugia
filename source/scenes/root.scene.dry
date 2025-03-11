@@ -214,9 +214,9 @@ Q.freeholder_pcr = 0;
 Q.freeholder_pnu = 70;
 Q.freeholder_turnout = 0.5;
 
-Q.unemployed_ppp = 45;
-Q.unemployed_pcr = 35;
-Q.unemployed_pnu = 20;
+Q.unemployed_ppp = 55;
+Q.unemployed_pcr = 30;
+Q.unemployed_pnu = 15;
 Q.unemployed_turnout = 0.6;
 
 // demographic turnout increased by higher QoL and radicalization?
