@@ -14,16 +14,16 @@ Whether or not we are in an electoral campaign, the party is always trying to br
 
 @ppp
 
-- @workers: The urban working class, a strong base for our radicalism.
-- @new_middle: The "new middle class" of government employees and white-collar workers, our traditional support base.
-- @old_middle: The "old middle class" of small independent businessmen and artisans.
-- @peasant: Rural workers,
-- @unemployed: The unemployed.
-- @catholics: Catholics, who typically support the <span style="color: #000000;">Center Party</span>.
+- @ppp_workers: The urban working class, a strong base for our radicalism.
+- @ppp_new_middle: The "new middle class" of government employees and white-collar workers, part of our traditional support base.
+- @ppp_old_middle: The "old middle class" of small independent businessmen and artisans.
+- @ppp_peasant: Landless rural workers, part of our traditional support base.
+- @ppp_freeholder: Landowning farmers, traditionally conservative.
+- @ppp_unemployed: The unemployed.
 - @root: We either don't want to or cannot campaign right now.
 - @easy_discard
 
-@workers
+@ppp_workers
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
@@ -31,7 +31,7 @@ on-arrival: workers_ppp += 6*(1-dissent); resources -= 1;
 
 We have increased our campaigning among the workers.
 
-@new_middle
+@ppp_new_middle
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
@@ -39,7 +39,7 @@ on-arrival: new_middle_ppp += 6*(1-dissent); resources -= 1;
 
 We have increased our campaigning among the new middle class.
 
-@old_middle
+@ppp_old_middle
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
@@ -47,27 +47,22 @@ on-arrival: old_middle_ppp += 5*(1-dissent); resources -= 1;
 
 We have increased our campaigning among the old middle class.
 
-@rural
+@ppp_peasant
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: rural_spd += 5*(1-dissent); rural_spd -= 3*(1-dissent) if peoples_party == 0; resources -= 1; peoples_party_support += 1; rural_spd += 3*(1-dissent) if rural_policy >= 2
+on-arrival: peasant_ppp += 6*(1-dissent); resources -= 1
 
-We have increased our campaigning among farmers. [? if peoples_party == 0: We have not historically campaigned much among the farmers, and they do not trust us. ?][? if peoples_party > 0: As a people's party, we have an easier time increasing support among farmers than before. ?][? if rural_policy >= 2 : Our rural policies have made it easier for us to build support among farmers. ?]
+@ppp_freeholder
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources
+on-arrival: freeholder_ppp += 5*(1-dissent); resources -= 1
 
 @unemployed
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: unemployed_spd += 6*(1-dissent); resources -= 1; unemployed_spd -= 3 if welfare < 0; unemployed_spd += 6*(1-dissent) if wtb_adopted = 1; unemployed_spd += 3*(1-dissent) if welfare >= 2;
+on-arrival: unemployed_ppp += 6*(1-dissent); resources -= 1;
 
-We have increased our campaigning among the unemployed. [? if welfare < 0: The welfare cuts and resultant poverty make our campaign more difficult, since we are associated with the government that enacted these cuts, and our campaign may even backfire. ?][? if wtb_adopted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract support from the unemployed. ?]
-
-@catholics
-subtitle: -1 resources
-choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-view-if: peoples_party == 1
-on-arrival: catholics_spd += 6*(1-dissent); resources -= 1
-
-We have increased our campaigning among Catholics.
+We have increased our campaigning among the unemployed

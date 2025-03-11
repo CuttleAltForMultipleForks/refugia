@@ -219,29 +219,11 @@ Q.socialism_disp = Math.round(Q.socialism);
 
 (if the election were to be held now):
 
-<span style="color: #c00000;">**SPD**</span>: [+ spd_votes +]%
+<span style="color:rgb(238, 117, 36);">**PPP**</span>: [+ ppp_votes +]
 
-[? if sapd_formed: <span style="color: #9B0000;">**SAPD**</span>: [+ sapd_votes +]% ?]
+<span style="color:rgb(64, 89, 156);">**PNU**</span>: [+ pnu_votes +]
 
-<span style="color: #000000;">**Z**</span> + <span style="color: #A2D8E0;">**BVP**</span>: [+ z_votes +]%
-
-<span style="color: #700000;">**KPD**</span>: [+ kpd_votes +]%
-
-[? if not lvp_formed: [? if not ddp_name: <span style="color: #D3C24D;">**DDP**</span>?][? if ddp_name != 0: <span style="color: #D3C24D;">**[+ ddp_name +]**</span>?]: [+ ddp_votes +]% ?]
-
-[? if lvp_formed: <span style="color: #FFCC00;">**LVP**</span>: [+ lvp_votes +]% ?]
-
-[? if not lvp_formed: <span style="color: #C0A054;">**DVP**</span>: [+ dvp_votes +]% ?]
-
-[? if kvp_formed: <span style="color: #0087DC;">**KVP**</span>: [+ kvp_votes +]% ?]
-
-<span style="color: #3E88B3;">**DNVP**</span>: [+ dnvp_votes +]%
-
-[? if dnf_formed: <span style="color: #003755;">**DNF**</span>: [+ dnf_votes +]% ?]
-
-<span style="color: #7A3C00;">**NSDAP**</span>: [+ nsdap_votes +]%
-
-**Others**: [+ other_votes +]%
+<span style="color:rgb(129, 11, 11);">**PCR**</span>: [+ pcr_votes +]
 
 **Detailed results for each demographic**
 

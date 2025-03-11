@@ -28,7 +28,7 @@ for (var c of Q.classes) {
         if (Q[c+'_'+party] < 0) {
             Q[c+'_'+party] = 0;
         }
-        class_votes += Q[c+'_'+party];
+        class_votes += (Q[c+'_'+party]*Q[party+'_turnout']);
     }
     for (var party of Q.parties) {
         Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
@@ -43,7 +43,7 @@ for (var party of Q.parties) {
         if (Q.old_demographics) { 
             party_support += Q[c]*Q[c+'_'+party];
         } else  { 
-            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
+            party_support += Q[c]*Q[c+'_turnout']*Q[c+'_'+party+'_normalized'];
         } 
     }
     Q[party + '_support'] = party_support;
