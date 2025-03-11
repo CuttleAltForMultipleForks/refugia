@@ -24,13 +24,20 @@ Select party.
 -@start_pcr: The <span style="color:rgb(129, 11, 11);">**Communist Party**</span>.
 
 @start_pnu
+on-arrival: party = "PNU"; ppp_relation = 20; pcr_relation = 10;
+go-to: start_fr
 
 @start_pcr
+on-arrival: party = "PCR"; ppp_relation = 30; pnu_relation = 10;
+go-to: start_fr
 
 @start_ppp
+on-arrival: party = "PPP"; pcr_relation = 30; pnu_relation = 20;
+go-to: start_fr
+
+@start_fr
 on-arrival: {!
 Q.started = 1;
-Q.party = "PPP";
 // time elapsed (in months)
 Q.time = 1;
 Q.year = 1920;
@@ -99,8 +106,6 @@ Q.scardina_split = 0;
 // organizations
 
 // inter-party relations
-Q.pnu_relation = 20;
-Q.pcr_relation = 30;
 
 Q.ppp_leader = "Caterino";
 Q.pnu_leader = "Guagenti";
@@ -139,6 +144,7 @@ Q.pro_republic = 79;
 
 Q.emergency_rule = 1;
 Q.constitution = 0;
+Q.convention_called = 0;
 
 // minimum percentage of votes to be represented in the Reichstag
 Q.electoral_threshold = 0;
@@ -380,99 +386,7 @@ Q.homosexual_rights_timer = 0;
 Q.economic_democracy_timer = 0;
 Q.coalition_affairs_timer = 0;
 // event timers
-Q.emergency_cuts_timer = 0;
-Q.unemployment_insurance_timer = 0;
-Q.sa_ban_timer = 0;
-Q.sh_ban_timer = 0;
-Q.kpd_ultimatum_timer = 0;
-Q.kpd_ultimatum_prussia_timer = 0;
-Q.dnf_decay_timer = 0;
-Q.march_on_berlin_timer = 0;
-Q.lvp_merger_timer = 0;
-Q.lvp_merger_1_timer = 0;
-Q.lvp_merger_2_timer = 0;
-Q.bourgeois_negotiations_1930_timer = 0;
-Q.bourgeois_negotiations_1930_aftermath_timer = 0;
-Q.bourgeois_negotiations_1932_timer = 0;
-Q.bourgeois_negotiations_1932_aftermath_timer = 0;
-Q.bourgeois_negotiations_elections_1930_timer = 0;
-Q.bourgeois_negotiations_elections_1932_timer = 0;
-Q.bourgeois_merger_timer = 0;
 Q.high_inflation_timer = 0;
-Q.papen_chancellor_timer = 0;
-Q.schleicher_chancellor_timer = 0;
-Q.nazi_decay_timer = 0;
-Q.z_party_name = "Z";
-Q.dnvp_leader = "Westarp";
-Q.dnvp_ideology = "Radical";
-Q.dstp_formed = 0;
-Q.ddp_left = 0;
-Q.ddp_right = 0;
-Q.ddp_name = "DDP";
-Q.ddp_full_name = "German Democratic Party";
-Q.ddp_leader = "Koch-Weser";
-Q.ddp_ideology = "Moderate"
-Q.ddp_cohesion = 15;
-Q.vice_chancellor = "Hergt";
-Q.young_plan_signatures = 0;
-Q.young_plan_votes = 0;
-Q.weimar_ref_signatures = 0;
-Q.weimar_ref_votes = 0;
-Q.was_in_center_right_coalition = 0;
-Q.was_in_right_coalition = 0;
-Q.dvp_left = 0;
-Q.dvp_right = 0;
-Q.dvp_was_in_prussia = 0;
-Q.dvp_leader = "Stresemann";
-Q.dvp_ideology = "Moderate"
-Q.liberal_cooperation = 0;
-Q.liberal_parliament = 0;
-Q.bourgeois_parliament = 0;
-Q.bourgeois_parliament_ddp = 0;
-Q.bourgeois_parliament_kvp = 0;
-Q.dvp_congress_trigger = 0;
-Q.liberal_parliament_seen = 0;
-Q.dvp_reform = 0;
-Q.bourgeois_cooperation = 0;
-Q.ui1_compromise = 0;
-Q.panzerkreuser_right_seen = 0;
-Q.black_thursday_seen = 0;
-Q.grand_coalition_collapsed = 0;
-Q.true_christian_democracy = 0;
-Q.zentrum_disintegration = 0;
-Q.wtb_rally = 0;
-Q.braun_resign = 0;
-Q.secret_mode = 0;
-Q.secret_trigger = 0;
-Q.strife = 0;
-Q.lvp_timer_trigger = 0;
-Q.lvp_timer_1_trigger = 0;
-Q.lvp_timer_2_trigger = 0;
-Q.ui0_seen = 0;
-Q.young_plan_ratified = 0
-Q.kvp_leader = "Westarp"
-Q.stresemann_dead = 0;
-Q.bourgeois_negotiations = 0;
-Q.bourgeois_negotiations_1 = 0;
-Q.bourgeois_negotiations_2 = 0;
-Q.bourgeois_negotiations_election_soon = 0;
-Q.dnvp_split_2 = 0
-Q.bourgeois_merger_trigger = 0;
-Q.bourgeois_list = 0;
-Q.hindenburg_angry_bruning = 0;
-Q.bruning_time = 0;
-Q.bruning_toleration_time = 0;
-Q.total_bruning_time = 0;
-Q.total_bruning_toleration_time = 0;
-Q.nazi_peak = 20;
-Q.dnvp_westarp = 1;
-Q.ddp_factionless_time = 0;
-Q.wp_conflict_time = 0;
-Q.dvp_conflict_time = 0;
-Q.bruning_austerity_limited = 0;
-Q.political_decree = 0;
-Q.bruning_coalition_dissent = 0;
-Q.dnvp_angry = 0;
 
 // flavour text stuff
 for (let i = 0; i <= 100; i++) {
@@ -482,45 +396,6 @@ for (let i = 0; i <= 100; i++) {
 
 // all the initial advisors are centrists.
 Q.wels_advisor = 1; // Otto Wels
-Q.muller_advisor = 1; // Hermann Müller
-Q.muller_dead = 0;
-// okay I know Arthur Crispien was a leader irl but i couldn't find much interesting about him...
-Q.crispien_advisor = 0; // Arthur Crispien
-Q.hilferding_advisor = 1; // Rudolf Hilferding
-
-// left advisors
-Q.sender_advisor = 0; // Toni Sender
-Q.levi_advisor = 0; // Paul Levi
-Q.levi_dead = 0;
-Q.rosenfeld_advisor = 0; // Kurt Rosenfeld
-Q.seydewitz_advisor = 0; // Max Seydewitz
-
-// centrist alternate advisors
-Q.pfulf_advisor = 0; // Antonie Pfülf
-Q.breitscheid_advisor = 0; // Rudolf Breitscheid
-
-// Reformist advisors
-Q.severing_advisor = 0; // Carl Severing
-Q.braun_advisor = 0; // Otto Braun
-Q.juchacz_advisor = 0; // Marie Juchacz
-Q.baade_advisor = 0; // Fritz Baade
-
-// Labor advisors
-Q.leipart_advisor = 0; // Theodor Leipart
-Q.aufhauser_advisor = 0; // Siegfried Aufhäuser
-Q.woytinsky_advisor = 0; // Wladimir Woytinsky (post-1930)
-Q.wissell_advisor = 0; // Rudolf Wissell
-
-// Revisionist advisors
-Q.mierendorff_advisor = 0; // Carlo Mierendorf (post-1930)
-
-Q.leber_advisor = 0; // Julius Leber (post-1930)
-Q.schumacher_advisor = 0; // Kurt Schumacher (post-1930)
-
-// Nonfactional advisors
-Q.hirschfeld_advisor = 0; // Magnus Hirschfeld
-Q.radbruch_advisor = 0; // Gustav Radbruch
-Q.stampfer_advisor = 0; // Friedrich Stampfer
 !}
 set-bg: img/map_2.jpg
 new-page: true
