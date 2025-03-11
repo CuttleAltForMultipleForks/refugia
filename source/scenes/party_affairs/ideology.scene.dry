@@ -72,7 +72,7 @@ The <span style="color:rgb(64, 89, 156);">**PNU**</span> is torn between many di
 - @capuano: Following Rufiano Capuano, the restoration of a monarchy under the guidance of the church.
 - @easy_discard
 
-@condemn
+@condem
 on-arrival: {!
 if (Q.ideology && Q.ideology != "Guagentist") {
     Q.changed = 1;
