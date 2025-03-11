@@ -67,7 +67,7 @@ for (var c of Q.ppp_factions) {
     if (Q[c+'_strength'] < 0) {
         Q[c+'_strength'] = 0;
     }
-    ppp_total_strength += Q[c+'_strength']
+    ppp_total_strength += Q[c+'_strength'];
 }
 for (var c of Q.ppp_factions) {
     Q[c+'_strength'] = 100*(Q[c+'_strength']/ppp_total_strength);
@@ -83,7 +83,7 @@ for (var c of Q.pnu_factions) {
     if (Q[c+'_strength'] < 0) {
         Q[c+'_strength'] = 0;
     }
-    pnu_total_strength += Q[c+'_strength']
+    pnu_total_strength += Q[c+'_strength'];
 }
 for (var c of Q.pnu_factions) {
     Q[c+'_strength'] = 100*(Q[c+'_strength']/pnu_total_strength);
@@ -99,7 +99,7 @@ for (var c of Q.pcr_factions) {
     if (Q[c+'_strength'] < 0) {
         Q[c+'_strength'] = 0;
     }
-    pcr_total_strength += Q[c+'_strength']
+    pcr_total_strength += Q[c+'_strength'];
 }
 for (var c of Q.pnu_factions) {
     Q[c+'_strength'] = 100*(Q[c+'_strength']/pcr_total_strength);
@@ -111,16 +111,17 @@ if (Q.unemployed <= 1) {
 
 var total_dissent = 0;
 if (Q.party = "PPP") {
+    var total_strength = ppp_total_strength;
     for (var c of Q.ppp_factions) {
         total_dissent += Q[c+'_strength']*Q[c+'_dissent'];
     }
-}
-if (Q.party = "PNU") {
+} else if (Q.party = "PNU") {
+    var total_strength = pnu_total_strength;
     for (var c of Q.pnu_factions) {
         total_dissent += Q[c+'_strength']*Q[c+'_dissent'];
     }
-}
-if (Q.party = "PCR") {
+} else if (Q.party = "PCR") {
+    var total_strength = pcr_total_strength;
     for (var c of Q.pcr_factions) {
         total_dissent += Q[c+'_strength']*Q[c+'_dissent'];
     }
