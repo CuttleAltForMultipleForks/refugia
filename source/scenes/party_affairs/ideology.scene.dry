@@ -3,68 +3,169 @@ new-page: true
 is-card: true
 tags: party_affairs
 view-if: ideology_timer = 0
-on-arrival: month_actions += 1; old_ideology = ideology; ideology_timer = 18
+on-arrival: month_actions += 1; changed = 0; old_ideology = ideology; ideology_timer = 18
 card-image: img/arbeiterbew.jpg
 max-visits: 3
+go-to: ppp_ideology if party == "PPP"; pnu_ideology if party == "PNU"; cpr_ideology if party == "CPR"
 #subtitle: Setting the party's ideological direction.
 
 = Questions of Ideology
 
-The <span style="color: #c00000;">**SPD**</span> is torn between many different ideological currents. What should be our primary ideological guidance for now?
+@ppp_ideology
+
+The <span style="color:rgb(238, 117, 36);">**PPP**</span> is torn between many different ideological currents. What should be our primary ideological guidance for now?
 
 [? if ideology != 0 : We have previously chosen a [+ ideology +] ideology. Changing it will likely have drawbacks. ?]
 
-- @class_struggle: Class struggle and preparing the proletariat for the revolution are our primary goals.
-- @centrist: The Center <span style="color: #9B0000;">Marxism</span> of Karl Kautsky remains the best way to resolve our internal contradictions.
-- @labor: We should work with the trade unions to improve the lives of workers.
-- @reform: Following Eduard Bernstein, we should work for ethical <span style="color: #c00000;">socialism</span>, strengthen democracy, and expand the party's electorate.
+- @radlib: Following Ponzio Caterono, we will call for crusade against the old order and balanced economics.
+- @socdem: Following Vulpano Trovato, we will call for the building of a strong welfare state with the workers placed first.
+- @modlib: Following Piero Scardina, we will call for the conclusion of the revolution and establishment of a constitutional republic.
 - @easy_discard
 
-@class_struggle
+@radlib
 on-arrival: {!
-if (Q.ideology && Q.ideology != "left") {
+if (Q.ideology && Q.ideology != "Caterinoist") {
     Q.changed = 1;
 }
 !}
-go-to: changed if changed = 1
-on-departure: ideology = "left"; left_strength += 10; communist_coalition += 1; left_dissent -= 5; z_relation -= 3; dvp_relation -= 5; ddp_relation -= 3; lvp_relation -= 3; ddp_cohesion -= 0.5; nationalization_support += 1; kpd_relation += 3; ddp_right += 1; dvp_right += 1.5; lvp_right += 1
+go-to: changed_ppp if changed = 1
+on-departure: ideology = "Caterinoist"; caterinoist_strength += 10; caterinoist_dissent -= 5; scardinaist_dissent += revolutionary_fatigue; labor_dissent += revolutionary_fatigue; revolutionary_Fatigue += 1
 
-The radical left of the party supports a course of class struggle, and potentially a reconciliation with the <span style="color: #700000;">**Communists**</span>.
+We continue to follow the Caterinoist program of continuing the revolution until all of its enemies have been destroyed and the groundwork laid for a republic of virtue. 
 
-@centrist
+@socdem
 on-arrival: {!
-if (Q.ideology && Q.ideology != "centrist") {
+if (Q.ideology && Q.ideology != "Trovatoist") {
     Q.changed = 1;
 }
 !}
-go-to: changed if changed = 1
-on-departure: ideology = "centrist"; center_strength += 10; center_dissent -= 10; left_dissent -= 5; reformist_dissent -= 5
+go-to: changed_ppp if changed = 1
+on-departure: ideology = "Trovatoist"; labor_strength += 10; labor_dissent -= 5; scardinaist_dissent += 5;
 
-The Center Marxists, represented by Kautsky and Hilferding, support a middle course of preparing for revolution while building up the consciousness of the working class.
+The Trovatoists advocate for a focus on the building of a robust welfare state and democratic economy that answers to the workers. 
 
-@labor
+@modlib
 on-arrival: {!
-if (Q.ideology && Q.ideology != "labor") {
+if (Q.ideology && Q.ideology != "Scardinaist") {
     Q.changed = 1;
 }
 !}
-go-to: changed if changed = 1
-on-departure: ideology = "labor"; labor_strength += 10; wtb_support += 1; labor_dissent -= 5; kpd_relation -= 3
+go-to: changed_ppp if changed = 1
+on-departure: ideology = "Scardinaist"; scardinaist_strength += 10; scardinaist_dissent -= 5; labor_dissent += 5;
 
-The labor wing of the party supports continued participation in government in order to provide benefits to the workers, and the creation of public works programs for employment.
+The Scardinaists consider the revolution to have already won, and seek to prioritize the building of a stable constitutional republic and a return to normalcy without further bloodshed.
 
-@reform
+@changed_ppp
+on-arrival: caterinoist_dissent += 5; labor_dissent += 5; scardinaist_dissent += 5
+
+We have changed ideologies. Many in the party feel unmoored.
+
+@pnu_ideology
+
+The <span style="color:rgb(64, 89, 156);">**PNU**</span> is torn between many different ideological currents. What should be our primary ideological guidance for now?
+
+[? if ideology != 0 : We have previously chosen a [+ ideology +] ideology. Changing it will likely have drawbacks. ?]
+
+- @condem: Following Ortensio Guagenti, the path of big-tent conservatism is the best.
+- @trentini: Following Filipio Trentini, the pursuit of a militaristic society through new mass politics.
+- @cimorelli: Following Maggiorino Cimorelli, the <span style="color:rgb(64, 89, 156);">**PNU**</span> will be the party of business.
+- @capuano: Following Rufiano Capuano, the restoration of a monarchy under the guidance of the church.
+- @easy_discard
+
+@condemn
 on-arrival: {!
-if (Q.ideology && Q.ideology != "reformist") {
+if (Q.ideology && Q.ideology != "Guagentist") {
     Q.changed = 1;
 }
 !}
-go-to: changed if changed = 1
-on-departure: ideology = "reformist"; reformist_strength += 10; democratization += 1; reformist_dissent -= 5; z_relation += 5; dvp_relation += 5; ddp_relation += 5; lvp_relation += 5; kpd_relation -= 8; moderate_plan_support += 1; dvp_left += 1; ddp_left += 0.5; ddp_cohesion += 0.5; lvp_left += 1
+go-to: changed_pnu if changed = 1
+on-departure: ideology = "Guagentist"; center_strength += 10; center_dissent -= 5;
 
-The reformist wing of the party seeks to preserve the Republic and the democratic system of government, and is most supportive of coalitions with the other pro-democracy parties.
+In order to not risk splitting such a big tent party, we will continue to focus on vague, moderate and broadly agreeable messages such as an end to the excesses of the revolution.
 
-@changed
-on-arrival: left_dissent += 5; center_dissent += 5; labor_dissent += 5; reformist_dissent += 5
+@trentini
+on-arrival: {!
+if (Q.ideology && Q.ideology != "Trentinist") {
+    Q.changed = 1;
+}
+!}
+go-to: changed_pnu if changed = 1
+on-departure: ideology = "Trentinist"; fascist_strength += 10; fascist_dissent -= 5; center_dissent += 10; business_dissent += 5;
+
+The Trentinists advocate for the <span style="color:rgb(64, 89, 156);">**PNU**</span> to transform into a mass party following the disciplined organization of a military, and to apply this structure to society as a whole.
+
+@cimorelli
+on-arrival: {!
+if (Q.ideology && Q.ideology != "capitalist") {
+    Q.changed = 1;
+}
+!}
+go-to: changed_pnu if changed = 1
+on-departure: ideology = "capitalist"; business_strength += 10; business_dissent -= 5; church_dissent += 5; fascist_dissent += 5;
+
+The Cimorellists most concerned with the administration's economic policies wish to focus the party's rhetoric on contrasting with this by advocating a laissez-faire model.
+
+@capuano
+on-arrival: {!
+if (Q.ideology && Q.ideology != "monarchist") {
+    Q.changed = 1;
+}
+!}
+go-to: changed_pnu if changed = 1
+on-departure: ideology = "monarchist"; church_strength += 10; church_dissent -= 5; center_dissent += 5; business_dissent += 5;
+
+The Capuanoists, with the backing of the church, represent the last monarchists and old-age reactionaries in the party, seeking to rally not against Caterino but the very republic itself.
+
+@changed_pnu
+on-arrival: center_dissent += 5; church_dissent += 5; fascist_dissent += 5; business_dissent += 5;
+
+We have changed ideologies. Many in the party feel unmoored.
+
+@ppp_ideology
+
+The <span style="color:rgb(129, 11, 11);">**PCR**</span> is torn between many different ideological currents. What should be our primary ideological guidance for now?
+
+[? if ideology != 0 : We have previously chosen a [+ ideology +] ideology. Changing it will likely have drawbacks. ?]
+
+- @baldoni: Ramiro Baldoni's doctrine of preparing for revolution while in the meantime building into a mass party.
+- @tomaso: Following Domezio Tomaso, we will focus on a middle road between revolution and reform, building class consciousness through government participation.
+- @anarchy: Anarchism, seeking the total abolition of state and hierarchy through revolution of one form or another.
+- @easy_discard
+
+@baldoni
+on-arrival: {!
+if (Q.ideology && Q.ideology != "Baldonist") {
+    Q.changed = 1;
+}
+!}
+go-to: changed_cpr if changed = 1
+on-departure: ideology = "Baldonist"; baldoni_strength += 10; baldoni_dissent -= 5;
+
+Following the lessons of Pilovia and modifying the tactics used to fit Refugia's material and present conditions, we will continue to operate as a revolutionary mass party.
+
+@tomaso
+on-arrival: {!
+if (Q.ideology && Q.ideology != "Trovatoist") {
+    Q.changed = 1;
+}
+!}
+go-to: changed_cpr if changed = 1
+on-departure: ideology = "Tomasoist"; tomaso_strength += 10; tomaso_dissent -= 5;
+
+The Tomasoists call for a middle ground between revolution and reform and opening up to government participation to build the class consciousness of the workers.
+
+@anarchy
+on-arrival: {!
+if (Q.ideology && Q.ideology != "Anarchist") {
+    Q.changed = 1;
+}
+!}
+go-to: changed_cpr if changed = 1
+on-departure: ideology = "Anarchist"; anarchist_strength += 10; anarchist_dissent -= 5; baldoni_dissent += 10; tomaso_dissent += 10;
+
+The anarchists, taking inspiration from the events of Mahraga call for the instantaneous transition to a communist society with or without the achievement of post-scarcity society conditions.
+
+@changed_cpr
+on-arrival: baldoni_dissent += 5; tomaso_dissent += 5; anarchist_dissent += 5
 
 We have changed ideologies. Many in the party feel unmoored.
