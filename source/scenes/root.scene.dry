@@ -175,12 +175,12 @@ Q.inflation = 8.6;
 Q.economic_growth = -4.7;
 
 // quality of life
-Q.workers_qol = 100;
-Q.peasant_qol = 100;
-Q.freeholder_qol = 100;
-Q.unemployed_qol = 100;
+Q.workers_qol = 50;
+Q.peasant_qol = 30;
+Q.freeholder_qol = 60;
+Q.unemployed_qol = 40;
 Q.old_middle_qol = 100;
-Q.new_middle_qol = 100;
+Q.new_middle_qol = 90;
 
 Q.classes = ['workers', 'old_middle', 'new_middle', 'peasant', 'freeholder', 'unemployed'];
 Q.parties = ['ppp', 'pnu', 'pcr'];
@@ -194,9 +194,9 @@ Q.workers_pcr = 5;
 Q.workers_pnu = 20;
 Q.workers_turnout = 0.7;
 
-Q.new_middle_ppp = 80;
-Q.new_middle_pcr = 5;
-Q.new_middle_pnu = 15;
+Q.new_middle_ppp = 58;
+Q.new_middle_pcr = 2;
+Q.new_middle_pnu = 40;
 Q.new_middle_turnout = 0.9;
 
 Q.old_middle_ppp = 25;
@@ -209,9 +209,9 @@ Q.peasant_pcr = 5;
 Q.peasant_pnu = 20;
 Q.peasant_turnout = 0.5;
 
-Q.freeholder_ppp = 30;
+Q.freeholder_ppp = 20;
 Q.freeholder_pcr = 0;
-Q.freeholder_pnu = 70;
+Q.freeholder_pnu = 80;
 Q.freeholder_turnout = 0.5;
 
 Q.unemployed_ppp = 55;
@@ -230,7 +230,7 @@ Q.economic_records = [];
 
 
 // State of the government
-Q.president = "Caaterino";
+Q.president = "Caterino";
 // starting chancellor: Wilhelm Marx
 Q.chancellor = "N/A";
 Q.chancellor_party = 'PPP';
