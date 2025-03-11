@@ -66,11 +66,11 @@ Economic growth: [+ economic_growth_2 +]%
 
 = Inter-party Relations
 
-[ if party != "PPP" : <span style="color:rgb(238, 117, 36);">**PPP**</span>: [+ ppp_relation : relationships +] ?]
+[? if party != "PPP" : <span style="color:rgb(238, 117, 36);">**PPP**</span>: [+ ppp_relation : relationships +] ?]
 
-[ if party != "PNU" : <span style="color:rgb(64, 89, 156);">**PNU**</span>: [+ pnu_relation : relationships +] ?]
+[? if party != "PNU" : <span style="color:rgb(64, 89, 156);">**PNU**</span>: [+ pnu_relation : relationships +] ?]
 
-[ if party != "PCR" : <span style="color:rgb(129, 11, 11);">**PCR**</span>: [+ pcr_relation : relationships +] ?]
+[? if party != "PCR" : <span style="color:rgb(129, 11, 11);">**PCR**</span>: [+ pcr_relation : relationships +] ?]
 
 = Party Leadership
 
