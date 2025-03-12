@@ -39,8 +39,24 @@ Realistically, there is nothing we can do.
 #A crisis has struck the small city of Vosallo following the arrest of Sandro Lorenzo, the local Liberty Guard leader, for playing the piano too loudly. The city's Liberty Guard then burned the police station down in an attempt to free him and fought off a police raid on their headquarters, going further to effectively take control of the city following the resignation of the mayor.
 
 @pnu_pov
+on-arrival: strife += 1; revolutionary_fatigue += 1; caterinoist_strength += 4; fascist_strength += 2; guagentist_strength -= 2; scardinaist_dissent += 3; workers_ppp += 2*(1-dissent); unemployed_ppp += 4*(1-dissent); workers_turnout += 0.01; unemployed_turnout += 0.02; new_middle_pnu -= 2*(1-dissent)
 
-Boo!!
+A crisis has struck the small city of Vosallo following the refusal of the local Liberty Guard leader, Sandro Lorenzo, to follow the law, instead having his goons burn the police station down for him so he could escape and then expelling the police from the city and forcing the resignation of the <span style="color:rgb(64, 89, 156);">**PNU**</span> mayor in a blatant putsch.
+
+Luckily, the Supreme Court sees through the lies, and is prepared to make a ruling in our favor, even in spite of the immediate protests the <span style="color:rgb(238, 117, 36);">**PPP**</span> has launched to try and force its hand.
+
+- @ban_lg: Rule the Liberty Guard as an illegal organization and call for it to be banned.
+- @arrest_lorenzo: Rule that Sandro Lorenzo is guilty of treason, but limit the ruling to just that.
+
+@ban_lg
+on-arrival: tension_path = 1
+
+With protests in the streets, many of the more moderate justices take longer to deliberate. Nevertheless, we are quite likely to see the Supreme Court rule in our favor.
+
+@arrest_lorenzo
+on-arrival: lorenzo_path = 1
+
+With protests in the streets, many of the more moderate justices take longer to deliberate. Nevertheless, we are quite likely to see the Supreme Court rule in our favor.
 
 @pcr_pov
 
