@@ -110,7 +110,7 @@ if (Q.unemployed <= 1) {
 }
 
 // unemployment
-Q.unemployment = ((Q.unemployed/Q.unemployed+Q.workers)*100).toFixed(1);
+Q.unemployment = ((Q.unemployed/(Q.unemployed+Q.workers))*100).toFixed(1);
 
 var total_dissent = 0;
 if (Q.party == "PPP") {
