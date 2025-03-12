@@ -25,6 +25,10 @@ In an outrageous [? if ppp_judiciary < 2 : 4-1 ?][? if ppp_judiciary >= 2 : 3-2 
 - @defy: Defy the ruling, and refuse to ban the Liberty Guard.
 - @oblige: Oblige and ban the Liberty Guard.
 
+@lorenzo_arrested
+
+HUH!
+
 @people_court
 on-arrival: resources -= 2; scardinaist_dissent += 3; ppp_police += 1; pnu_police -= 1; pnu_gov -= 1; ppp_judiciary += 1; pnu_judiciary -= 1; revolutionary_fatigue += 1; strife += 1;
 
