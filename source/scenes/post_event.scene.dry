@@ -322,6 +322,19 @@ if (Q.month_actions >= 1) {
             Q.economic_growth += 0.1;
         }
     }
+    if (Q.revolutionary_fatigue) {
+        Q.old_middle_pnu += Q.revolutionary_fatigue/6;
+        Q.new_middle_pnu += Q.revolutionary_fatigue/10;
+        Q.freeholder_pnu += Q.revolutionary_fatigue/5;
+        Q.workers_pnu += Q.revolutionary_fatigue/14;
+        Q.pnu_turnout += Q.revolutionary_fatigue/1200;
+        if (Q.scardinaist_dissent >= 30) {
+            Q.new_middle_ppp -= Q.scardinaist_dissent/10;
+            Q.old_middle_ppp -= Q.scardinaist_dissent/8;
+            Q.freeholder_ppp -= Q.scardinaist_dissent/12;
+            Q.ppp_turnout -= Q.revolutionary_fatigue/1200;
+        }
+    }
 
     /////////////////////////////// update opinions based on economy
     if (Q.unemployed > 15 && Q.pro_republic > 50) {
