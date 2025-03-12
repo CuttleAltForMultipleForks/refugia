@@ -4,6 +4,7 @@ view-if: time >= 2
 tags: event
 face-image: img/piano_forte.jpg
 max-visits: 1
+new-page: true
 go-to: ppp_pov if party == "PPP"; pnu_pov if party == "PNU"; pcr_pov if party == "PCR";
 
 = Vosallo Crisis
@@ -36,3 +37,11 @@ on-arrival: ppp_judiciary += 1; caterinoist_dissent += 2; scardinaist_strength +
 Realistically, there is nothing we can do.
 
 #A crisis has struck the small city of Vosallo following the arrest of Sandro Lorenzo, the local Liberty Guard leader, for playing the piano too loudly. The city's Liberty Guard then burned the police station down in an attempt to free him and fought off a police raid on their headquarters, going further to effectively take control of the city following the resignation of the mayor.
+
+@pnu_pov
+
+Boo!!
+
+@pcr_pov
+
+Boo!!
