@@ -2,8 +2,37 @@ title: Crisis in Vosallo!
 subtitle: A crisis has broken out in the small city of Vosallo.
 view-if: time >= 2
 tags: event
+face-image: img/piano_forte.jpg
 max-visits: 1
+go-to: ppp_pov if party == "PPP"; pnu_pov if party == "PNU"; pcr_pov if party == "PCR";
 
 = Vosallo Crisis
 
-A crisis has struck the small city of Vosallo following the arrest of Sandro Lorenzo, the local Liberty Guard leader, for playing the piano too loudly. The city's Liberty Guard then burned the police station down in an attempt to free him and fought off a police raid on their headquarters, going further to effectively take control of the city following the resignation of the mayor.
+@ppp_pov
+
+A crisis has struck the small city of Vosallo following the unjust arrest of Sandro Lorenzo, the local Liberty Guard leader, for "playing the piano too loudly", a blatant pretense to crack down on the Liberty Guard. When they predictably protested, the police fired upon them and in the ensuing chaos Sandro Lorenzo was freed and the police station burned. The police then tried to raid their headquarters but were repelled, leading to the resignation of the <span style="color:rgb(64, 89, 156);">**PNU**</span> mayor who had orchestrated the whole failed crackdown.
+
+The Supreme Court, under the blatant influence of the <span style="color:rgb(64, 89, 156);">**PNU**</span> as always, has gathered and may use this as a pretext to crackdown on the Liberty Guard. 
+
+- @protest: Mobilize protests against the old guard and in defense of Lorenzo!
+- @reach_out: Using Scardinaist connections, reach out to the moderate justices.
+- @nothing: We will not interfere in the judicial process.
+
+@protest
+subtitle: -1 resource.
+choose-if: resources >= 1
+on-arrival: revolutionary_fatigue += 1; strife += 1; caterinoist_strength += 4; fascist_strength += 2; guagentist_strength -= 2; scardinaist_dissent += 3; resources -= 1; workers_ppp += 2*(1-dissent); unemployed_ppp += 4*(1-dissent); workers_turnout += 0.01; unemployed_turnout += 0.02; new_middle_pnu -= 2*(1-dissent)
+
+Fliers and leaflets are spread by the Liberty Guard while protests are launched in major <span style="color:rgb(238, 117, 36);">**PPP**</span>-aligned cities. We lionize Sandro Lorenzo as the martyr he is, an innocent pianist targeted by the old guard, and pressure the Supreme Court.
+
+@reach_out
+subtitle: The Scardinaists have useful contacts.
+choose-if: scardinaist_strength-scardinaist_dissent >= 10
+unavailable-subtitle: The Scardinaists are unwilling.
+on-arrival: ppp_judiciary += 1; caterinoist_dissent += 2; scardinaist_strength += 5; guagentist_strength += 3; ppp_turnout -= 0.03;
+
+@nothing
+
+Realistically, there is nothing we can do.
+
+#A crisis has struck the small city of Vosallo following the arrest of Sandro Lorenzo, the local Liberty Guard leader, for playing the piano too loudly. The city's Liberty Guard then burned the police station down in an attempt to free him and fought off a police raid on their headquarters, going further to effectively take control of the city following the resignation of the mayor.

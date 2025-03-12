@@ -254,6 +254,8 @@ Q.ppp_turnout = 1;
 Q.pcr_turnout = 0.7;
 Q.pnu_turnout = 0.7;
 
+Q.revolutionary_fatigue = 0;
+
 
 // is the current government a presidential minority government?
 Q.minority_government = 1;

@@ -322,12 +322,18 @@ if (Q.month_actions >= 1) {
             Q.economic_growth += 0.1;
         }
     }
+    if (!Q.convention_called) {
+        Q.revolutionary_fatigue += 1/12;
+        Q.revolutionary_fatigue += Q.lg_force/120;
+    }
     if (Q.revolutionary_fatigue) {
         Q.old_middle_pnu += Q.revolutionary_fatigue/6;
         Q.new_middle_pnu += Q.revolutionary_fatigue/10;
         Q.freeholder_pnu += Q.revolutionary_fatigue/5;
         Q.workers_pnu += Q.revolutionary_fatigue/14;
         Q.pnu_turnout += Q.revolutionary_fatigue/1200;
+        Q.scardinaist_dissent += Q.revolutionary_fatigue/12;
+        Q.labor_dissent += Q.revolutionary_fatigue/16;
         if (Q.scardinaist_dissent >= 30) {
             Q.new_middle_ppp -= Q.scardinaist_dissent/10;
             Q.old_middle_ppp -= Q.scardinaist_dissent/8;
