@@ -273,6 +273,39 @@ Q.finance_minister_party = 'PPP';
 Q.agriculture_minister_party = 'PPP';
 
 
+// levers of power
+Q.ppp_judiciary = 1;
+Q.pcr_judiciary = 1;
+Q.pnu_judiciary = 5;
+
+Q.ppp_gov = 4;
+Q.pcr_gov = 1;
+Q.pnu_gov = 3;
+
+Q.ppp_police = 2;
+Q.pcr_police = 1
+Q.pnu_police = 4;
+
+Q.ppp_navy = 5;
+Q.pcr_navy = 2;
+Q.pnu_navy = 2;
+
+Q.ppp_army = 4;
+Q.pcr_army = 1;
+Q.pnu_army = 2;
+
+Q.ppp_church = 3;
+Q.pcr_church = 1;
+Q.pnu_church = 5;
+
+Q.ppp_capital = 2;
+Q.pcr_capital = 1;
+Q.pnu_capital = 5;
+
+Q.ppp_labour = 4;
+Q.pcr_labour = 2;
+Q.pnu_labour = 1;
+
 // have we reformed these institutions to be more democratic?
 Q.judicial_reform = 0;
 Q.bureaucratic_reform = 1;
