@@ -2,6 +2,7 @@ title: Crisis in Vosallo!
 subtitle: A crisis has broken out in the small city of Vosallo.
 view-if: time >= 2
 tags: event
+max-visits: 1
 
 = Vosallo Crisis
 
