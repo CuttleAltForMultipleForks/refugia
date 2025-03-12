@@ -40,7 +40,7 @@ Next election: [? if convention_called : [+ next_election_month : month +] [+ ne
 
 Inflation: [+ inflation_2 +]%
 
-Unemployment: [+ unemployed_2 +]%
+Unemployment: [+ unemployment +]%
 
 Economic growth: [+ economic_growth_2 +]%
 
