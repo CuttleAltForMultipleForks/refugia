@@ -19,18 +19,17 @@ go-to: lg_banned if strife+ppp_judiciary < pnu_judiciary; lorenzo_arrested if st
 @lg_banned
 on-arrival: ppp_police -= 1; police_loyalty -= 0.05; scardinaist_strength -= 4; caterinoist_strength += 4; guagentist_strength += 2; pnu_turnout += 0.04; workers_pnu += 3; workers_turnout += 0.01; new_middle_turnout += 0.01; old_middle_turnout += 0.01; polarization = 1;
 
-In an outrageous [? if ppp_judiciary < 2 : 4-1 ?][? if ppp_judiciary >= 2 : 3-2 ?] ruling, the Supreme Court has found that the Liberty Guard is an illegal organization, obligating the government to ban them. 
+In an outrageous [? if ppp_judiciary < 2 : 4-1 ?][? if ppp_judiciary >= 2 : 3-2 ?] ruling, the Supreme Court has found that the Liberty Guard is an illegal organization, obligating us in a court order to ban them. [? if strife >= 2 : With protests mounting, we may be able to challenge them on this. ?]
 
-- @people_court: Establish the People's Courts via presidential decree and overturn this travesty!
+- @people_court: Establish the People's Courts via presidential decree!
 - @defy: Defy the ruling, and refuse to ban the Liberty Guard.
 - @oblige: Oblige and ban the Liberty Guard.
 
 @lorenzo_arrested
-
-HUH!
+on-arrival: ppp_police -= 1; police_loyalty -= 0.04; guagentist_strength += 3; pnu_turnout += 0.02; 
 
 @people_court
-on-arrival: resources -= 2; scardinaist_dissent += 3; ppp_police += 1; pnu_police -= 1; pnu_gov -= 1; ppp_judiciary += 1; pnu_judiciary -= 1; revolutionary_fatigue += 1; strife += 1;
+on-arrival: budget -= 1 if resources < 2; resources -= 2 if resources >= 2; scardinaist_dissent += 3; ppp_police += 1; pnu_police -= 1; pnu_gov -= 1; ppp_judiciary += 1; pnu_judiciary -= 1; revolutionary_fatigue += 1; strife += 1;
 
 @defy
 on-arrival: pnu_police += 1; ppp_gov -= 1; labor_dissent += 2; caterinoist_strength -= 3; scardinaist_dissent += 5; strife += 2; pro_republic -= 5; capital_strike_progress += 1; 
