@@ -5,7 +5,7 @@ tags: event
 face-image: img/piano_forte.jpg
 max-visits: 1
 new-page: true
-go-to: ppp_pov if party == "PPP"; pnu_pov if party == "PNU"; pcr_pov if party == "PCR";
+go-to: ppp_pov if party == "PPP"; pnu_pov if party == "PNU"; pcr_pov if party == "PCR"
 
 = Vosallo Crisis
 
