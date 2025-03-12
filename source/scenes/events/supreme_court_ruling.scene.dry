@@ -1,0 +1,26 @@
+title: Supreme Court Ruling
+subtitle: The Supreme Court has made its ruling...
+view-if: time >= 4
+tags: event
+face-image: img/supreme_court.png
+max-visits: 1
+new-page: true
+go-to: ppp_pov if party == "PPP"; pnu_pov if party == "PNU"; pcr_pov if party == "PCR"
+
+@ppp_pov
+
+After a couple weeks of deliberation, the Supreme Court has made its ruling. We'll have to see if the pressure we have applied will be enough.
+
+- @ruling: The Supreme Court rules...
+
+@ruling
+
+That this is unfinished and WIP.
+
+@pnu_pov
+
+Boo!!
+
+@pcr_pov
+
+Boo!!

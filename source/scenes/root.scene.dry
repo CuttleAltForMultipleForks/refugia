@@ -401,7 +401,6 @@ for (let i = 0; i <= 100; i++) {
 Q.wels_advisor = 1; // Otto Wels
 !}
 set-bg: img/map_2.jpg
-new-page: true
 
 This is a game about a fictional country. So don't let me know about no inaccuracies unless you played Refugia in which case ermmm fine.
 
