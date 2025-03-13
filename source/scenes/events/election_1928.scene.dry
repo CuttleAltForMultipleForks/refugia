@@ -37,8 +37,8 @@ Let us hope this does not backfire.
 on-arrival: {!  
 Q.adjustmentFactors_ppp = 1;
 Q.adjustmentFactors_pnu = 1;
-Q.adjustmentFactors_pcr = 1;
-Q.adjustmentFactors_pdc = 1;
+Q.adjustmentFactors_pcr = 0.99;
+Q.adjustmentFactors_pdc = 0.99;
 
     var new_party_sum = 0;
     var total_reichstag_without = 0;  // Initialize a variable to accumulate 'reichstag_without_' values
