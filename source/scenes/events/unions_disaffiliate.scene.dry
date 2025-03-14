@@ -11,8 +11,6 @@ Q.parties.push('plr');
 
 Q.workers_plr = (Q.workers.ppp*(Q.labor_strength/100));
 Q.workers_ppp -= Q.workers_plr;
-Q.workers_plr += (Q.tomaso_dissent/10);
-Q.workers_pcr -= (Q.tomaso_dissent/10);
 Q.unemployed_plr = (Q.unemployed_ppp*(Q.labor_strength/200));
 Q.unemployed_ppp -= Q.unemployed_plr;
 Q.new_middle_plr = Q.new_middle_pcr;
