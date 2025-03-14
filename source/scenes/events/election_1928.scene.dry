@@ -39,6 +39,14 @@ Q.adjustmentFactors_ppp = 1;
 Q.adjustmentFactors_pnu = 1;
 Q.adjustmentFactors_pcr = 0.99;
 Q.adjustmentFactors_pdc = 0.99;
+Q.turnout = 0;
+for (var c of Q.classes) {
+    Q.turnout += Q[c]*Q[c+'_turnout'];
+}
+Q.turnout = Q.turnout/2;
+for (var party of Q.parties) {
+    Q.turnout += Q[party+'_votes']*Q[party+'_turnout'];
+}
 
     var new_party_sum = 0;
     var total_reichstag_without = 0;  // Initialize a variable to accumulate 'reichstag_without_' values
@@ -108,7 +116,11 @@ if (new_party_sum > 0) {
         }
     }
 }
-    
+    // step 3: seats
+    for (var party of Q.parties) {
+        Q[party + '_seats'] = Math.round(Q[party + '_r']*(Q.turnout/100))*500;
+    }
+
     // Step 3: Calculate changes in results
     for (var party of Q.parties) {
         Q['change_' + party + '_r'] = Q[party + '_r'] - Q['old_' + party + '_r'];
