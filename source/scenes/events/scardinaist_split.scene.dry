@@ -1,0 +1,13 @@
+title: Scardinaists Resign
+subtitle: The Scardinaists have left our party.
+view-if: scardinaist_dissent >= 60
+new-page: true
+max-visits: 1
+on-arrival: pdc_formed = 1; scardinaist_strength *= 0.1; new_middle_pdc += new_middle_ppp*(scardinaist_strength/250); new_middle_ppp *= (scardinaist_strength/100); new_middle_ppp += scardinaist_strength; freeholder_pdc += freeholder_ppp; freeholder_ppp = 0; old_middle_pdc = old_middle_ppp; old_middle_ppp = 0; old_middle_pnu -= business_dissent/4; {!
+Q.parties.push('dnf');
+!}
+tags: event
+
+= Scardinaists Resign
+
+It's so over.
