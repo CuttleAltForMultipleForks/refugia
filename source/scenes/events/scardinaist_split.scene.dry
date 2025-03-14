@@ -7,6 +7,9 @@ on-arrival: pdc_formed = 1; new_middle_pdc = new_middle_ppp*(scardinaist_strengt
 Q.parties.push('pdc');
 Q.scardinaist_strength *= 0.1;
 Q.pdc_turnout = 0.8;
+Q.workers_pdc = 0;
+Q.unemployed_pdc = 0;
+Q.peasant_pdc = 0;
 !}
 tags: event
 
