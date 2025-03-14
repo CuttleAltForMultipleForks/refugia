@@ -48,6 +48,7 @@ Q.turnout *= 0.5;
 for (var party of Q.parties) {
     Q.turnout += (Q[party+'_votes']*Q[party+'_turnout']);
 }
+Q.turnout *= 0.5;
 
     var new_party_sum = 0;
     var total_reichstag_without = 0;  // Initialize a variable to accumulate 'reichstag_without_' values
