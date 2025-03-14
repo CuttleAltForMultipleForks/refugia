@@ -272,6 +272,10 @@ Q.economic_minister_party = 'PPP';
 Q.finance_minister_party = 'PPP';
 Q.agriculture_minister_party = 'PPP';
 
+Q.old_ppp_seats = 0;
+Q.old_pnu_seats = 0;
+Q.old_pcr_seats = 0;
+Q.old_pdc_seats = 0;
 
 // levers of power
 Q.ppp_judiciary = 1;
