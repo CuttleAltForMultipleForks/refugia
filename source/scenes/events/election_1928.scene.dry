@@ -350,15 +350,61 @@ go-to: coalition_menu
     {!</div>!}
 {!</div>!}
 
+for (var party of Q.parties) {
+    Q.total_seats += Q[party + '_seats']
+}
+
+Q.government_threshold = Math.ceil(Q.total_seats/2);
+
 {!<svg id="election_history" style="width: 500px; height: 400px; display: none;"> </svg>!}
 {!<svg id="party_support_history" style="width: 500px; height: 400px; display: none;"> </svg>!}
+
+Q.social_republican = Q.ppp_seats + Q.plr_seats;
+Q.liberal_republican = Q.ppp_seats + Q.pdc_seats;
+Q.liberal_conservative = Q.pnu_seats + Q.pdc_seats;
+Q.left_front = Q.pcr_seats + Q.plr_seats;
+Q.popular_front = Q.pcr_seats + Q.plr_seats + Q.ppp_seats;
+Q.grand_coalition = Q.ppp_seats + Q.plr_seats + Q.pdc_seats;
 
 There are some potential coalition arrangements.
 
 @coalition_menu
+on-arrival: hm = 1;
+go-to: ppp_menu if player == "PPP"; pnu_menu if player == "PNU"; pcr_menu if player == "PCR"
 
-- @nothing: Nothing.
+@ppp_menu
+on-arrival: coalition_seats = ppp_seats; ppp_coalition = 1
+go-to: ppp_actual_menu
 
-@nothing
+@ppp_actual_menu
 
-Yea
+- @invite_pcr: Invite the communists.
+- @invite_pdc: Invite the constitutionalists.
+- @invite_plr: Invite the socialists.
+- @complete_ppp: We will form our government now.
+
+@complete_ppp
+choose-if: coalition_seats >= government_threshold
+subtitle: [+ coalition_seats +] - [+ government_threshold +] needed. Supported by PPP[? if pdc_coalition :- PDC?][? if plr_coalition :- PLR?][? if pcr_coalition :- PCR?].
+
+@invite_pcr
+choose-if: pcr_relation >= 60
+unavailable-subtitle: The communists would never.
+on-arrival: coalition_seats += pcr_seats; pcr_coalition = 1; scardinaist_dissent += 10; ppp_turnout -= 0.05; pcr_turnout += 0.05
+go-to: ppp_actual_menu
+
+@invite_pdc
+view-if: pdc_formed
+on-arrival: coalition_seats += pdc_seats; pdc_coalition = 1; labor_dissent += 0.05; pdc_turnout += 0.05
+
+@invite_plr
+view-if: plr_formed
+on-arrival: coalition_seats += plr_seats; plr_coalition = 1; labor_dissent += 0.05; pdc_turnout += 0.05
+
+@pnu_menu
+
+Boo
+
+@pcr_menu
+
+boo
