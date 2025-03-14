@@ -39,13 +39,14 @@ Q.adjustmentFactors_ppp = 1;
 Q.adjustmentFactors_pnu = 1;
 Q.adjustmentFactors_pcr = 0.99;
 Q.adjustmentFactors_pdc = 0.99;
+
 Q.turnout = 0;
 for (var c of Q.classes) {
-    Q.turnout += Q[c]*Q[c+'_turnout'];
+    Q.turnout += (Q[c]*Q[c+'_turnout']);
 }
-Q.turnout = Q.turnout/2;
+Q.turnout *= 0.5;
 for (var party of Q.parties) {
-    Q.turnout += Q[party+'_votes']*Q[party+'_turnout'];
+    Q.turnout += (Q[party+'_votes']*Q[party+'_turnout']);
 }
 
     var new_party_sum = 0;
