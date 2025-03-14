@@ -9,13 +9,13 @@ Q.plr_formed = 1;
 Q.plr_turnout = 0.8;
 Q.parties.push('plr');
 
-Q.workers_plr += (Q.workers.ppp*(Q.labor_strength/100));
+Q.workers_plr = (Q.workers.ppp*(Q.labor_strength/100));
 Q.workers_ppp -= Q.workers_plr;
 Q.workers_plr += (Q.tomaso_dissent/10);
 Q.workers_pcr -= (Q.tomaso_dissent/10);
-Q.unemployed_plr += (Q.unemployed_ppp*(Q.labor_strength/200));
+Q.unemployed_plr = (Q.unemployed_ppp*(Q.labor_strength/200));
 Q.unemployed_ppp -= Q.unemployed_plr;
-Q.new_middle_plr += Q.new_middle_pcr;
+Q.new_middle_plr = Q.new_middle_pcr;
 Q.new_middle_pcr = 1;
 Q.old_middle_plr = 0;
 Q.peasant_plr = 0;
