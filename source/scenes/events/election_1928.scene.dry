@@ -189,6 +189,15 @@ data = [{
     "seats": Q.pcr_seats,
 }];
 
+if (Q.plr_r && Q.plr_formed) {
+    data.push({
+        "id": "plr",
+        "legend": "PLR",
+        "name": "PLR",
+        "seats": Q.plr_seats,
+    });
+}
+
 data = data.concat([{
     "id": "ppp",
     "legend": "PPP",
@@ -229,8 +238,8 @@ if (window && d3) {
 
     var lines = d3.linegraph(false, false,
         Q.parties,
-        {'pcr': '#810B0B', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
-        {'pcr': 'PCR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
+        {'pcr': '#810B0B', 'plr': '#D03A85', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
+        {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
     );
     lines.width(width).height(400);
     d3.select("#election_history").datum(Q.election_records).call(lines);
@@ -238,8 +247,8 @@ if (window && d3) {
     if (!Q.historical_mode) {
         var lines_2 = d3.linegraph(true, true,
             Q.parties,
-            {'pcr': '#810B0B', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
-            {'pcr': 'PCR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
+            {'pcr': '#810B0B', 'plr': '#D03A85', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
+            {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
         );
         lines_2.width(width).height(400);
         d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
@@ -256,6 +265,8 @@ go-to: coalition_menu
 {!<tr><td>Party</td><td>Vote share</td><td>% Change</td><td>Reichstag Seats</td><td>% Change</td></tr>!}
 
 {!<tr><td><div class="box" style='background-color:#810B0B; outline: 2px; outline-style: solid;'> </div> !} **PCR:** {!</td><td>!} **[+ pcr_votes +]%** {!</td><td>!} **[+ str_votes_change_pcr +]** {!</td><td>!} **[+ pcr_seats +]** {!</td><td>!} **[+ str_change_pcr +]** {!</td></tr>!}
+
+[? if plr_formed : {!<tr><td><div class="box" style='background-color:#D03A85; outline: 2px; outline-style: solid;'> </div> !} **PLR:** {!</td><td>!} **[+ plr_votes +]%** {!</td><td>!} **[+ str_votes_change_plr +]** {!</td><td>!} **[+ plr_seats +]** {!</td><td>!} **[+ str_change_plr +]** {!</td></tr>!} ?]
 
 {!<tr><td><div class="box" style='background-color:#EE7524; outline: 2px; outline-style: solid;'> </div> !} **PPP:** {!</td><td>!} **[+ ppp_votes +]%** {!</td><td>!} **[+ str_votes_change_ppp +]** {!</td><td>!} **[+ ppp_seats +]** {!</td><td>!} **[+ str_change_ppp +]** {!</td></tr>!}
 
@@ -291,6 +302,18 @@ go-to: coalition_menu
             {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ freeholder_pcr_display +]%{!</td>!}
             {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ unemployed_pcr_display +]%{!</td>!}
         {!</tr>!}
+
+        [? if plr_formed : 
+        {!<tr>!}
+            {!<td><span style="color: #D03A85;"><b>PDC</b></span></td>!}
+            {!<td style="background-color: rgba(208, 58, 133, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(208, 58, 133, 0.1); font-size: 0.85em;">!}[+ new_middle_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(208, 58, 133, 0.1); font-size: 0.85em;">!}[+ old_middle_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(208, 58, 133, 0.1); font-size: 0.85em;">!}[+ peasant_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(208, 58, 133, 0.1); font-size: 0.85em;">!}[+ freeholder_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(208, 58, 133, 0.1); font-size: 0.85em;">!}[+ unemployed_plr_display +]%{!</td>!}
+        {!</tr>!}
+        ?]
         
         {!<tr>!}
             {!<td><span style="color: #EE7524;"><b>PPP</b></span></td>!}

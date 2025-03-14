@@ -572,6 +572,9 @@ td, th {
 .seat.pdc {
   fill: #a4c13d
 }
+.seat.plr {
+  fill: #d03a85
+}
 .tooltip-text {
   text-decoration: underline;
   text-decoration-style: dotted;

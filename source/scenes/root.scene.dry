@@ -193,6 +193,7 @@ Q.classes = ['workers', 'old_middle', 'new_middle', 'peasant', 'freeholder', 'un
 Q.parties = ['ppp', 'pnu', 'pcr'];
 
 Q.pdc_formed = 0;
+Q.plr_formed = 0;
 
 // Support for party by social group
 // they don't have to sum to 100 since the electoral calculations will be normalized.
@@ -276,6 +277,7 @@ Q.old_ppp_seats = 0;
 Q.old_pnu_seats = 0;
 Q.old_pcr_seats = 0;
 Q.old_pdc_seats = 0;
+Q.old_plr_seats = 0;
 
 // levers of power
 Q.ppp_judiciary = 1;
