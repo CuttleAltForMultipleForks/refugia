@@ -6,6 +6,7 @@ max-visits: 1
 on-arrival: {!
 
 Q.plr_formed = 1;
+Q.plr_turnout = 0.8;
 Q.parties.push('plr');
 
 Q.workers_plr += (Q.workers.ppp*(Q.labor_strength/100));
