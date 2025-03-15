@@ -47,15 +47,16 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
       const xScale = d3.scaleUtc([new Date(1920, 0), addMonths(maxDate, additionalMonths)], [marginLeft, width - marginRight]);
 
       var xaxis = d3.axisBottom()
-        .tickFormat(d3.timeFormat('%b %Y'))
-        .tickValues(dates)
-        .scale(xScale);
+       .tickFormat(d3.timeFormat('%b %d, %Y')) // Format per week
+       .ticks(d3.timeWeek.every(1)) // Weekly ticks
+       .scale(xScale);
       if (noTicks) {
-        xaxis = d3.axisBottom()
-        .tickFormat(d3.timeFormat('%b %Y'))
-        .ticks(10)
+       xaxis = d3.axisBottom()
+        .tickFormat(d3.timeFormat('%b %d, %Y'))
+        .ticks(d3.timeWeek.every(1))
         .scale(xScale);
-      }
+       }
+  
 
       // Declare the y (vertical position) scale.
       if (!dataMax) {

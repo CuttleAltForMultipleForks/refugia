@@ -337,8 +337,10 @@ if (Q.month_actions >= 1) {
         Q.pnu_turnout += Q.revolutionary_fatigue/1200;
         Q.scardinaist_dissent += Q.revolutionary_fatigue/12;
         Q.labor_dissent += Q.revolutionary_fatigue/16;
-        if (Q.scardinaist_dissent >= 30) {
-            Q.new_middle_ppp -= Q.scardinaist_dissent/10;
+        if (Q.scardinaist_dissent >= 30 && !Q.pdc_split) {
+            if (Q.new_middle_ppp_display >= Q.pro_republic/2) {
+                Q.new_middle_ppp -= Q.scardinaist_dissent/10;
+            }
             Q.old_middle_ppp -= Q.scardinaist_dissent/8;
             Q.freeholder_ppp -= Q.scardinaist_dissent/12;
             Q.ppp_turnout -= Q.revolutionary_fatigue/1200;
