@@ -2,10 +2,10 @@
  * generating a line graph of multipile parties with multiple dates...
  * */
 
-function addWeeks(date, weeks) {
+function addMonths(date, months) {
     date = new Date(date);
     var d = date.getDate();
-    date.setWeek(date.getWeek() + weeks);
+    date.setMonth(date.getMonth() + months);
     if (date.getDate() != d) {
       date.setDate(0);
     }
@@ -13,7 +13,7 @@ function addWeeks(date, weeks) {
 }
 
 
-d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataMax, dataMin, additionalWeeks) {
+d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataMax, dataMin, additionalMonths) {
     /* params */
     if (!parties) {
         parties = ['pcr', 'plr', 'ppp', 'pdc', 'pnu'];
@@ -24,8 +24,8 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
     if (!partyNames) {
         partyNames = {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'};
     }
-    if (!additionalWeeks) {
-        additionalWeeks = 10;
+    if (!additionalMonths) {
+        additionalMonths = 10;
     }
 
     // Declare the chart dimensions and margins.
@@ -44,7 +44,7 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
 
       // Declare the x (horizontal position) scale.
       const maxDate = d3.max(dates);
-      const xScale = d3.scaleUtc([new Date(1920, 0), addWeeks(maxDate, additionalWeeks)], [marginLeft, width - marginRight]);
+      const xScale = d3.scaleUtc([new Date(1920, 0), addMonths(maxDate, additionalMonths)], [marginLeft, width - marginRight]);
 
       var xaxis = d3.axisBottom()
         .tickFormat(d3.timeFormat('%b %Y'))
