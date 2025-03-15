@@ -367,10 +367,11 @@ go-to: ppp_actual_menu
 
 @ppp_actual_menu
 
+
+- @complete_ppp: We will form our government now.
 - @invite_pcr: Invite the communists.
 - @invite_pdc: Invite the constitutionalists.
 - @invite_plr: Invite the socialists.
-- @complete_ppp: We will form our government now.
 
 @complete_ppp
 choose-if: coalition_seats >= government_threshold
