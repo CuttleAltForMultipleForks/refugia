@@ -165,6 +165,7 @@ if (new_party_sum > 0) {
         Q['previous_' + party + '_last_election_votes'] = parseFloat(parseFloat(Q[party + '_last_election_votes']).toFixed(1));
     }    
 
+Q.total_seats = 0;
 for (var party of Q.parties) {
     Q.total_seats += Q[party + '_seats']
 }
@@ -367,7 +368,6 @@ go-to: ppp_actual_menu
 
 @ppp_actual_menu
 
-
 - @complete_ppp: We will form our government now.
 - @invite_pcr: Invite the communists.
 - @invite_pdc: Invite the constitutionalists.
@@ -384,12 +384,14 @@ on-arrival: coalition_seats += pcr_seats; pcr_coalition = 1; scardinaist_dissent
 go-to: ppp_actual_menu
 
 @invite_pdc
-view-if: pdc_formed
-on-arrival: coalition_seats += pdc_seats; pdc_coalition = 1; labor_dissent += 0.05; pdc_turnout += 0.05
+view-if: pdc_formed and not pdc_coalition
+on-arrival: coalition_seats += pdc_seats; pdc_coalition = 1; labor_dissent += 5; pdc_turnout += 0.05
+go-to: ppp_actual_menu
 
 @invite_plr
-view-if: plr_formed
-on-arrival: coalition_seats += plr_seats; plr_coalition = 1; labor_dissent += 0.05; pdc_turnout += 0.05
+view-if: plr_formed and not plr_coalition
+on-arrival: coalition_seats += plr_seats; plr_coalition = 1; scardinaist_dissent += 5; plr_turnout += 0.05;
+go-to: ppp_actual_menu
 
 @pnu_menu
 
