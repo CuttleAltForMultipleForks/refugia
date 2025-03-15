@@ -19,9 +19,12 @@ Q.old_middle_plr = 0;
 Q.peasant_plr = 0;
 Q.freeholder_plr = 0;
 
-Q.plr_seats = Math.round(Q.ppp_seats*=(Q.labor_strength/100));
+var trovato_percent = Q.labor_strength/100;
+
+Q.plr_seats = Math.round(Q.ppp_seats*trovato_percent);
 Q.ppp_seats -= Math.round(Q.plr_seats);
 
+Q.labor_strength *= 0.1;
 !}
 tags: event
 
