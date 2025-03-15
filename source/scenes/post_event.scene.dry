@@ -343,8 +343,33 @@ if (Q.month_actions >= 1) {
             Q.freeholder_ppp -= Q.scardinaist_dissent/12;
             Q.ppp_turnout -= Q.revolutionary_fatigue/1200;
         }
+        if (Q.pdc_formed) {
+            Q.new_middle_pdc += Q.revolutionary_fatigue/3;
+            Q.old_middle_pdc += Q.revolutionary_fatigue/5;
+            Q.freeholder_pdc += Q.revolutionary_fatigue/8;
+            Q.new_middle_pnu -= Q.revolutionary_fatigue/12;
+            Q.old_middle_pnu -= Q.revolutionary_fatigue/14;
+            Q.freeholder_pnu -= Q.revolutionary_fatigue/18;
+            Q.pdc_turnout += Q.revolutionary_fatigue/1000;
+        }
+        if (Q.plr_formed) {
+            Q.workers_plr += Q.revolutionary_fatigue/6;
+            Q.workers_ppp -= Q.revolutionary_fatigue/10;
+            Q.workers_pnu -= Q.revolutionary_fatigue/16;
+            Q.peasant_plr += Q.revolutionary_fatigue/18;
+            Q.plr_turnout += Q.revolutionary_fatigue/1000;
+        }
     }
-
+    if (Q.pdc_formed && Q.scardina_timer_1 > 0) {
+        Q.new_middle_pdc += (Q.scardina_timer_1-Q.scardina_timer_2)/8;
+        Q.old_middle_pdc += (Q.scardina_timer_1-Q.scardina_timer_2)/10;
+        Q.freeholder_pdc += (Q.scardina_timer_1-Q.scardina_timer_2)/12;
+        Q.workers_pdc += (Q.scardina_timer_1-Q.scardina_timer_2)/16;
+        Q.unemployed_pdc += (Q.scardina_timer_1-Q.scardina_timer_2)/24;
+        Q.peasant_pdc += (Q.scardina_timer_1-Q.scardina_timer_2)/24;
+        Q.new_middle_pdc += (Math.random() * 4 + 1)/12;
+        Q.old_middle_pdc += (Math.random() * 4 + 1)/16;
+    }
     /////////////////////////////// update opinions based on economy
     if (Q.unemployed > 15 && Q.pro_republic > 50) {
         Q.pro_republic -= 1;

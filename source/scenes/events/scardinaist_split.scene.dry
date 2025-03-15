@@ -17,6 +17,9 @@ Q.pdc_seats = Math.round(Q.ppp_seats*scardina_percent);
 Q.ppp_seats -= Math.round(Q.pdc_seats);
 
 Q.scardinaist_strength *= 0.1;
+
+Q.scardina_timer_1 = Math.random() * 6 + 12;
+Q.scardina_timer_2 = Q.scardina_timer_1 - 9;
 !}
 tags: event
 
