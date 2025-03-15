@@ -374,7 +374,7 @@ go-to: ppp_actual_menu
 
 @complete_ppp
 choose-if: coalition_seats >= government_threshold
-subtitle: [+ coalition_seats +] - [+ government_threshold +] needed. Supported by PPP[? if pdc_coalition :- PDC?][? if plr_coalition :- PLR?][? if pcr_coalition :- PCR?].
+subtitle: [+ coalition_seats +]/[+ government_threshold +]. Supported by PPP[? if pdc_coalition :- PDC?][? if plr_coalition :- PLR?][? if pcr_coalition :- PCR?].
 
 @invite_pcr
 choose-if: pcr_relation >= 60
