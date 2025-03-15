@@ -2,10 +2,10 @@
  * generating a line graph of multipile parties with multiple dates...
  * */
 
-function addMonths(date, months) {
+function addWeeks(date, weeks) {
     date = new Date(date);
     var d = date.getDate();
-    date.setMonth(date.getMonth() + months);
+    date.setWeek(date.getWeek() + weeks);
     if (date.getDate() != d) {
       date.setDate(0);
     }
@@ -13,19 +13,19 @@ function addMonths(date, months) {
 }
 
 
-d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataMax, dataMin, additionalMonths) {
+d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataMax, dataMin, additionalWeeks) {
     /* params */
     if (!parties) {
-        parties = ['pcr', 'ppp', 'pnu'];
+        parties = ['pcr', 'plr', 'ppp', 'pdc', 'pnu'];
     }
     if (!partyColors) {
-        partyColors = {'pcr': '#810B0B', 'ppp': '#EE7524', 'pnu': '#40599C'};
+        partyColors = {'pcr': '#810B0B', 'plr': '#e455a1', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'};
     }
     if (!partyNames) {
-        partyNames = {'pcr': 'PCR', 'ppp': 'PPP', 'pnu': 'PNU'};
+        partyNames = {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'};
     }
-    if (!additionalMonths) {
-        additionalMonths = 10;
+    if (!additionalWeeks) {
+        additionalWeeks = 10;
     }
 
     // Declare the chart dimensions and margins.
@@ -44,19 +44,18 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
 
       // Declare the x (horizontal position) scale.
       const maxDate = d3.max(dates);
-      const xScale = d3.scaleUtc([new Date(1920, 0), addMonths(maxDate, additionalMonths)], [marginLeft, width - marginRight]);
+      const xScale = d3.scaleUtc([new Date(1920, 0), addWeeks(maxDate, additionalWeeks)], [marginLeft, width - marginRight]);
 
       var xaxis = d3.axisBottom()
-       .tickFormat(d3.timeFormat('%b %d, %Y')) // Format labels to show the week
-       .ticks(d3.timeWeek.every(1)) // Ensure ticks occur every week
-       .scale(xScale);
-     if (noTicks) {
-     xaxis = d3.axisBottom()
-        .tickFormat(d3.timeFormat('%b %d, %Y'))
-        .ticks(d3.timeWeek.every(1)) // Explicitly setting weekly tick marks
+        .tickFormat(d3.timeFormat('%b %Y'))
+        .tickValues(dates)
         .scale(xScale);
-    }
-  
+      if (noTicks) {
+        xaxis = d3.axisBottom()
+        .tickFormat(d3.timeFormat('%b %Y'))
+        .ticks(10)
+        .scale(xScale);
+      }
 
       // Declare the y (vertical position) scale.
       if (!dataMax) {
