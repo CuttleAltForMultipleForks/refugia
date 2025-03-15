@@ -359,7 +359,7 @@ There are some potential coalition arrangements.
 
 @coalition_menu
 on-arrival: hm = 1;
-go-to: ppp_menu if player == "PPP"; pnu_menu if player == "PNU"; pcr_menu if player == "PCR"
+go-to: ppp_menu if party == "PPP"; pnu_menu if party == "PNU"; pcr_menu if party == "PCR"
 
 @ppp_menu
 on-arrival: coalition_seats = ppp_seats; ppp_coalition = 1
