@@ -19,6 +19,9 @@ Q.old_middle_plr = 0;
 Q.peasant_plr = 0;
 Q.freeholder_plr = 0;
 
+Q.plr_seats = Math.round(Q.ppp_seats*=(1-(Q.labor_strength/100)));
+Q.ppp_seats -= Math.round(Q.plr_seats);
+
 !}
 tags: event
 
