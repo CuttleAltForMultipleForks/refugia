@@ -10,7 +10,7 @@ Q.pdc_turnout = 0.8;
 Q.workers_pdc = 0;
 Q.unemployed_pdc = 0;
 Q.peasant_pdc = 0;
-Q.pdc_seats = Math.round(Q.ppp_seats*=(1-(Q.scardinaist_strength/100)));
+Q.pdc_seats = Math.round(Q.ppp_seats*=(Q.scardinaist_strength/100));
 Q.ppp_seats -= Math.round(Q.pdc_seats);
 !}
 tags: event
