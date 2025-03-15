@@ -9,8 +9,8 @@ Q.plr_formed = 1;
 Q.plr_turnout = 0.8;
 Q.parties.push('plr');
 
-Q.workers_plr = (Q.workers_ppp*(Q.labor_strength/100));
-Q.workers_ppp -= Q.workers_plr;
+Q.workers_plr = (Q.workers_ppp*(Q.labor_strength/150));
+Q.workers_ppp -= (Q.workers_plr/0.75);
 Q.unemployed_plr = (Q.unemployed_ppp*(Q.labor_strength/200));
 Q.unemployed_ppp -= Q.unemployed_plr;
 Q.new_middle_plr = Q.new_middle_pcr;
@@ -25,6 +25,9 @@ Q.plr_seats = Math.round(Q.ppp_seats*trovato_percent);
 Q.ppp_seats -= Math.round(Q.plr_seats);
 
 Q.labor_strength *= 0.1;
+
+Q.trovato_timer_1 = Math.random() * 6 + 12;
+Q.trovato_timer_2 = Q.trovato_timer_1 - 9;
 !}
 tags: event
 

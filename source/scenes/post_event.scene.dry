@@ -363,14 +363,22 @@ if (Q.month_actions >= 1) {
         }
     }
     if (Q.pdc_formed && Q.scardina_timer_1 > 0) {
-        Q.new_middle_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/8;
-        Q.old_middle_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/10;
-        Q.freeholder_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/12;
-        Q.workers_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/16;
-        Q.unemployed_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/24;
-        Q.peasant_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/24;
-        Q.new_middle_pdc += (Math.random() * 4 + 1)/12;
-        Q.old_middle_pdc += (Math.random() * 4 + 1)/16;
+        Q.new_middle_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/12;
+        Q.old_middle_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/14;
+        Q.freeholder_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/16;
+        Q.workers_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/20;
+        Q.unemployed_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/28;
+        Q.peasant_pdc += (Q.scardina_timer_1-(Q.scardina_timer_2*2))/28;
+        Q.new_middle_pdc += (Math.random() * 4 + 1)/16;
+        Q.old_middle_pdc += (Math.random() * 4 + 1)/20;
+    }
+    if (Q.plr_formed && Q.trovato_timer_1 > 0) {
+        Q.workers_plr += (Q.trovato_timer_1-(Q.trovato_timer_2*2))/12;
+        Q.unemployed_plr += (Q.trovato_timer_1-(Q.trovato_timer_2*2))/14;
+        Q.peasant_plr += (Q.trovato_timer_1-(Q.trovato_timer_2*2))/20;
+        Q.new_middle_plr += (Q.trovato_timer_1-(Q.trovato_timer_2*2))/16;
+        Q.workers_plr += (Math.random() * 4 + 1)/16;
+        Q.unemployed_plr += (Math.random() * 4 + 1)/20;
     }
     /////////////////////////////// update opinions based on economy
     if (Q.unemployed > 15 && Q.pro_republic > 50) {
