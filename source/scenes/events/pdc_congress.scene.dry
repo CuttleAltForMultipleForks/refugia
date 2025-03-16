@@ -18,11 +18,15 @@ Q.scardina_strength += Q.new_middle_pdc_display;
 Q.scardina_strength += Q.scardinaist_dissent/2;
 !}
 tags: event
-go-to: cimorelli_victory if cimorelli_strength > scardina_strength and cimorelli_strength > evemonds_strength; evemonds_victory if evemonds_strength > scardina_strength and evemonds_strength > cimorelli_strength; scardina_victory if scardina_strength > cimorelli_strength and scardina_strength > evemonds_strength
 
 = <span style="color:rgb(164, 193, 61);">**PDC**</span> Party Congress
 
-The <span style="color:rgb(164, 193, 61);">**PDC**</span> is holding its party congress 
+The <span style="color:rgb(164, 193, 61);">**PDC**</span> is holding its first party congress after having recently formed. We will see if their interim leader, Evemonds, will continue to lead the party, or if the Scardinaist or Cimorellist wings will firmly capture power.
+
+- @vote: The party votes...
+
+@vote
+go-to: cimorelli_victory if cimorelli_strength > scardina_strength and cimorelli_strength > evemonds_strength; evemonds_victory if evemonds_strength > scardina_strength and evemonds_strength > cimorelli_strength; scardina_victory if scardina_strength > cimorelli_strength and scardina_strength > evemonds_strength
 
 @cimorelli_victory
 
