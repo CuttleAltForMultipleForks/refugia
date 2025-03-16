@@ -10,6 +10,7 @@ Q.scardina_strength = 0;
 
 Q.cimorelli_strength += Q.business_dissent;
 Q.cimorelli_strength += Q.old_middle_pdc_display;
+Q.cimorelli_strength += Q.capital_strike_progress;
 Q.evemonds_strength += Q.revolutionary_fatigue;
 Q.evemonds_strength += Q.strife;
 Q.evemonds_strength += Q.freeholder_pdc_display;
@@ -29,7 +30,7 @@ The <span style="color:rgb(164, 193, 61);">**PDC**</span> is holding its first p
 go-to: cimorelli_victory if cimorelli_strength > scardina_strength and cimorelli_strength > evemonds_strength; evemonds_victory if evemonds_strength > scardina_strength and evemonds_strength > cimorelli_strength; scardina_victory if scardina_strength > cimorelli_strength and scardina_strength > evemonds_strength
 
 @cimorelli_victory
-on-arrival: business_dissent += 10; business_strength -= 10; old_middle_pnu -= 4; old_middle_pdc += 5; freeholder_pdc += strife; old_middle_pdc += strife; new_middle_pnu -= 2; new_middle_pdc += 2; revolutionary_fatigue += 1; pdc_turnout -= 0.05; ppp_turnout += 0.02;
+on-arrival: pdc_leader = "Cimorelli"; business_dissent += 10; business_strength -= 10; old_middle_pnu -= 4; old_middle_pdc += 5; freeholder_pdc += strife; old_middle_pdc += strife; new_middle_pnu -= 2; new_middle_pdc += 2; revolutionary_fatigue += 1; pdc_turnout -= 0.05; ppp_turnout += 0.02;
 
 Maggiorino Cimorelli, an industrialist formerly of the <span style="color:rgb(64, 89, 156);">**PNU**</span>, has won the leadership contest, transforming the <span style="color:rgb(164, 193, 61);">**PDC**</span> into a business oriented conservative-liberal party focusing their campaigning on national unity. 
 
@@ -43,7 +44,7 @@ Evemonds, former Supreme Court justice, has won the nomination for party leaders
 If nothing else, tensions in the party have been begrudgingly smoothed over as Evemonds alienates none within the party.
 
 @scardina_victory
-on-arrival: scardina_timer_1 -= 3; business_dissent -= 5; pdc_turnout -= 0.05; old_middle_pdc -= 5; freeholder_pdc -= 5; new_middle_pdc -= 2; ppp_turnout += 0.02; new_middle_ppp += 2; pdc_relation += 10 if party == "PPP"; pdc_relation -= 10 if party == "PNU"
+on-arrival: pdc_leader = "Scardina"; scardina_timer_1 -= 3; business_dissent -= 5; pdc_turnout -= 0.05; old_middle_pdc -= 5; freeholder_pdc -= 5; new_middle_pdc -= 2; ppp_turnout += 0.02; new_middle_ppp += 2; pdc_relation += 10 if party == "PPP"; pdc_relation -= 10 if party == "PNU"
 
 Piero Scardina, former <span style="color:rgb(238, 117, 36);">**PPP**</span> member, has won the nomination for party leadership. Despite his significant credentials, a personal loyalty to Caterino and an unwillingness to campaign against them has caused the party to see much internal upheaval, failing to capture <span style="color:rgb(64, 89, 156);">**PNU**</span> voters and bleeding support to the <span style="color:rgb(238, 117, 36);">**PPP**</span. 
 
