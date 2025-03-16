@@ -15,7 +15,7 @@ Q.evemonds_strength += Q.strife;
 Q.evemonds_strength += Q.freeholder_pdc_display;
 Q.evemonds_strength += Q.guagentist_dissent/3;
 Q.scardina_strength += Q.new_middle_pdc_display;
-Q.scardina_strength += Q.scardinaist_dissent/2;
+Q.scardina_strength += Q.scardinaist_dissent/1.5;
 !}
 tags: event
 
@@ -29,7 +29,22 @@ The <span style="color:rgb(164, 193, 61);">**PDC**</span> is holding its first p
 go-to: cimorelli_victory if cimorelli_strength > scardina_strength and cimorelli_strength > evemonds_strength; evemonds_victory if evemonds_strength > scardina_strength and evemonds_strength > cimorelli_strength; scardina_victory if scardina_strength > cimorelli_strength and scardina_strength > evemonds_strength
 
 @cimorelli_victory
+on-arrival: business_dissent += 10; business_strength -= 10; old_middle_pnu -= 4; old_middle_pdc += 5; freeholder_pdc += strife; old_middle_pdc += strife; new_middle_pnu -= 2; new_middle_pdc += 2; revolutionary_fatigue += 1; pdc_turnout -= 0.05; ppp_turnout += 0.02;
+
+Maggiorino Cimorelli, an industrialist formerly of the <span style="color:rgb(64, 89, 156);">**PNU**</span>, has won the leadership contest, transforming the <span style="color:rgb(164, 193, 61);">**PDC**</span> into a business oriented conservative-liberal party focusing their campaigning on national unity. 
+
+Though tensions in the party have momentarily flared over the selection of who many view as a corrupt Ortha-aligned businessman, he seems to be a fairly capable politician, and has utilized his financial backing to win over the pacifist vote.
 
 @evemonds_victory
+on-arrival: scardina_timer_1 -= 2; guagentist_dissent += 5; pdc_turnout += 0.02; old_middle_pdc -= 3; new_middle_pdc -= 4; pnu_turnout += 0.02; old_middle_pnu += 2; freeholder_pnu += 2; pdc_relation -= 10 if party == "PPP"; pdc_relation += 10 if party == "PNU"
+
+Evemonds, former Supreme Court justice, has won the nomination for party leadership, leading the party in a rather uninspiring and moderate direction. Despite this moderatism, she has failed to contrast the <span style="color:rgb(164, 193, 61);">**PDC**</span> from the <span style="color:rgb(64, 89, 156);">**PNU**</span>, slowing the new party's momentum and bleeding support to the <span style="color:rgb(64, 89, 156);">**PNU**</span>.
+
+If nothing else, tensions in the party have been begrudgingly smoothed over as Evemonds alienates none within the party.
 
 @scardina_victory
+on-arrival: scardina_timer_1 -= 3; business_dissent -= 5; pdc_turnout -= 0.05; old_middle_pdc -= 5; freeholder_pdc -= 5; new_middle_pdc -= 2; ppp_turnout += 0.02; new_middle_ppp += 2; pdc_relation += 10 if party == "PPP"; pdc_relation -= 10 if party == "PNU"
+
+Piero Scardina, former <span style="color:rgb(238, 117, 36);">**PPP**</span> member, has won the nomination for party leadership. Despite his significant credentials, a personal loyalty to Caterino and an unwillingness to campaign against them has caused the party to see much internal upheaval, failing to capture <span style="color:rgb(64, 89, 156);">**PNU**</span> voters and bleeding support to the <span style="color:rgb(238, 117, 36);">**PPP**</span. 
+
+Under his charge, the <span style="color:rgb(164, 193, 61);">**PDC**</span> has become in the eyes of many little more than a satellite party of the <span style="color:rgb(238, 117, 36);">**PPP**</span>, due to his naivety and stubbornness.
