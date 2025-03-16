@@ -31,10 +31,21 @@ on-arrival: ppp_police -= 1; police_loyalty -= 0.04; guagentist_strength += 3; p
 In an outrageous [? if ppp_judiciary < 2 : and unanimous?][? if ppp_judiciary >= 2 : 4-1 ?] ruling, the Supreme Court has found that Sandro Lorenzo is guilty of insurrection, treason and conspiracy. 
 
 @people_court
-on-arrival: budget -= 1 if resources < 2; resources -= 2 if resources >= 2; scardinaist_dissent += 3; ppp_police += 1; pnu_police -= 1; pnu_gov -= 1; ppp_judiciary += 1; pnu_judiciary -= 1; revolutionary_fatigue += 1; strife += 1;
+choose-if: emergency_rule
+unavailable-subtitle: We lack the sufficient power.
+on-arrival: budget -= 1 if resources < 2; resources -= 2 if resources >= 2; scardinaist_dissent += 3; ppp_police += 1; pnu_police -= 1; pnu_gov -= 1; ppp_judiciary += 2; pnu_judiciary -= 1; revolutionary_fatigue += 1; strife += 1; old_middle_ppp -= 3; freeholder_ppp -= 3; peasant_ppp += 4*(1-dissent); workers_ppp += 2*(1-dissent); pnu_turnout += 0.02
+subtitle: [? if resources >= 2 : -2 resources. ?][? if resources < 2 : -1 budget. ?] This may upset the Scardinaists.
+
+> *"In accordance with our belief that the People's Will is the highest authority in the nation, a new judicial system of People's Courts shall be established that hold authority over all judicial instruments and institutions established prior to the revolution."*
+
+ - 1920 People's Courts Decree
+
+The establishment of the People's Courts is an overwhelming success, as we devote our resources to making sure every town and city in the country may be free from the yoke of the olden Monarchy's Courts. The <span style="color:rgb(64, 89, 156);">**PNU**</span> boycotts its own right to participate in selecting the justices, further cementing our dominance and allowing us to pursue through these courts a progressive agenda.
+
+The <span style="color:rgb(64, 89, 156);">**PNU**</span> is shocked by the speed at which the people have made their voices one, and is yet to respond, but we can be sure that the Supreme Court will strike it down as unconstitutional. We should prepare for a constitutional crisis, or worse. 
 
 @defy
-on-arrival: pnu_police += 1; ppp_gov -= 1; labor_dissent += 2; caterinoist_strength -= 3; scardinaist_dissent += 5; strife += 2; pro_republic -= 5; capital_strike_progress += 1; 
+on-arrival: pnu_police += 1; ppp_gov -= 1; labor_dissent += 2; caterinoist_strength -= 3; scardinaist_dissent += 5; strife += 2; pro_republic -= 5; capital_strike_progress += 1; pnu_turnout += 0.03
 
 @oblige
 choose-if: scardinaist_strength >= 200
