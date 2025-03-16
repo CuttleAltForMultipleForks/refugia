@@ -405,8 +405,8 @@ Q.in_election_prussia = 1;
 Q.next_election_time_prussia = 5;
 Q.next_election_year_prussia = 1928;
 Q.next_election_month_prussia = 5;
-Q.next_election_year = 1928;
-Q.next_election_month = 12;
+Q.next_election_year = 1920;
+Q.next_election_month = 3;
 Q.next_election_time = 12;
 // government affairs timers
 Q.spd_government_burden_timer = 0;
