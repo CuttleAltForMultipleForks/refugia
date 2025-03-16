@@ -1,0 +1,31 @@
+title: <span style="color:rgb(164, 193, 61);">**PDC**</span> Party Congress
+subtitle: The <span style="color:rgb(164, 193, 61);">**PDC**</span> is holding its first party congress.
+view-if: pdc_formed and scardina_timer_2 <= 0
+new-page: true
+max-visits: 1
+on-arrival: {!
+Q.cimorelli_strength = 0;
+Q.evemonds_strength = 0;
+Q.scardina_strength = 0;
+
+Q.cimorelli_strength += Q.business_dissent;
+Q.cimorelli_strength += Q.old_middle_pdc_display;
+Q.evemonds_strength += Q.revolutionary_fatigue;
+Q.evemonds_strength += Q.strife;
+Q.evemonds_strength += Q.freeholder_pdc_display;
+Q.evemonds_strength += Q.guagentist_dissent/3;
+Q.scardina_strength += Q.new_middle_pdc_display;
+Q.scardina_strength += Q.scardinaist_dissent/2;
+!}
+tags: event
+go-to: cimorelli_victory if cimorelli_strength > scardina_strength and cimorelli_strength > evemonds_strength; evemonds_victory if evemonds_strength > scardina_strength and evemonds_strength > cimorelli_strength; scardina_victory if scardina_strength > cimorelli_strength and scardina_strength > evemonds_strength
+
+= <span style="color:rgb(164, 193, 61);">**PDC**</span> Party Congress
+
+The <span style="color:rgb(164, 193, 61);">**PDC**</span> is holding its party congress 
+
+@cimorelli_victory
+
+@evemonds_victory
+
+@scardina_victory
