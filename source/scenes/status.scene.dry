@@ -56,6 +56,10 @@ Economic growth: [+ economic_growth_2 +]%
 
 [? if party != "PCR" : <span style="color:rgb(129, 11, 11);">**PCR**</span>: [+ pcr_relation : relationships +] ?]
 
+[? if pdc_formed : <span style="color:rgb(164, 193, 61);">**PDC**</span>: [+ pdc_relation : relationships +] ?]
+
+[? if plr_formed : <span style="color:rgb(208, 58, 133);">**PLR**</span>: [+ plr_relation : relationships +] ?]
+
 = Party Leadership
 
 <span style="color:rgb(238, 117, 36);">**PPP**</span>: [+ ppp_leader +]
@@ -64,6 +68,9 @@ Economic growth: [+ economic_growth_2 +]%
 
 <span style="color:rgb(129, 11, 11);">**PCR**</span>: [+ pcr_leader +]
 
+[? if pdc_formed : <span style="color:rgb(164, 193, 61);">**PDC**</span>: [+ pdc_leader +] ?]
+
+[? if plr_formed : <span style="color:rgb(208, 58, 133);">**PLR**</span>: [+ pdc_leader +] ?]
 
 = Internal Factions of the <span style="color:rgb(238, 117, 36);">**PPP**</span>
 
@@ -140,6 +147,10 @@ Q.socialism_disp = Math.round(Q.socialism);
 <span style="color:rgb(64, 89, 156);">**PNU**</span>: [+ pnu_votes +]%
 
 <span style="color:rgb(129, 11, 11);">**PCR**</span>: [+ pcr_votes +]%
+
+[? if pdc_formed : <span style="color:rgb(164, 193, 61);">**PDC**</span>: [+ pdc_votes +]% ?]
+
+[? if plr_formed : <span style="color:rgb(208, 58, 133);">**PLR**</span>: [+ plr_votes +]% ?]
 
 **Detailed results for each demographic**
 

@@ -16,10 +16,16 @@ var scardina_percent = Q.scardinaist_strength/100;
 Q.pdc_seats = Math.round(Q.ppp_seats*scardina_percent);
 Q.ppp_seats -= Math.round(Q.pdc_seats);
 
+Q.pdc_relation = 40;
+if (Q.party == "PCR") {
+	Q.pdc_relation -= 35;
+}
+Q.pdc_leader = "Evemonds";
+
 Q.scardinaist_strength *= 0.1;
 
-Q.scardina_timer_1 = Math.random() * 6 + 12;
-Q.scardina_timer_2 = Q.scardina_timer_1 - 9;
+Q.scardina_timer_1 = Math.random() * 3 + 6;
+Q.scardina_timer_2 = Q.scardina_timer_1 - 4;
 !}
 tags: event
 

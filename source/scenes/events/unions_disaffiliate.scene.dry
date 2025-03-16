@@ -26,8 +26,14 @@ Q.ppp_seats -= Math.round(Q.plr_seats);
 
 Q.labor_strength *= 0.1;
 
-Q.trovato_timer_1 = Math.random() * 6 + 12;
-Q.trovato_timer_2 = Q.trovato_timer_1 - 9;
+Q.plr_relation = 40;
+if (Q.party == "PNU") {
+	Q.pdc_relation -= 35;
+}
+Q.plr_leader = "Trovato";
+
+Q.trovato_timer_1 = Math.random() * 3 + 6;
+Q.trovato_timer_2 = Q.trovato_timer_1 - 4;
 !}
 tags: event
 
