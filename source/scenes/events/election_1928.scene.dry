@@ -241,7 +241,7 @@ if (window && d3) {
 
     var lines = d3.linegraph(false, false,
         Q.parties,
-        {'pcr': '#810B0B', 'plr': '#a54377', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
+        {'pcr': '#810B0B', 'plr': '#bb538b 7', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
         {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
     );
     lines.width(width).height(400);
@@ -250,7 +250,7 @@ if (window && d3) {
     if (!Q.historical_mode) {
         var lines_2 = d3.linegraph(true, true,
             Q.parties,
-            {'pcr': '#810B0B', 'plr': '#a54377', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
+            {'pcr': '#810B0B', 'plr': '#bb538b 7', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
             {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
         );
         lines_2.width(width).height(400);
@@ -269,7 +269,7 @@ go-to: coalition_menu
 
 {!<tr><td><div class="box" style='background-color:#810B0B; outline: 2px; outline-style: solid;'> </div> !} **PCR:** {!</td><td>!} **[+ pcr_votes +]%** {!</td><td>!} **[+ str_votes_change_pcr +]** {!</td><td>!} **[+ pcr_seats +]** {!</td><td>!} **[+ str_change_pcr +]** {!</td></tr>!}
 
-[? if plr_formed : {!<tr><td><div class="box" style='background-color:#a54377; outline: 2px; outline-style: solid;'> </div> !} **PLR:** {!</td><td>!} **[+ plr_votes +]%** {!</td><td>!} **[+ str_votes_change_plr +]** {!</td><td>!} **[+ plr_seats +]** {!</td><td>!} **[+ str_change_plr +]** {!</td></tr>!} ?]
+[? if plr_formed : {!<tr><td><div class="box" style='background-color:#bb538b 7; outline: 2px; outline-style: solid;'> </div> !} **PLR:** {!</td><td>!} **[+ plr_votes +]%** {!</td><td>!} **[+ str_votes_change_plr +]** {!</td><td>!} **[+ plr_seats +]** {!</td><td>!} **[+ str_change_plr +]** {!</td></tr>!} ?]
 
 {!<tr><td><div class="box" style='background-color:#EE7524; outline: 2px; outline-style: solid;'> </div> !} **PPP:** {!</td><td>!} **[+ ppp_votes +]%** {!</td><td>!} **[+ str_votes_change_ppp +]** {!</td><td>!} **[+ ppp_seats +]** {!</td><td>!} **[+ str_change_ppp +]** {!</td></tr>!}
 
@@ -308,13 +308,13 @@ go-to: coalition_menu
 
         [? if plr_formed : 
         {!<tr>!}
-            {!<td><span style="color: #a54377;"><b>PDC</b></span></td>!}
-            {!<td style="background-color: rgba(165, 67, 119, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_plr_display +]%{!</td>!}
-            {!<td style="background-color: rgba(165, 67, 119, 0.1); font-size: 0.85em;">!}[+ new_middle_plr_display +]%{!</td>!}
-            {!<td style="background-color: rgba(165, 67, 119, 0.1); font-size: 0.85em;">!}[+ old_middle_plr_display +]%{!</td>!}
-            {!<td style="background-color: rgba(165, 67, 119, 0.1); font-size: 0.85em;">!}[+ peasant_plr_display +]%{!</td>!}
-            {!<td style="background-color: rgba(165, 67, 119, 0.1); font-size: 0.85em;">!}[+ freeholder_plr_display +]%{!</td>!}
-            {!<td style="background-color: rgba(165, 67, 119, 0.1); font-size: 0.85em;">!}[+ unemployed_plr_display +]%{!</td>!}
+            {!<td><span style="color: #bb538b 7;"><b>PDC</b></span></td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ new_middle_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ old_middle_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ peasant_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ freeholder_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ unemployed_plr_display +]%{!</td>!}
         {!</tr>!}
         ?]
         
