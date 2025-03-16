@@ -312,6 +312,8 @@ Q.ppp_labour = 4;
 Q.pcr_labour = 2;
 Q.pnu_labour = 1;
 
+Q.entryism = 0;
+
 // have we reformed these institutions to be more democratic?
 Q.judicial_reform = 0;
 Q.bureaucratic_reform = 1;

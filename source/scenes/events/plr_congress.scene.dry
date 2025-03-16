@@ -1,0 +1,33 @@
+title: <span style="color:rgb(187, 83, 139);">**PLR**</span> Party Congress
+subtitle: The <span style="color:rgb(187, 83, 139);">**PLR**</span> is holding its first party congress.
+view-if: plr_formed and trovato_timer_2 <= 0
+new-page: true
+max-visits: 1
+on-arrival: {!
+Q.trovato_strength = 0;
+Q.domezio_strength = 0;
+
+Q.trovato_strength += Q.workers_plr_display;
+Q.trovato_strength += Q.revolutionary_fatigue;
+Q.trovato_strength += Q.labor_dissent/3;
+Q.domezio_strength += Q.tomaso_dissent/2;
+Q.domezio_strength += Q.unemployed;
+Q.domezio_strength += Q.unemployed_plr_display;
+Q.domezio_strength += Q.pcr_votes;
+!}
+tags: event
+
+= <span style="color:rgb(187, 83, 139);">**PLR**</span> Party Congress
+
+The <span style="color:rgb(187, 83, 139);">**PLR**</span> is holding its first party congress after having recently formed. We will see if Vulpano Trovato continues to hold the party in his grasp or not.
+
+- @vote: The party votes...
+
+@vote
+go-to: trovato_victory if trovato_strength > domezio_strength; tomaso_victory if domezio_strength > trovato_strength
+
+@trovato_victory
+on-arrival: trovato_timer_1 -= 3; entryism += 2; workers_pcr += 3; workers_plr -= 1; unemployed_pcr += 2; new_middle_plr += 2; peasant_plr += 2; 
+
+@tomaso_victory
+on-arrival: leader = "Tomaso"; trovato_timer_1 -= 1; entryism -= 1; workers_plr += 2; unemployed_plr += 4; tomaso_dissent += 20; workers_pcr -= 3; unemployed_pcr -= 2; new_middle_plr = 0; new_middle_ppp += 2; peasant_plr = 0; plr_turnout -= 0.1; ppp_turnout += 0.05
