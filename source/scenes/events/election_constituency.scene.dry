@@ -1,0 +1,381 @@
+title: Reichstag Elections
+new-page: true
+tags: event
+priority: -1
+on-arrival: ppp_coalition = 0; pnu_coalition = 0; pdc_coalition = 0; plr_coalition = 0; pcr_coalition = 0; 
+view-if: ((year = next_election_year and month >= next_election_month) or (year > next_election_year)) and not constituency_system
+on-departure: in_election = 0; next_election_year = year; next_election_month = next_election_month + 4; n_elections += 1; next_election_time = time + 16
+set-jump: post_election_1928
+#face-image: img/Rothe_Wahlen_1903.jpg
+
+
+= Elections, [+ month : month +] [+ year +]
+
+The Reichstag elections are to be held now.
+
+- @election_algorithm: May we do our best...
+- @cancel_elections
+
+@cancel_elections
+title: We cannot hold the elections now. Cancel the elections.
+subtitle: This is an anti-democratic move that may backfire.
+view-if: in_emergency_government == 1 and president == "Braun" and not presidential_powers
+
+Since we are currently ruling as part of an emergency government, we may use quasi-constitutional trickery to significantly delay these elections, and continue governing via Article 48. This is likely to be extremely unpopular both with our base and with the other parties. However, this may be necessary to prevent the extremists from gaining power.
+
+- @cancel_elections_2: Yes, do it.
+- @election_algorithm: No, let's hold the elections.
+
+@cancel_elections_2
+on-departure: next_election_year = next_election_year + 1; next_election_time = time + 12; pro_republic -= 10; dvp_relation -= 8; lvp_relation -= 8; z_relation -= 8; ddp_relation -= 10; kpd_relation -= 8; coup_progress += 2; workers_spd -= 4; new_middle_spd -= 5; old_middle_spd -= 5; rural_spd -= 5; catholics_spd -= 5; unemployed_spd -= 5; coup_progress += 2 if nsdap_normalized >= 0.3; coup_progress += 2 if nsdap_normalized + dnvp_normalized >= 0.5 and dnvp_ideology = "Radical"; coup_progress += 2 if nsdap_normalized + dnf_normalized >= 0.5 and dnvp_ideology = "Moderate"; sa_strength += 100 if coup_progress >= 7; sh_strength += 100 if coup_progress >= 7
+achievement: ausnahmezustand
+
+Fine. President [+ president +] has taken the unprecedented step of canceling these elections. New elections are scheduled for [+ next_election_month : month +] [+ next_election_year +].
+
+Let us hope this does not backfire.
+
+@post_election_1928
+on-arrival: {!  
+// Loop through classes and parties to calculate class votes and normalized values
+for (var c of Q.classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (Q[c + '_' + party] < 0) {
+            Q[c + '_' + party] = 0;
+            console.log(`Negative votes corrected for class ${c}, party ${party}:`, Q[c + '_' + party]);
+        }
+        class_votes += Q[c + '_' + party];
+    }
+    console.log(`Total votes for class ${c}:`, class_votes);
+
+    // Normalize class votes for each party
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = Math.round(100 * Q[c + '_' + party] / class_votes);
+        console.log(`Normalized votes for class ${c}, party ${party}:`, Q[c + '_' + party + '_normalized']);
+    }
+}
+
+// Loop through states to calculate support for each party
+for (var state of Q.constituencies) {
+    var total_support = 0;
+
+    for (var party of Q.parties) {
+        var party_support = 0;
+        
+        for (var c of Q.classes) {
+            party_support += Q[state + '_' + c] * Q[c + '_' + party + '_normalized'] * Q[c + '_turnout'] * Q[party + '_turnout'];
+        }
+
+        Q[state + '_' + party + '_support'] = party_support;
+        total_support += party_support;
+        console.log(`Support for state ${state}, party ${party}:`, party_support);
+    }
+
+    console.log(`Total support for state ${state}:`, total_support);
+
+    // Normalize support for each party and calculate votes
+    for (var party of Q.parties) {
+        Q[state + '_' + party + '_normalized'] = Q[state + '_' + party + '_support'] / total_support;
+        Q[state + '_' + party + '_votes_dec'] = Math.round(Q[state + '_' + party + '_normalized'] * 1000) / 10;
+        Q[state + '_' + party + '_votes'] = Math.round(Q[state + '_' + party + '_normalized'] * 100);
+
+        console.log(`Normalized support for state ${state}, party ${party}:`, Q[state + '_' + party + '_normalized']);
+        console.log(`Decimal votes for state ${state}, party ${party}:`, Q[state + '_' + party + '_votes_dec']);
+        console.log(`Rounded votes for state ${state}, party ${party}:`, Q[state + '_' + party + '_votes']);
+    }
+
+    // Determine the winning party for each state
+    var highest_support = 0;
+    Q['winning_party_' + state] = null;
+    for (var party of Q.parties) {
+        if (Q[state + '_' + party + '_normalized'] > highest_support) {
+            highest_support = Q[state + '_' + party + '_normalized'];
+            Q['winning_party_' + state] = party;
+        }
+    }
+    console.log(`Winning party for state ${state}:`, Q['winning_party_' + state]);
+}
+
+// Add seats for each winning party
+for (var state of Q.constituencies) {
+    var winning_party = Q['winning_party_' + state];
+    Q[winning_party + 'seats'] += Q[state + '_votes'];
+    console.log(`Electoral votes updated for winning party ${winning_party} in state ${state}:`, Q[winning_party + '_electoral']);
+}
+
+    // Step 3: Calculate changes in results
+    for (var party of Q.parties) {
+        Q['change_' + party + '_seats'] = Q[party + '_seats'] - Q['old_' + party + '_seats'];
+        var sign = Q['change_' + party + '_seats'] > 0 
+                   ? '<img src="img/arrowup.jpg"> ' 
+                   : Q['change_' + party + '_seats'] < 0 
+                     ? '<img src="img/arrowdown.jpg"> ' 
+                     : '<img src="img/steady.jpg"> ';
+        Q['change_' + party + '_seats'] = Math.abs(Q['change_' + party + '_seats']);
+        Q['str_change_' + party] = sign + Q['change_' + party + '_seats'];
+    
+        // Calculate changes in votes
+        Q['change_' + party + '_votes'] = Q[party + '_votes'] - Q['previous_' + party + '_last_election_votes'];
+        if (Q['previous_' + party + '_last_election_votes'] === undefined) {
+            Q['change_' + party + '_votes'] = Q[party + '_votes'];
+        }
+    
+        var sign2 = Q['change_' + party + '_votes'] > 0 
+                    ? '<img src="img/arrowup.jpg"> ' 
+                    : Q['change_' + party + '_votes'] < 0 
+                      ? '<img src="img/arrowdown.jpg"> ' 
+                      : '<img src="img/steady.jpg"> ';
+        Q['str_votes_change_' + party] = sign2 + Math.abs(Q['change_' + party + '_votes']).toFixed(1);
+    }
+    
+    // Handle demographic changes for all parties
+    for (var party of Q.parties) {
+        for (var c of Q.classes) {
+            Q[c + "_change_" + party + '_display'] = Q[c + '_' + party + '_display'] - Q['old_' + c + '_' + party + '_display'];
+            var sign3 = Q[c + "_change_" + party + '_display'] > 0 ? '+' : '';
+            Q['demo_change_' + c + '_' + party + '_display'] = sign3 + parseFloat(Q[c + "_change_" + party + '_display']).toFixed(0);
+            Q['old_' + c + '_' + party + '_display'] = Q[c + '_' + party + '_display'];
+        }
+    }
+    
+    // Store current votes as previous for the next iteration
+    for (var party of Q.parties) {
+        Q[party + '_last_election_votes'] = parseFloat(Q[party + '_votes']).toFixed(1);
+        Q['previous_' + party + '_last_election_votes'] = parseFloat(parseFloat(Q[party + '_last_election_votes']).toFixed(1));
+    }    
+
+Q.total_seats = 0;
+for (var party of Q.parties) {
+    Q.total_seats += Q[party + '_seats']
+}
+
+Q.government_threshold = Math.ceil(Q.total_seats/2);
+Q.social_republican = Q.ppp_seats + Q.plr_seats;
+Q.liberal_republican = Q.ppp_seats + Q.pdc_seats;
+Q.liberal_conservative = Q.pnu_seats + Q.pdc_seats;
+Q.left_front = Q.pcr_seats + Q.plr_seats;
+Q.popular_front = Q.pcr_seats + Q.plr_seats + Q.ppp_seats;
+Q.grand_coalition = Q.ppp_seats + Q.plr_seats + Q.pdc_seats;
+
+var election_result = {'date': new Date(Q.year, Q.month - 1)};
+for (var party of Q.parties) {
+    election_result[party] = Q[party + '_r'];
+}
+Q.election_records.push(election_result);
+!}
+on-display: {!
+data = [{
+    "id": "pcr",
+    "legend": "PCR",
+    "name": "PCR",
+    "seats": Q.pcr_seats,
+}];
+
+if (Q.plr_r && Q.plr_formed) {
+    data.push({
+        "id": "plr",
+        "legend": "PLR",
+        "name": "PLR",
+        "seats": Q.plr_seats,
+    });
+}
+
+data = data.concat([{
+    "id": "ppp",
+    "legend": "PPP",
+    "name": "PPP",
+    "seats": Q.ppp_seats,
+}]);
+
+if (Q.pdc_r && Q.pdc_formed) {
+    data.push({
+        "id": "pdc",
+        "legend": "PDC",
+        "name": "PDC",
+        "seats": Q.pdc_seats,
+    });
+}
+
+data = data.concat([{
+    "id": "pnu",
+    "legend": "PNU",
+    "name": "PNU",
+    "seats": Q.pnu_seats,
+}]);
+
+if (window && d3) {
+    var width = 500;
+    var height = 500;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("reichstag").style.height = screenWidth/2 + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#reichstag").datum(data).call(parliament);
+
+    var lines = d3.linegraph(false, false,
+        Q.parties,
+        {'pcr': '#810B0B', 'plr': '#bb538b', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
+        {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
+    );
+    lines.width(width).height(400);
+    d3.select("#election_history").datum(Q.election_records).call(lines);
+
+    if (!Q.historical_mode) {
+        var lines_2 = d3.linegraph(true, true,
+            Q.parties,
+            {'pcr': '#810B0B', 'plr': '#bb538b', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
+            {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
+        );
+        lines_2.width(width).height(400);
+        d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
+    }
+}
+!}
+go-to: coalition_menu
+
+= Election results
+
+{!<svg id="reichstag" style="width: 500px; height: 250px;"> </svg>!}
+
+{!<table>!} 
+{!<tr><td>Party</td><td>Vote share</td><td>% Change</td><td>Reichstag Seats</td><td>% Change</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#810B0B; outline: 2px; outline-style: solid;'> </div> !} **PCR:** {!</td><td>!} **[+ pcr_votes +]%** {!</td><td>!} **[+ str_votes_change_pcr +]** {!</td><td>!} **[+ pcr_seats +]** {!</td><td>!} **[+ str_change_pcr +]** {!</td></tr>!}
+
+[? if plr_formed : {!<tr><td><div class="box" style='background-color:#bb538b; outline: 2px; outline-style: solid;'> </div> !} **PLR:** {!</td><td>!} **[+ plr_votes +]%** {!</td><td>!} **[+ str_votes_change_plr +]** {!</td><td>!} **[+ plr_seats +]** {!</td><td>!} **[+ str_change_plr +]** {!</td></tr>!} ?]
+
+{!<tr><td><div class="box" style='background-color:#EE7524; outline: 2px; outline-style: solid;'> </div> !} **PPP:** {!</td><td>!} **[+ ppp_votes +]%** {!</td><td>!} **[+ str_votes_change_ppp +]** {!</td><td>!} **[+ ppp_seats +]** {!</td><td>!} **[+ str_change_ppp +]** {!</td></tr>!}
+
+[? if pdc_formed : {!<tr><td><div class="box" style='background-color:#a4c13d; outline: 2px; outline-style: solid;'> </div> !} **PDC:** {!</td><td>!} **[+ pdc_votes +]%** {!</td><td>!} **[+ str_votes_change_pdc +]** {!</td><td>!} **[+ pdc_seats +]** {!</td><td>!} **[+ str_change_pdc +]** {!</td></tr>!} ?]
+
+{!<tr><td><div class="box" style='background-color:#40599C; outline: 2px; outline-style: solid;'> </div> !} **PNU:** {!</td><td>!} **[+ pnu_votes +]%** {!</td><td>!} **[+ str_votes_change_pnu +]** {!</td><td>!} **[+ pnu_seats +]** {!</td><td>!} **[+ str_change_pnu +]** {!</td></tr>!}
+
+{!</table>!}
+
+{!<button class="tab_button" id="demographics_tab" onclick="window.toggleDem();">Demographic Results</button>!}
+{!<button class="tab_button" id="election_tab" onclick="window.toggleElectionGraph();">Previous Elections Graph</button>!}
+{!<button class="tab_button" id="graph_tab" onclick="window.toggleGraph();">Party Support Graph</button>!}
+
+{!<div id="results" style="display: none;">!}
+    {!<div style="overflow-x:auto;">!}
+    {!<table style="text-align:center; border-spacing: 0.2em;">!}
+        {!<tr>!}
+            {!<th>Party</th>!}
+            {!<th>Workers</th>!}
+            {!<th>New Middle</th>!}
+            {!<th>Old Middle</th>!}
+            {!<th>Peasant</th>!}
+            {!<th>Freeholder</th>!}
+            {!<th>Unemployed</th>!}
+        {!</tr>!}
+        
+        {!<tr>!}
+            {!<td><span style="color: #810B0B;"><b>PCR</b></span></td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ new_middle_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ old_middle_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ peasant_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ freeholder_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ unemployed_pcr_display +]%{!</td>!}
+        {!</tr>!}
+
+        [? if plr_formed : 
+        {!<tr>!}
+            {!<td><span style="color: #bb538b;"><b>PDC</b></span></td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ new_middle_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ old_middle_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ peasant_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ freeholder_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ unemployed_plr_display +]%{!</td>!}
+        {!</tr>!}
+        ?]
+        
+        {!<tr>!}
+            {!<td><span style="color: #EE7524;"><b>PPP</b></span></td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ new_middle_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ old_middle_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ peasant_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ freeholder_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ unemployed_ppp_display +]%{!</td>!}
+        {!</tr>!}
+        
+        [? if pdc_formed : 
+        {!<tr>!}
+            {!<td><span style="color: #a4c13d;"><b>PDC</b></span></td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ new_middle_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ old_middle_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ peasant_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ freeholder_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ unemployed_pdc_display +]%{!</td>!}
+        {!</tr>!}
+        ?]
+        
+        {!<tr>!}
+            {!<td><span style="color: #40599C;"><b>PNU</b></span></td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ new_middle_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ old_middle_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ peasant_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ freeholder_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ unemployed_pnu_display +]%{!</td>!}
+        {!</tr>!}
+    {!</table>!}
+    {!</div>!}
+{!</div>!}
+
+{!<svg id="election_history" style="width: 500px; height: 400px; display: none;"> </svg>!}
+{!<svg id="party_support_history" style="width: 500px; height: 400px; display: none;"> </svg>!}
+
+There are some potential coalition arrangements.
+
+@coalition_menu
+on-arrival: hm = 1;
+go-to: ppp_menu if party == "PPP"; pnu_menu if party == "PNU"; pcr_menu if party == "PCR"
+
+@ppp_menu
+on-arrival: coalition_seats = ppp_seats; ppp_coalition = 1
+go-to: ppp_actual_menu
+
+@ppp_actual_menu
+
+- @complete_ppp: We will form our government now.
+- @invite_pcr: Invite the communists.
+- @invite_pdc: Invite the constitutionalists.
+- @invite_plr: Invite the socialists.
+
+@complete_ppp
+choose-if: coalition_seats >= government_threshold
+subtitle: [+ coalition_seats +]/[+ government_threshold +]. Supported by PPP[? if pdc_coalition :- PDC?][? if plr_coalition :- PLR?][? if pcr_coalition :- PCR?].
+
+@invite_pcr
+choose-if: pcr_relation >= 60
+unavailable-subtitle: The communists would never.
+on-arrival: coalition_seats += pcr_seats; pcr_coalition = 1; scardinaist_dissent += 10; ppp_turnout -= 0.05; pcr_turnout += 0.05
+go-to: ppp_actual_menu
+
+@invite_pdc
+view-if: pdc_formed and not pdc_coalition
+on-arrival: coalition_seats += pdc_seats; pdc_coalition = 1; labor_dissent += 5; pdc_turnout += 0.05
+go-to: ppp_actual_menu
+
+@invite_plr
+view-if: plr_formed and not plr_coalition
+on-arrival: coalition_seats += plr_seats; plr_coalition = 1; scardinaist_dissent += 5; plr_turnout += 0.05;
+go-to: ppp_actual_menu
+
+@pnu_menu
+
+Boo
+
+@pcr_menu
+
+boo

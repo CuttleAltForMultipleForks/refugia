@@ -313,6 +313,7 @@ Q.pcr_labour = 2;
 Q.pnu_labour = 1;
 
 Q.entryism = 0;
+Q.constituency_system = 1;
 
 // have we reformed these institutions to be more democratic?
 Q.judicial_reform = 0;
@@ -440,6 +441,19 @@ for (let i = 0; i <= 100; i++) {
 
 // all the initial advisors are centrists.
 Q.wels_advisor = 1; // Otto Wels
+
+Q.constituencies = ['urpo', 'urmi', 'urri', 'subpo', 'submi', 'subri', 'rurpo', 'rurmi', 'rurri'];
+
+Q.urpo_votes = 54;
+Q.urmi_votes = 13;
+Q.urri_votes = 4;
+Q.subpo_votes = 39;
+Q.submi_votes = 21;
+Q.subri_votes = 7;
+Q.rurpo_votes = 89;
+Q.rurmi_votes = 53;
+Q.rurri_votes = 31;
+
 !}
 set-bg: img/map_2.jpg
 
