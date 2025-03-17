@@ -3,9 +3,9 @@ new-page: true
 tags: event
 priority: -1
 on-arrival: ppp_coalition = 0; pnu_coalition = 0; pdc_coalition = 0; plr_coalition = 0; pcr_coalition = 0; 
-view-if: ((year = next_election_year and month >= next_election_month) or (year > next_election_year)) and not constituency_system
+view-if: ((year = next_election_year and month >= next_election_month) or (year > next_election_year))
 on-departure: in_election = 0; next_election_year = year; next_election_month = next_election_month + 4; n_elections += 1; next_election_time = time + 16
-set-jump: post_election_1928
+set-jump: post_election_1928 if not constituency_system; post_election_constituency if constituency_system
 #face-image: img/Rothe_Wahlen_1903.jpg
 
 
@@ -259,9 +259,217 @@ if (window && d3) {
     }
 }
 !}
-go-to: election_results
+go-to: coalition_menu
 
-@election_results
+@post_election_constituency
+on-arrival: {!  
+Q.ppp_seats = 0;
+Q.pnu_seats = 0;
+Q.pcr_seats = 0;
+Q.pdc_seats = 0;
+Q.plr_seats = 0;
+
+// Loop through classes and parties to calculate class votes and normalized values
+for (var c of Q.classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (Q[c + '_' + party] < 0) {
+            Q[c + '_' + party] = 0;
+            console.log(`Negative votes corrected for class ${c}, party ${party}:`, Q[c + '_' + party]);
+        }
+        class_votes += Q[c + '_' + party];
+    }
+    console.log(`Total votes for class ${c}:`, class_votes);
+
+    // Normalize class votes for each party
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = Math.round(100 * Q[c + '_' + party] / class_votes);
+        console.log(`Normalized votes for class ${c}, party ${party}:`, Q[c + '_' + party + '_normalized']);
+    }
+}
+
+// Loop through states to calculate support for each party
+for (var state of Q.constituencies) {
+    var total_support = 0;
+
+    for (var party of Q.parties) {
+        var party_support = 0;
+        
+        for (var c of Q.classes) {
+            party_support += Q[state + '_' + c] * Q[c + '_' + party + '_normalized'] * Q[c + '_turnout'] * Q[party + '_turnout'];
+        }
+
+        Q[state + '_' + party + '_support'] = party_support;
+        total_support += party_support;
+        console.log(`Support for state ${state}, party ${party}:`, party_support);
+    }
+
+    console.log(`Total support for state ${state}:`, total_support);
+
+    // Normalize support for each party and calculate votes
+    for (var party of Q.parties) {
+        Q[state + '_' + party + '_normalized'] = Q[state + '_' + party + '_support'] / total_support;
+        Q[state + '_' + party + '_votes_dec'] = Math.round(Q[state + '_' + party + '_normalized'] * 1000) / 10;
+        Q[state + '_' + party + '_votes'] = Math.round(Q[state + '_' + party + '_normalized'] * 100);
+
+        console.log(`Normalized support for state ${state}, party ${party}:`, Q[state + '_' + party + '_normalized']);
+        console.log(`Decimal votes for state ${state}, party ${party}:`, Q[state + '_' + party + '_votes_dec']);
+        console.log(`Rounded votes for state ${state}, party ${party}:`, Q[state + '_' + party + '_votes']);
+    }
+
+    // Determine the winning party for each state
+    var highest_support = 0;
+    Q['winning_party_' + state] = null;
+    for (var party of Q.parties) {
+        if (Q[state + '_' + party + '_normalized'] > highest_support) {
+            highest_support = Q[state + '_' + party + '_normalized'];
+            Q['winning_party_' + state] = party;
+        }
+    }
+    console.log(`Winning party for state ${state}:`, Q['winning_party_' + state]);
+}
+
+// Add seats for each winning party
+for (var state of Q.constituencies) {
+    var winning_party = Q['winning_party_' + state];
+    Q[winning_party + '_seats'] += Q[state + '_votes'];
+    console.log(`Electoral votes updated for winning party ${winning_party} in state ${state}:`, Q[winning_party + '_seats']);
+}
+
+    // Step 3: Calculate changes in results
+    for (var party of Q.parties) {
+        Q['change_' + party + '_seats'] = Q[party + '_seats'] - Q['old_' + party + '_seats'];
+        var sign = Q['change_' + party + '_seats'] > 0 
+                   ? '<img src="img/arrowup.jpg"> ' 
+                   : Q['change_' + party + '_seats'] < 0 
+                     ? '<img src="img/arrowdown.jpg"> ' 
+                     : '<img src="img/steady.jpg"> ';
+        Q['change_' + party + '_seats'] = Math.abs(Q['change_' + party + '_seats']);
+        Q['str_change_' + party] = sign + Q['change_' + party + '_seats'];
+    
+        // Calculate changes in votes
+        Q['change_' + party + '_votes'] = Q[party + '_votes'] - Q['previous_' + party + '_last_election_votes'];
+        if (Q['previous_' + party + '_last_election_votes'] === undefined) {
+            Q['change_' + party + '_votes'] = Q[party + '_votes'];
+        }
+    
+        var sign2 = Q['change_' + party + '_votes'] > 0 
+                    ? '<img src="img/arrowup.jpg"> ' 
+                    : Q['change_' + party + '_votes'] < 0 
+                      ? '<img src="img/arrowdown.jpg"> ' 
+                      : '<img src="img/steady.jpg"> ';
+        Q['str_votes_change_' + party] = sign2 + Math.abs(Q['change_' + party + '_votes']).toFixed(1);
+    }
+    
+    // Handle demographic changes for all parties
+    for (var party of Q.parties) {
+        for (var c of Q.classes) {
+            Q[c + "_change_" + party + '_display'] = Q[c + '_' + party + '_display'] - Q['old_' + c + '_' + party + '_display'];
+            var sign3 = Q[c + "_change_" + party + '_display'] > 0 ? '+' : '';
+            Q['demo_change_' + c + '_' + party + '_display'] = sign3 + parseFloat(Q[c + "_change_" + party + '_display']).toFixed(0);
+            Q['old_' + c + '_' + party + '_display'] = Q[c + '_' + party + '_display'];
+        }
+    }
+    
+    // Store current votes as previous for the next iteration
+    for (var party of Q.parties) {
+        Q[party + '_last_election_votes'] = parseFloat(Q[party + '_votes']).toFixed(1);
+        Q['previous_' + party + '_last_election_votes'] = parseFloat(parseFloat(Q[party + '_last_election_votes']).toFixed(1));
+    }    
+
+Q.total_seats = 0;
+for (var party of Q.parties) {
+    Q.total_seats += Q[party + '_seats']
+}
+
+Q.government_threshold = Math.ceil(Q.total_seats/2);
+Q.social_republican = Q.ppp_seats + Q.plr_seats;
+Q.liberal_republican = Q.ppp_seats + Q.pdc_seats;
+Q.liberal_conservative = Q.pnu_seats + Q.pdc_seats;
+Q.left_front = Q.pcr_seats + Q.plr_seats;
+Q.popular_front = Q.pcr_seats + Q.plr_seats + Q.ppp_seats;
+Q.grand_coalition = Q.ppp_seats + Q.plr_seats + Q.pdc_seats;
+
+var election_result = {'date': new Date(Q.year, Q.month - 1)};
+for (var party of Q.parties) {
+    election_result[party] = Q[party + '_r'];
+}
+Q.election_records.push(election_result);
+!}
+on-display: {!
+data = [{
+    "id": "pcr",
+    "legend": "PCR",
+    "name": "PCR",
+    "seats": Q.pcr_seats,
+}];
+
+if (Q.plr_r && Q.plr_formed) {
+    data.push({
+        "id": "plr",
+        "legend": "PLR",
+        "name": "PLR",
+        "seats": Q.plr_seats,
+    });
+}
+
+data = data.concat([{
+    "id": "ppp",
+    "legend": "PPP",
+    "name": "PPP",
+    "seats": Q.ppp_seats,
+}]);
+
+if (Q.pdc_r && Q.pdc_formed) {
+    data.push({
+        "id": "pdc",
+        "legend": "PDC",
+        "name": "PDC",
+        "seats": Q.pdc_seats,
+    });
+}
+
+data = data.concat([{
+    "id": "pnu",
+    "legend": "PNU",
+    "name": "PNU",
+    "seats": Q.pnu_seats,
+}]);
+
+if (window && d3) {
+    var width = 500;
+    var height = 500;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("reichstag").style.height = screenWidth/2 + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#reichstag").datum(data).call(parliament);
+
+    var lines = d3.linegraph(false, false,
+        Q.parties,
+        {'pcr': '#810B0B', 'plr': '#bb538b', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
+        {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
+    );
+    lines.width(width).height(400);
+    d3.select("#election_history").datum(Q.election_records).call(lines);
+
+    if (!Q.historical_mode) {
+        var lines_2 = d3.linegraph(true, true,
+            Q.parties,
+            {'pcr': '#810B0B', 'plr': '#bb538b', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
+            {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
+        );
+        lines_2.width(width).height(400);
+        d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
+    }
+}
+!}
 go-to: coalition_menu
 
 = Election results
