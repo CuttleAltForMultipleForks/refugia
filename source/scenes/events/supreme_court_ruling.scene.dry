@@ -47,6 +47,8 @@ The <span style="color:rgb(64, 89, 156);">**PNU**</span> is shocked by the speed
 @defy
 on-arrival: pnu_police += 1; ppp_gov -= 1; labor_dissent += 2; caterinoist_strength -= 3; scardinaist_dissent += 5; strife += 2; pro_republic -= 5; capital_strike_progress += 1; pnu_turnout += 0.03
 
+D
+
 @oblige
 choose-if: scardinaist_strength >= 200
 unavailable-subtitle: Are you stupid?? No.
