@@ -4,7 +4,7 @@ tags: event
 priority: -1
 on-arrival: ppp_coalition = 0; pnu_coalition = 0; pdc_coalition = 0; plr_coalition = 0; pcr_coalition = 0; 
 view-if: (year = next_election_year and month >= next_election_month) or (year > next_election_year)
-on-departure: in_election = 0; next_election_month = next_election_month + 4; n_elections += 1; next_election_time = time + 16
+on-departure: in_election = 0; next_election_year = year; next_election_month = next_election_month + 4; n_elections += 1; next_election_time = time + 16
 set-jump: post_election_1928
 #face-image: img/Rothe_Wahlen_1903.jpg
 
