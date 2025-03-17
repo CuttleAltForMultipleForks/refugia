@@ -35,7 +35,7 @@ for (var party of Q.parties) {
 }
 
 !}
-go-to: jumpScene if not go_election; election_1928 if go_election
+go-to: jumpScene if not go_election; election_1928.post_election_1928 if go_election and not constituency_system; election_1928.post_election_constituency if go_election and constituency_system
 on-departure: go_election = 0;
 
 # note: this is a helpful utility to deal with elections and so on.
