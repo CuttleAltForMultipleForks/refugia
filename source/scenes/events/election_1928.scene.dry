@@ -259,6 +259,9 @@ if (window && d3) {
     }
 }
 !}
+go-to: election_results
+
+@election_results
 go-to: coalition_menu
 
 = Election results
