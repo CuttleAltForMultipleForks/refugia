@@ -169,6 +169,12 @@ for (var state of Q.constituencies) {
             Q['winning_party_' + state] = party;
         }
     }
+    if (highest_support < 0.5) {
+        if (Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && Q['winning_party_'+state] == "pnu") {
+            Q['winning_party_'+state] = "ppp";
+            console.log(`Strategic voting in the second round has lead to the PPP winning ${state}:`);
+        }
+    }
     console.log(`Winning party for state ${state}:`, Q['winning_party_' + state]);
 }
 
