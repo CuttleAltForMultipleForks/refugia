@@ -170,12 +170,30 @@ for (var state of Q.constituencies) {
         }
     }
     if (highest_support < 0.5) {
+        if (Q[state+'_plr_normalized'] === undefined) {
+            Q[state+'_plr_normalized'] = 0;
+        }
         if (Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && Q['winning_party_'+state] == "pnu") {
             Q['winning_party_'+state] = "ppp";
+            Q['strategic_voting_'+state] = 1;
             console.log(`Strategic voting in the second round has lead to the PPP winning ${state}:`);
         }
     }
     console.log(`Winning party for state ${state}:`, Q['winning_party_' + state]);
+    if (highest_support < 0.6) {
+        for (var party of Q.parties) {
+            if (Q['strategic_voting_'+state]) {
+                Q[state+'_ppp_normalized'] = Q[state+'pcr_normalized']+Q[state+'plr_normalized'];
+                Q[state+'_pcr_normalized'] = 0;
+                Q[state+'_plr_normalized'] = 0;
+            }
+            Q[state+'_'+party+'_support'] = Q[state+'_'+party+'_support']*(1+Q[state+'_'+party+'_normalized']);
+            Q[state+'_'+party+'_normalized'] = Q[state+'_'+party+'_support']/total_support;
+            Q[state+'_'+party+'_support'] = Q[state+'_'+party+'_support']*(1+Q[state+'_'+party+'_normalized']);
+            Q[state+'_'+party+'_normalized'] = Q[state+'_'+party+'_support']/total_support;
+            Q[state+'_split'] = 1;
+        }
+    }
 }
 
 Q.ppp_seats = 0;
@@ -186,9 +204,17 @@ Q.pdc_seats = 0;
 
 // Add seats for each winning party
 for (var state of Q.constituencies) {
-    var winning_party = Q['winning_party_' + state];
-    Q[winning_party + '_seats'] += Q[state + '_votes'];
-    console.log(`Electoral votes updated for winning party ${winning_party} in state ${state}:`, Q[winning_party + '_seats']);
+    if (!Q[state+'_split']) {
+        var winning_party = Q['winning_party_' + state];
+        Q[winning_party + '_seats'] += Q[state + '_votes'];
+        console.log(`Electoral votes updated for winning party ${winning_party} in state ${state}:`, Q[winning_party + '_seats']);
+    }
+    if (Q[state+'_split']) {
+        for (var party of Q.parties) {
+            Q[party+'_seats'] += Math.round(Q[state+'_votes']*Q[state+'_'+party+'_normalized'])
+            console.log(`Constituency ${state} split, no clear winner`);
+        }
+    }
 }
 
 }
