@@ -146,8 +146,6 @@ for (var state of Q.constituencies) {
 
     for (var party of Q.parties) {
         var party_support = 0;
-        Q['old_' + party + '_r'] = Q[party + '_r']; // Store the original r value for comparison
-        Q['old_' + party + '_seats'] = Q[party + '_seats'];
         
         for (var c of Q.classes) {
             party_support += Q[state + '_' + c] * Q[c + '_' + party + '_normalized'] * Q[c + '_turnout'] * Q[party + '_turnout'];
