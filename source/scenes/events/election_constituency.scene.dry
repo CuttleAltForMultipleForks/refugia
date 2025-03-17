@@ -303,7 +303,6 @@ go-to: coalition_menu
         {!</tr>!}
         ?]
         
-
         {!<tr>!}
             {!<td><span style="color: #EE7524;"><b>PPP</b></span></td>!}
             {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_ppp_display +]%{!</td>!}
@@ -325,7 +324,6 @@ go-to: coalition_menu
             {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ unemployed_pdc_display +]%{!</td>!}
         {!</tr>!}
         ?]
-        
         
         {!<tr>!}
             {!<td><span style="color: #40599C;"><b>PNU</b></span></td>!}
