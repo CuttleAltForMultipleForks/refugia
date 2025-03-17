@@ -36,6 +36,12 @@ Let us hope this does not backfire.
 
 @post_election_1928
 on-arrival: {!  
+Q.ppp_seats = 0;
+Q.pnu_seats = 0;
+Q.pcr_seats = 0;
+Q.pdc_seats = 0;
+Q.plr_seats = 0;
+
 // Loop through classes and parties to calculate class votes and normalized values
 for (var c of Q.classes) {
     var class_votes = 0;
