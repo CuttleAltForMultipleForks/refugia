@@ -145,6 +145,9 @@ Q.pro_republic = 79;
 Q.emergency_rule = 1;
 Q.constitution = 0;
 Q.convention_called = 0;
+Q.ppp_seats = 0;
+Q.pnu_seats = 0;
+Q.pcr_seats = 0;
 
 // minimum percentage of votes to be represented in the Reichstag
 Q.electoral_threshold = 0;

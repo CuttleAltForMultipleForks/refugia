@@ -140,6 +140,9 @@ if (new_party_sum > 0) {
 } 
 if (Q.constituency_system) {
 
+Q['old_' + party + '_r'] = Q[party + '_r']; // Store the original r value for comparison
+Q['old_' + party + '_seats'] = Q[party + '_seats'];
+
 // Loop through states to calculate support for each party
 for (var state of Q.constituencies) {
     var total_support = 0;
