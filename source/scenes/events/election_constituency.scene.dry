@@ -244,6 +244,7 @@ go-to: coalition_menu
 {!<svg id="reichstag" style="width: 500px; height: 250px;"> </svg>!}
 
 {!<table>!} 
+
 {!<tr><td>Party</td><td>Vote share</td><td>% Change</td><td>Reichstag Seats</td><td>% Change</td></tr>!}
 
 {!<tr><td><div class="box" style='background-color:#810B0B; outline: 2px; outline-style: solid;'> </div> !} **PCR:** {!</td><td>!} **[+ pcr_votes +]%** {!</td><td>!} **[+ str_votes_change_pcr +]** {!</td><td>!} **[+ pcr_seats +]** {!</td><td>!} **[+ str_change_pcr +]** {!</td></tr>!}
