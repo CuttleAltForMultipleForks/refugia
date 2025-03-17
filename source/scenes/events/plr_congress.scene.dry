@@ -29,5 +29,12 @@ go-to: trovato_victory if trovato_strength > domezio_strength; tomaso_victory if
 @trovato_victory
 on-arrival: trovato_timer_1 -= 3; entryism += 2; workers_pcr += 3; workers_plr -= 1; unemployed_pcr += 2; new_middle_plr += 2; peasant_plr += 2; 
 
+Vulpano Trovato has won the leadership contest of the <span style="color:rgb(187, 83, 139);">**PLR**</span> through his strong connections in the Federation of Labour. Despite his credentials however, his focus on the <span style="color:rgb(129, 11, 11);">**PCR**</span> inadvertantly gives them undue attention, helping further popularize the party, while his preoccupation in union affairs holds him back from excellence somewhat.
+
+He does manage to further peel off voters from the <span style="color:rgb(238, 117, 36);">**PPP**</span>, but some worry he will end up empowering the communists if he does not amend the trajectory of the party.
+
 @tomaso_victory
 on-arrival: leader = "Tomaso"; trovato_timer_1 -= 1; entryism -= 1; workers_plr += 2; unemployed_plr += 4; tomaso_dissent += 20; workers_pcr -= 3; unemployed_pcr -= 2; new_middle_plr = 0; new_middle_ppp += 2; peasant_plr = 0; plr_turnout -= 0.1; ppp_turnout += 0.05
+
+Domezio Tomaso has won the leadership contest of the <span style="color:rgb(187, 83, 139);">**PLR**</span> through backing from the dissident factions of the <span style="color:rgb(129, 11, 11);">**PCR**</span>, which have promptly begun to defect. However, the party has bled support back to the <span style="color:rgb(238, 117, 36);">**PPP**</span> as Vulpano Trovato fights to hold the party back from radicalism with his remaining influence.
+
