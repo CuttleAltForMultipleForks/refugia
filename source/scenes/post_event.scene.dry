@@ -28,6 +28,12 @@ for (var c of Q.classes) {
         if (Q[c+'_'+party] < 0) {
             Q[c+'_'+party] = 0;
         }
+        if (Q[party+'_turnout'] < 0) {
+            Q[party+'_turnout'] = 0;
+        }
+        if (Q[party+'_turnout'] > 1) {
+            Q[party+'_turnout'] = 1;
+        }
         class_votes += (Q[c+'_'+party]*Q[party+'_turnout']);
     }
     for (var party of Q.parties) {
@@ -329,7 +335,7 @@ if (Q.month_actions >= 1) {
         Q.revolutionary_fatigue += 1/12;
         Q.revolutionary_fatigue += Q.lg_force/120;
     }
-    if (Q.revolutionary_fatigue && Q.ppp_votes >= 20+(Q.pro_republic/10)) {
+    if (Q.revolutionary_fatigue && Q.ppp_votes >= 25+(Q.pro_republic/10)) {
         Q.old_middle_pnu += Q.revolutionary_fatigue/10;
         Q.new_middle_pnu += Q.revolutionary_fatigue/14;
         Q.freeholder_pnu += Q.revolutionary_fatigue/9;
@@ -345,7 +351,7 @@ if (Q.month_actions >= 1) {
             Q.freeholder_ppp -= Q.scardinaist_dissent/16;
             Q.ppp_turnout -= Q.revolutionary_fatigue/1600;
         }
-        if (Q.pdc_formed) {
+        if (Q.pdc_formed && Q.pdc_leader != "Scardina") {
             Q.new_middle_pdc += Q.revolutionary_fatigue/7;
             Q.old_middle_pdc += Q.revolutionary_fatigue/10;
             Q.freeholder_pdc += Q.revolutionary_fatigue/12;
