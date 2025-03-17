@@ -416,8 +416,8 @@ if (Q.month_actions >= 1) {
     Q.urmi_new_middle = Q.new_middle*1.5;
     Q.urmi_old_middle = Q.old_middle;
     Q.urmi_peasant = Q.peasant*0.4;
-    Q.urpo_freeholder = Q.freeholder*0.4;
-    Q.urpo_unemployed = Q.unemployed*1.1;
+    Q.urmi_freeholder = Q.freeholder*0.4;
+    Q.urmi_unemployed = Q.unemployed*1.1;
     // urban rich.
     Q.urri_workers = Q.workers*1.1;
     Q.urri_new_middle = Q.new_middle*1.4;
