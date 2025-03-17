@@ -137,8 +137,10 @@ if (new_party_sum > 0) {
                      : '<img src="img/steady.jpg"> ';
         Q['change_' + party + '_seats'] = Math.abs(Q['change_' + party + '_seats']);
         Q['str_change_' + party] = sign + Q['change_' + party + '_seats'];
-} else if (Q.constituency_system) {
-    // Loop through states to calculate support for each party
+} 
+if (Q.constituency_system) {
+
+// Loop through states to calculate support for each party
 for (var state of Q.constituencies) {
     var total_support = 0;
 
@@ -185,6 +187,7 @@ for (var state of Q.constituencies) {
     Q[winning_party + '_seats'] += Q[state + '_votes'];
     console.log(`Electoral votes updated for winning party ${winning_party} in state ${state}:`, Q[winning_party + '_seats']);
 }
+
 }
     
         // Calculate changes in votes
