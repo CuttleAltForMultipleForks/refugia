@@ -172,6 +172,12 @@ for (var state of Q.constituencies) {
     console.log(`Winning party for state ${state}:`, Q['winning_party_' + state]);
 }
 
+Q.ppp_seats = 0;
+Q.pnu_seats = 0;
+Q.pcr_seats = 0;
+Q.plr_seats = 0;
+Q.pdc_seats = 0;
+
 // Add seats for each winning party
 for (var state of Q.constituencies) {
     var winning_party = Q['winning_party_' + state];
@@ -190,7 +196,7 @@ for (var state of Q.constituencies) {
                      : '<img src="img/steady.jpg"> ';
         Q['change_' + party + '_seats'] = Math.abs(Q['change_' + party + '_seats']);
         Q['str_change_' + party] = sign + Q['change_' + party + '_seats'];
-        
+
         // Calculate changes in votes
         Q['change_' + party + '_votes'] = Q[party + '_votes'] - Q['previous_' + party + '_last_election_votes'];
         if (Q['previous_' + party + '_last_election_votes'] === undefined) {
