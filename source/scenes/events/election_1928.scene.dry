@@ -471,9 +471,6 @@ if (window && d3) {
 !}
 go-to: coalition_menu
 
-@coalition_menu
-go-to: ppp_menu if party == "PPP"; pnu_menu if party == "PNU"; pcr_menu if party == "PCR"
-
 = Election results
 
 {!<svg id="reichstag" style="width: 500px; height: 250px;"> </svg>!}
@@ -571,6 +568,10 @@ go-to: ppp_menu if party == "PPP"; pnu_menu if party == "PNU"; pcr_menu if party
 {!<svg id="party_support_history" style="width: 500px; height: 400px; display: none;"> </svg>!}
 
 There are some potential coalition arrangements.
+
+@coalition_menu
+on-arrival: hm = 1;
+go-to: ppp_menu if party == "PPP"; pnu_menu if party == "PNU"; pcr_menu if party == "PCR"
 
 @ppp_menu
 on-arrival: coalition_seats = ppp_seats; ppp_coalition = 1
