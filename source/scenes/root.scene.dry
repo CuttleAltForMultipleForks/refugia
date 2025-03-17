@@ -198,6 +198,10 @@ Q.parties = ['ppp', 'pnu', 'pcr'];
 Q.pdc_formed = 0;
 Q.plr_formed = 0;
 
+Q.ppp_seats = 0;
+Q.pnu_seats = 0;
+Q.pcr_seats = 0;
+
 // Support for party by social group
 // they don't have to sum to 100 since the electoral calculations will be normalized.
 Q.workers_ppp = 75;
