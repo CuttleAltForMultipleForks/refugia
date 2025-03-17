@@ -243,4 +243,147 @@ if (window && d3) {
     }
 }
 !}
-go-to: election_1928.election_results
+go-to: coalition_menu
+
+= Election results
+
+{!<svg id="reichstag" style="width: 500px; height: 250px;"> </svg>!}
+
+{!<table>!} 
+{!<tr><td>Party</td><td>Vote share</td><td>% Change</td><td>Reichstag Seats</td><td>% Change</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#810B0B; outline: 2px; outline-style: solid;'> </div> !} **PCR:** {!</td><td>!} **[+ pcr_votes +]%** {!</td><td>!} **[+ str_votes_change_pcr +]** {!</td><td>!} **[+ pcr_seats +]** {!</td><td>!} **[+ str_change_pcr +]** {!</td></tr>!}
+
+[? if plr_formed : {!<tr><td><div class="box" style='background-color:#bb538b; outline: 2px; outline-style: solid;'> </div> !} **PLR:** {!</td><td>!} **[+ plr_votes +]%** {!</td><td>!} **[+ str_votes_change_plr +]** {!</td><td>!} **[+ plr_seats +]** {!</td><td>!} **[+ str_change_plr +]** {!</td></tr>!} ?]
+
+{!<tr><td><div class="box" style='background-color:#EE7524; outline: 2px; outline-style: solid;'> </div> !} **PPP:** {!</td><td>!} **[+ ppp_votes +]%** {!</td><td>!} **[+ str_votes_change_ppp +]** {!</td><td>!} **[+ ppp_seats +]** {!</td><td>!} **[+ str_change_ppp +]** {!</td></tr>!}
+
+[? if pdc_formed : {!<tr><td><div class="box" style='background-color:#a4c13d; outline: 2px; outline-style: solid;'> </div> !} **PDC:** {!</td><td>!} **[+ pdc_votes +]%** {!</td><td>!} **[+ str_votes_change_pdc +]** {!</td><td>!} **[+ pdc_seats +]** {!</td><td>!} **[+ str_change_pdc +]** {!</td></tr>!} ?]
+
+{!<tr><td><div class="box" style='background-color:#40599C; outline: 2px; outline-style: solid;'> </div> !} **PNU:** {!</td><td>!} **[+ pnu_votes +]%** {!</td><td>!} **[+ str_votes_change_pnu +]** {!</td><td>!} **[+ pnu_seats +]** {!</td><td>!} **[+ str_change_pnu +]** {!</td></tr>!}
+
+{!</table>!}
+
+{!<button class="tab_button" id="demographics_tab" onclick="window.toggleDem();">Demographic Results</button>!}
+{!<button class="tab_button" id="election_tab" onclick="window.toggleElectionGraph();">Previous Elections Graph</button>!}
+{!<button class="tab_button" id="graph_tab" onclick="window.toggleGraph();">Party Support Graph</button>!}
+
+{!<div id="results" style="display: none;">!}
+    {!<div style="overflow-x:auto;">!}
+    {!<table style="text-align:center; border-spacing: 0.2em;">!}
+        {!<tr>!}
+            {!<th>Party</th>!}
+            {!<th>Workers</th>!}
+            {!<th>New Middle</th>!}
+            {!<th>Old Middle</th>!}
+            {!<th>Peasant</th>!}
+            {!<th>Freeholder</th>!}
+            {!<th>Unemployed</th>!}
+        {!</tr>!}
+        
+        {!<tr>!}
+            {!<td><span style="color: #810B0B;"><b>PCR</b></span></td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ new_middle_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ old_middle_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ peasant_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ freeholder_pcr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(129, 11, 11, 0.1); font-size: 0.85em;">!}[+ unemployed_pcr_display +]%{!</td>!}
+        {!</tr>!}
+
+        [? if plr_formed : 
+        {!<tr>!}
+            {!<td><span style="color: #bb538b;"><b>PDC</b></span></td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ new_middle_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ old_middle_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ peasant_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ freeholder_plr_display +]%{!</td>!}
+            {!<td style="background-color: rgba(187, 83, 139, 0.1); font-size: 0.85em;">!}[+ unemployed_plr_display +]%{!</td>!}
+        {!</tr>!}
+        ?]
+        
+
+        {!<tr>!}
+            {!<td><span style="color: #EE7524;"><b>PPP</b></span></td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ new_middle_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ old_middle_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ peasant_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ freeholder_ppp_display +]%{!</td>!}
+            {!<td style="background-color: rgba(238, 117, 36, 0.1); font-size: 0.85em;">!}[+ unemployed_ppp_display +]%{!</td>!}
+        {!</tr>!}
+        
+        [? if pdc_formed : 
+        {!<tr>!}
+            {!<td><span style="color: #a4c13d;"><b>PDC</b></span></td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ new_middle_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ old_middle_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ peasant_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ freeholder_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(164, 193, 61, 0.1); font-size: 0.85em;">!}[+ unemployed_pdc_display +]%{!</td>!}
+        {!</tr>!}
+        ?]
+        
+        
+        {!<tr>!}
+            {!<td><span style="color: #40599C;"><b>PNU</b></span></td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ new_middle_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ old_middle_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ peasant_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ freeholder_pnu_display +]%{!</td>!}
+            {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ unemployed_pnu_display +]%{!</td>!}
+        {!</tr>!}
+    {!</table>!}
+    {!</div>!}
+{!</div>!}
+
+{!<svg id="election_history" style="width: 500px; height: 400px; display: none;"> </svg>!}
+{!<svg id="party_support_history" style="width: 500px; height: 400px; display: none;"> </svg>!}
+
+There are some potential coalition arrangements.
+
+@coalition_menu
+on-arrival: hm = 1;
+go-to: ppp_menu if party == "PPP"; pnu_menu if party == "PNU"; pcr_menu if party == "PCR"
+
+@ppp_menu
+on-arrival: coalition_seats = ppp_seats; ppp_coalition = 1
+go-to: ppp_actual_menu
+
+@ppp_actual_menu
+
+- @complete_ppp: We will form our government now.
+- @invite_pcr: Invite the communists.
+- @invite_pdc: Invite the constitutionalists.
+- @invite_plr: Invite the socialists.
+
+@complete_ppp
+choose-if: coalition_seats >= government_threshold
+subtitle: [+ coalition_seats +]/[+ government_threshold +]. Supported by PPP[? if pdc_coalition :- PDC?][? if plr_coalition :- PLR?][? if pcr_coalition :- PCR?].
+
+@invite_pcr
+choose-if: pcr_relation >= 60
+unavailable-subtitle: The communists would never.
+on-arrival: coalition_seats += pcr_seats; pcr_coalition = 1; scardinaist_dissent += 10; ppp_turnout -= 0.05; pcr_turnout += 0.05
+go-to: ppp_actual_menu
+
+@invite_pdc
+view-if: pdc_formed and not pdc_coalition
+on-arrival: coalition_seats += pdc_seats; pdc_coalition = 1; labor_dissent += 5; pdc_turnout += 0.05
+go-to: ppp_actual_menu
+
+@invite_plr
+view-if: plr_formed and not plr_coalition
+on-arrival: coalition_seats += plr_seats; plr_coalition = 1; scardinaist_dissent += 5; plr_turnout += 0.05;
+go-to: ppp_actual_menu
+
+@pnu_menu
+
+Boo
+
+@pcr_menu
+
+boo
