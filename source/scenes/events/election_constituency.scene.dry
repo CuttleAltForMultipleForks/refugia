@@ -99,7 +99,7 @@ for (var state of Q.constituencies) {
 // Add seats for each winning party
 for (var state of Q.constituencies) {
     var winning_party = Q['winning_party_' + state];
-    Q[winning_party + 'seats'] += Q[state + '_votes'];
+    Q[winning_party + '_seats'] += Q[state + '_votes'];
     console.log(`Electoral votes updated for winning party ${winning_party} in state ${state}:`, Q[winning_party + '_seats']);
 }
 
