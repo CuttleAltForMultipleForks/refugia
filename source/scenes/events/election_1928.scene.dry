@@ -138,7 +138,9 @@ if (new_party_sum > 0) {
         Q['change_' + party + '_seats'] = Math.abs(Q['change_' + party + '_seats']);
         Q['str_change_' + party] = sign + Q['change_' + party + '_seats'];
 } 
-if (Q.constituency_system == 1) {
+
+}
+if (Q.constituency_system) {
 console.log(`Hello world`);
 
 // Loop through states to calculate support for each party
