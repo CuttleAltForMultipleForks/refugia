@@ -262,6 +262,10 @@ Q.ppp_turnout = 1;
 Q.pcr_turnout = 0.7;
 Q.pnu_turnout = 0.7;
 
+Q.ppp_base = 5;
+Q.pnu_base = 0;
+Q.pcr_base = 0;
+
 Q.revolutionary_fatigue = 0;
 
 

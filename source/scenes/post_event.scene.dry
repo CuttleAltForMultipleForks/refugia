@@ -403,6 +403,38 @@ if (Q.month_actions >= 1) {
             Q.unemployed_plr -= Q.entryism/24;
         }
     }
+    /// baselines
+    Q.ppp_equilibrium = 0;
+    Q.ppp_equilibrium += Q.ppp_base;
+    Q.ppp_equilibrium += Q.pro_republic/2;
+    Q.ppp_equilibrium += Q.lg_force/4;
+    Q.ppp_equilibrium -= Q.revolutionary_fatigue;
+    Q.ppp_equilibrium -= Q.pdc_formed;
+    Q.ppp_equilibrium -= Q.plr_formed;
+    Q.pnu_equilibrium = 0;
+    Q.pnu_equilibrium += Q.pnu_base;
+    Q.pnu_equilibrium += Q.revolutionary_fatigue;
+    Q.pnu_equilibrium += Q.capital_strike_progress;
+    Q.pnu_equilibrium += Q.nationalism/4;
+    Q.pnu_equilibrium -= Q.lg_force/4;
+    Q.pcr_equilibrium = 0;
+    Q.pcr_equilibrium += Q.pcr_base;
+    Q.pcr_equilibrium += Q.entryism;
+    Q.pcr_equilibrium -= Q.revolutionary_fatigue/2;
+    if (Q.ppp_votes < Q.ppp_equilibrium) {
+        Q.workers_ppp += 2/32;
+        Q.new_middle_ppp += 4/32;
+        Q.peasant_ppp += 4/32;
+        Q.old_middle_ppp += 1/32;
+        Q.ppp_turnout += 0.01/32;
+    }
+    if (Q.pnu_votes < Q.pnu_equilibrium) {
+        Q.new_middle_pnu += 2/32;
+        Q.old_middle_pnu += 4/32;
+        Q.freeholder_pnu += 4/32;
+        Q.workers_pnu += 1/32;
+        Q.pnu_turnout += 0.01/32;
+    }
     ///// CONSTITUENCIES
     // urban poor.
     Q.urpo_workers = Q.workers*2;
