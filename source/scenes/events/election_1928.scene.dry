@@ -201,6 +201,18 @@ for (var state of Q.constituencies) {
     }
 }
 
+Q.old_ppp_seats = Q.ppp_seats;
+Q.old_pnu_seats = Q.pnu_seats;
+Q.old_pcr_seats = Q.pcr_seats;
+Q.old_plr_seats = Q.plr_seats;
+Q.old_pdc_seats = Q.pdc_seats;
+
+Q.ppp_seats = 0;
+Q.pnu_seats = 0;
+Q.pcr_seats = 0;
+Q.plr_seats = 0;
+Q.pdc_seats = 0;
+
 // Add seats for each winning party
 for (var state of Q.constituencies) {
     if (!Q[state+'_split']) {
