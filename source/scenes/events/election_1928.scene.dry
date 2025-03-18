@@ -133,6 +133,8 @@ console.log(`Hello world`);
 
 // Loop through states to calculate support for each party
 for (var state of Q.constituencies) {
+    Q[state+'_split'] = 0;
+    Q['strategic_voting_'+state] = 0;
     var total_support = 0;
 
     for (var party of Q.parties) {
