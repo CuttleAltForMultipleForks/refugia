@@ -180,7 +180,15 @@ for (var state of Q.constituencies) {
         if (Q[state+'_plr_normalized'] === undefined) {
             Q[state+'_plr_normalized'] = 0;
         }
-        if (Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && Q['winning_party_'+state] == "pnu") {
+        if (Q[state+'_pdc_normalized'] === undefined) {
+            Q[state+'_pdc_normalized'] = 0;
+        }
+        if (Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && (Q['winning_party_'+state] == "ppp" || Q['winning_party_'+state] == "pnu" || Q['winning_party_'+state] == "pdc")) {
+            Q['winning_party_'+state] = "plr";
+            Q['strategic_voting_4_'+state] = 1;
+            highest_support = Q[state+'_plr_normalized']+Q[state+'_pcr_normalized'];
+            console.log(`Strategic voting in the second round has lead to the PLR winning ${state} with ${highest_support}`);
+        } else if (Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && (Q['winning_party_'+state] == "pnu" || Q['winning_party_'+state] == "pdc")) {
             Q['winning_party_'+state] = "ppp";
             Q['strategic_voting_'+state] = 1;
             highest_support = Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'];
@@ -190,20 +198,12 @@ for (var state of Q.constituencies) {
             Q['strategic_voting_pdc_'+state] = 1;
             highest_support = Q[state+'_ppp_normalized']+Q[state+'_pdc_normalized']+Q[state+'_plr_normalized'];
             console.log(`Strategic voting in the second round has lead to the PDC winning ${state} with ${highest_support}`);
-        }
-        if (Q[state+'_pnu_normalized']+Q[state+'_pdc_normalized'] >= 0.5 && Q['winning_party_'+state] == "ppp") {
+        } else if (Q[state+'_pnu_normalized']+Q[state+'_pdc_normalized'] >= 0.5 && Q['winning_party_'+state] == "ppp") {
             Q['winning_party_'+state] = "pdc";
             Q['strategic_voting_3_'+state] = 1;
             highest_support = Q[state+'_pdc_normalized']+Q[state+'_pnu_normalized'];
             console.log(`Strategic voting in the second round has lead to the PDC winning ${state} with ${highest_support}`);
-        }
-        if (Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && Q['winning_party_'+state] == "ppp") {
-            Q['winning_party_'+state] = "plr";
-            Q['strategic_voting_4_'+state] = 1;
-            highest_support = Q[state+'_plr_normalized']+Q[state+'_pcr_normalized'];
-            console.log(`Strategic voting in the second round has lead to the PLR winning ${state} with ${highest_support}`);
-        }
-        if (Q[state+'_ppp_normalized']+Q[state+'_pdc_normalized'] >= 0.5 && Q['winning_party_'+state] == "pcr") {
+        } else if (Q[state+'_ppp_normalized']+Q[state+'_pdc_normalized'] >= 0.5 && (Q['winning_party_'+state] == "pcr" || Q['winning_party_'+state] == "plr")) {
             Q['winning_party_'+state] = "ppp";
             Q['strategic_voting_5_'+state] = 1;
             highest_support = Q[state+'_ppp_normalized']+Q[state+'_pdc_normalized'];
