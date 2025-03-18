@@ -28,7 +28,28 @@ In an outrageous [? if ppp_judiciary < 2 : 4-1 ?][? if ppp_judiciary >= 2 : 3-2 
 @lorenzo_arrested
 on-arrival: ppp_police -= 1; police_loyalty -= 0.04; guagentist_strength += 3; pnu_turnout += 0.02; 
 
-In an outrageous [? if ppp_judiciary < 2 : and unanimous?][? if ppp_judiciary >= 2 : 4-1 ?] ruling, the Supreme Court has found that Sandro Lorenzo is guilty of insurrection, treason and conspiracy. 
+In an outrageous [? if ppp_judiciary < 2 : and unanimous?][? if ppp_judiciary >= 2 : 4-1 ?] ruling, the Supreme Court has found that Sandro Lorenzo is guilty of insurrection, treason and conspiracy, despite him doing no wrong and being nothing but a victim of police corruption and abuse.
+
+- @pardon_lorenzo: Pardon Lorenzo, for he has done no wrong.
+- @campaign_against: Ramp up the protests, but take no concrete action.
+- @silence: Let him fall. We have more important matters to deal with.
+
+@pardon_lorenzo
+on-arrival: scardinaist_dissent += 2; old_middle_pnu += 3; new_middle_pnu += 1; freeholder_pnu += 3; workers_ppp -= 2; pnu_turnout += 0.01; new_middle_ppp += strife
+
+We pardon Lorenzo, motivating the <span style="color:rgb(64, 89, 156);">**PNU**</span> to attack us for supposed intervention in the judicial process and yet another case of overreach. Meanwhile, Lorenzo himself finds himself hailed as though a celebrity by the jubilant crowds of our supporters, and has been propelled into national importance.
+
+@campaign_against
+subtitle: -1 resource.
+choose-if: resources >= 1
+on-arrival: resources -= 1; lg_strength += 10; ppp_turnout += 0.01; strife += 1; workers_ppp += 2*(1-dissent); peasant_ppp += 4*(1-dissent); new_middle_ppp += 3*(1-dissent); workers_turnout += 0.01; new_middle_turnout += 0.02; peasant_turnout += 0.02; polarization = 1
+
+The protests build with the news of Lorenzo's conviction, our attempts to martyr him a success. Lorenzo himself evades arrest, fleeing to our party offices in Tulanto. The <span style="color:rgb(64, 89, 156);">**PNU**</span> attacks us for sheltering a criminal and labels us crooks, but the people's hearts have been won over, and thankfully for us, not by them.
+
+@silence
+on-arrival: caterinoist_dissent += 10; scardinaist_strength += 5; pnu_judiciary -= 1 if ppp_judiciary > 1; business_strength += 4; guagentist_strength += 4; revolutionary_fatigue -= 1; strife -= 1; pcr_relation -= 5; pnu_relation += 2; ppp_turnout -= 0.05; pnu_turnout += 0.02;
+
+We do not take action, bewildering the Caterinoists in our party, who take Lorenzo in anyway, causing the <span style="color:rgb(64, 89, 156);">**PNU**</span> to attack us as crooks and criminals. Despite the setbacks, we have managed to build bridges with more moderate groups in the establishment by our inaction, however. Let's hope it's worth it.
 
 @people_court
 choose-if: emergency_rule
@@ -45,9 +66,9 @@ The establishment of the People's Courts is an overwhelming success, as we devot
 The <span style="color:rgb(64, 89, 156);">**PNU**</span> is shocked by the speed at which the people have made their voices one, and is yet to respond, but we can be sure that the Supreme Court will strike it down as unconstitutional. We should prepare for a constitutional crisis, or worse. 
 
 @defy
-on-arrival: pnu_police += 1; ppp_gov -= 1; labor_dissent += 2; caterinoist_strength -= 3; scardinaist_dissent += 5; strife += 2; pro_republic -= 5; capital_strike_progress += 1; pnu_turnout += 0.03
+on-arrival: pnu_police += 1; ppp_gov -= 1; labor_dissent += 2; caterinoist_strength -= 3; scardinaist_dissent += 5; revolutionary_fatigue += 2; pro_republic -= 5; capital_strike_progress += 1; pnu_turnout += 0.03
 
-D
+We refuse to take action against the Liberty Guard, which has done no wrong, triggering a constitutional crisis as the <span style="color:rgb(64, 89, 156);">**PNU**</span> attacks us for ignoring a court order and rallies for "democracy".
 
 @oblige
 choose-if: scardinaist_strength >= 200
@@ -83,7 +104,7 @@ Cooler heads must prevail. With the courts and police on our side, the only way 
 @lorenzo_arrest_pnu
 on-arrival: ppp_police -= 1; police_loyalty -= 0.04; guagentist_strength += 3; pnu_turnout += 0.02; 
 
-In a unanimous ruling, Sandro Lorenzo has been found guilty of treason, insurrection and conspiracy.
+In a unanimous ruling, Sandro Lorenzo has been found guilty of treason, insurrection and conspiracy. Caterino then has the gall to defy the court and intervene in the judicial process by directly pardoning him. 
 
 
 @pcr_pov
