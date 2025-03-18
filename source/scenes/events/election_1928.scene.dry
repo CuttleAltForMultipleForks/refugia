@@ -298,7 +298,7 @@ data = [{
     "seats": Q.pcr_seats,
 }];
 
-if (Q.plr_r && Q.plr_formed) {
+if (Q.plr_seats && Q.plr_formed) {
     data.push({
         "id": "plr",
         "legend": "PLR",
@@ -314,7 +314,7 @@ data = data.concat([{
     "seats": Q.ppp_seats,
 }]);
 
-if (Q.pdc_r && Q.pdc_formed) {
+if (Q.pdc_seats && Q.pdc_formed) {
     data.push({
         "id": "pdc",
         "legend": "PDC",
