@@ -187,9 +187,13 @@ for (var state of Q.constituencies) {
                 Q[state+'_pcr_normalized'] = 0;
                 Q[state+'_plr_normalized'] = 0;
             }
+            total_support -= Q[state+'_'+party+'_support'];
             Q[state+'_'+party+'_support'] = Q[state+'_'+party+'_support']*(1+Q[state+'_'+party+'_normalized']);
+            total_support += Q[state+'_'+party+'_support'];
             Q[state+'_'+party+'_normalized'] = Q[state+'_'+party+'_support']/total_support;
+            total_support -= Q[state+'_'+party+'_support'];
             Q[state+'_'+party+'_support'] = Q[state+'_'+party+'_support']*(1+Q[state+'_'+party+'_normalized']);
+            total_support += Q[state+'_'+party+'_support'];
             Q[state+'_'+party+'_normalized'] = Q[state+'_'+party+'_support']/total_support;
             Q[state+'_split'] = 1;
         }
