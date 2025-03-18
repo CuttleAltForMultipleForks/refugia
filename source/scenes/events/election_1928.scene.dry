@@ -184,7 +184,7 @@ for (var state of Q.constituencies) {
     if (highest_support < 0.6) {
         for (var party of Q.parties) {
             if (Q['strategic_voting_'+state]) {
-                Q[state+'_ppp_normalized'] = Q[state+'_ppp_normalized']+Q[state+'pcr_normalized']+Q[state+'plr_normalized'];
+                Q[state+'_ppp_normalized'] = Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'];
                 Q[state+'_pcr_normalized'] = 0;
                 Q[state+'_plr_normalized'] = 0;
             }
@@ -218,7 +218,7 @@ for (var state of Q.constituencies) {
         for (var party of Q.parties) {
             var won_seats = Math.round(Q[state+'_votes']*Q[state+'_'+party+'_normalized']);
             Q[party+'_seats'] += won_seats;
-            console.log(`Constituency ${state} split, no clear winner, ${party} wins ${won_seats}/Q[state+'_votes']`);
+            console.log(`Constituency ${state} split, no clear winner, ${party} wins ${won_seats}/`Q[state+'_votes']);
         }
     }
 }
