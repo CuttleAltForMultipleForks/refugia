@@ -176,7 +176,8 @@ for (var state of Q.constituencies) {
         if (Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && Q['winning_party_'+state] == "pnu") {
             Q['winning_party_'+state] = "ppp";
             Q['strategic_voting_'+state] = 1;
-            console.log(`Strategic voting in the second round has lead to the PPP winning ${state}:`);
+            highest_support = Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'];
+            console.log(`Strategic voting in the second round has lead to the PPP winning ${state} with ${highest_support}`);
         }
     }
     console.log(`Winning party for state ${state}:`, Q['winning_party_' + state]);
@@ -215,8 +216,9 @@ for (var state of Q.constituencies) {
     }
     if (Q[state+'_split']) {
         for (var party of Q.parties) {
-            Q[party+'_seats'] += Math.round(Q[state+'_votes']*Q[state+'_'+party+'_normalized'])
-            console.log(`Constituency ${state} split, no clear winner`);
+            var won_seats = Math.round(Q[state+'_votes']*Q[state+'_'+party+'_normalized']);
+            Q[party+'_seats'] += won_seats;
+            console.log(`Constituency ${state} split, no clear winner, ${party} wins ${won_seats}/Q[state+'_votes']`);
         }
     }
 }
