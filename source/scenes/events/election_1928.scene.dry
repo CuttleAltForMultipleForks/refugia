@@ -218,7 +218,7 @@ for (var state of Q.constituencies) {
         for (var party of Q.parties) {
             var won_seats = Math.round(Q[state+'_votes']*Q[state+'_'+party+'_normalized']);
             Q[party+'_seats'] += won_seats;
-            console.log(`Constituency ${state} split, no clear winner, ${party} wins ${won_seats}/`Q[state+'_votes']);
+            console.log(`Constituency ${state} split, no clear winner, ${party} wins ${won_seats}`);
         }
     }
 }
