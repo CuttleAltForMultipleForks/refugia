@@ -176,7 +176,7 @@ for (var state of Q.constituencies) {
             Q['winning_party_' + state] = party;
         }
     }
-    if (highest_support < 0.5) {
+    if (highest_support < 0.6) {
         if (Q[state+'_plr_normalized'] === undefined) {
             Q[state+'_plr_normalized'] = 0;
             Q[state+'_plr_support'] = 0;
