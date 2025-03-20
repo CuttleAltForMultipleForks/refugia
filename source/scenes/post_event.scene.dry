@@ -331,6 +331,12 @@ if (Q.month_actions >= 1) {
             Q.economic_growth += 0.1;
         }
     }
+    if (Q.year == 1920){
+        Q.economic_growth -= 4/36;
+        Q.economic_growth -= Q.capital_strike_progress/48;
+        Q.unemployed += 8/36;
+        Q.inflation -= 6/36;
+    }
     if (!Q.convention_called) {
         Q.revolutionary_fatigue += 1/12;
         Q.revolutionary_fatigue += Q.lg_force/120;

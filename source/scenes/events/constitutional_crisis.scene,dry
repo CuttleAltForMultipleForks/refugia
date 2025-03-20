@@ -1,0 +1,68 @@
+title: Constitutional Crisis
+subtitle: A constitutional crisis has erupted over the People's Courts.
+view-if: time >= 6 and peoples_court
+tags: event
+face-image: img/supreme_court.png
+max-visits: 1
+new-page: true
+go-to: ppp_pov if party == "PPP"; pnu_pov if party == "PNU"; pcr_pov if party == "PCR"
+
+= Constitutional Crisis
+
+@ppp_pov
+on-arrival: ppp_gov -= 1; pnu_police += 1; pnu_turnout += 0.02; scardinaist_dissent += 4; ppp_turnout -= 0.01; freeholder_turnout += 0.04; old_middle_turnout += 0.02;
+go-to: pnu_armament
+
+As expected, the <span style="color:rgb(64, 89, 156);">**PNU**</span> courts have, in [? if ppp_judiciary < 2 : two unanimous decisions?][? if ppp_judiciary >= 2 : twp 4-1 decisions ?] found not only the decree establishing the People's Courts as unconstitutional but the very **state of emergency** through which we currently rule by decree. Of course, these actions are taken in a futile attempt to preserve their institutional power and destabilize the revolution so they may uproot it, but all the same this has swung the police back into the <span style="color:rgb(64, 89, 156);">**PNU**</span>'s hands and weakened our hold over the administration as bureaucrats resign and refuse to enforce our "unconstitutional" decrees - it seems the Supreme Court retains some legitimacy, even if only in the eyes of a powerful minority.
+
+The two opinions of the Supreme Court are immediately overturned by the Vosallo People's Court, though this is mainly a symbolic gesture to display the weakness of the Supreme Court and unfortunately carries much less weight in terms of actual institutional change. 
+
+@pnu_armament
+on-arrival: pnu_turnout += 0.03; rg_formed = 1; rg_strength += 30; rg_militancy += 0.3; fascist_strength += 5; business_dissent += 2; guagentist_dissent += 1;
+
+Meanwhile, another parallel society has begun to coalesce around the <span style="color:rgb(64, 89, 156);">**PNU**</span> following the establishment of various party-affiliated organizations, including the **Refugian Guard**, a seeming reactionary counterweight to our increasingly powerful Liberty Guard. The reactionaries may be preparing for this crisis to escalate into something further.
+
+- @piano_forte: *And escalate, it shall.*
+- @caution: Interesting.
+
+@piano_forte
+subtitle: Commence **"Piano Forte"**, the culmination of our protests to dismantle the reactionary state apparatus by force.
+on-arrival: scardinaist_dissent += 15; revolutionary_fatigue += strife; strife += 1
+go-to: scardinaist_protests
+
+@scardinaist_protests
+
+The Scardinaists on our party right are opposed to the idea of effectively wielding riots and our own paramilitary to destroy the police and Supreme Court. To prevent a rebellion within the party, concessions may be necessary.
+
+- @dont_care: The Scardinaists mean nothing. The Revolution is *everything*.
+- @erm: We will leave the Supreme Court alone, but still march against the police.
+- @fine: Drop the idea.
+
+@dont_care
+on-arrival: revolutionary_fatigue += 2; scardinaist_dissent += revolutionary_fatigue; labor_dissent += revolutionary_fatigue; ppp_turnout -= revolutionary_fatigue/100 if scardinaist_dissent >= 30
+go-to: forte_2
+
+This course of action strains the party's unity, but allows us to continue undisturbed. [? if scardinaist_dissent >= 30 : However, the right-wing of our party has begun to openly rebel in response. ?]
+
+@erm 
+on-arrival: scardinaist_dissent -= 5; caterinoist_dissent += 2
+go-to: forte_2
+
+It's something, but the Scardinaists would still prefer we refrained from this course of action altogether. Still, with some convincing words from the President, they cave to the idea.
+
+@fine 
+on-arrival: caterinoist_dissent += 10; scardinaist_dissent -= 20; scardinaist_strength += 5
+
+The Caterinoists are increduled that the plan we just adopted is now being dropped.
+
+@caution 
+on-arrival: caterinoist_dissent += 5; strife -= 1; 
+
+Interesting. It is too soon to act - we will have to observe. The Caterinoists criticize this course of action, but remain committed to fighting off reaction, even if at a slower pace than preferred.
+
+# reactionary options: PPP establishes pepoples courts, what do we do? 
+# - supreme court rules unconstitutional, obv
+# - rule both peoples court and emergency unconstitutional
+# sweet now what
+# - establish refugian guard and stuff
+# - dont (lmao)

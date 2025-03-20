@@ -54,7 +54,7 @@ We do not take action, bewildering the Caterinoists in our party, who take Loren
 @people_court
 choose-if: emergency_rule
 unavailable-subtitle: We lack the sufficient power.
-on-arrival: budget -= 1 if resources < 2; resources -= 2 if resources >= 2; scardinaist_dissent += 3; ppp_police += 1; pnu_police -= 1; pnu_gov -= 1; ppp_judiciary += 2; pnu_judiciary -= 1; revolutionary_fatigue += 1; strife += 1; old_middle_ppp -= 3; freeholder_ppp -= 3; peasant_ppp += 4*(1-dissent); workers_ppp += 2*(1-dissent); pnu_turnout += 0.02
+on-arrival: peoples_court = 1; budget -= 1 if resources < 2; resources -= 2 if resources >= 2; scardinaist_dissent += 3; ppp_police += 1; pnu_police -= 1; pnu_gov -= 1; ppp_judiciary += 2; pnu_judiciary -= 1; revolutionary_fatigue += 1; strife += 1; old_middle_ppp -= 3; freeholder_ppp -= 3; peasant_ppp += 4*(1-dissent); workers_ppp += 2*(1-dissent); pnu_turnout += 0.02
 subtitle: [? if resources >= 2 : -2 resources. ?][? if resources < 2 : -1 budget. ?] This may upset the Scardinaists.
 
 > *"In accordance with our belief that the People's Will is the highest authority in the nation, a new judicial system of People's Courts shall be established that hold authority over all judicial instruments and institutions established prior to the revolution."*
@@ -84,7 +84,7 @@ After a couple weeks of deliberation, the Supreme Court has made its ruling. We'
 go-to: lg_banned_pnu if tension_path; lorenzo_arrest_pnu if lorenzo_path
 
 @lg_banned_pnu
-on-arrival: ppp_police -= 1; police_loyalty -= 0.05; scardinaist_strength -= 4; caterinoist_strength += 4; guagentist_strength += 2; pnu_turnout += 0.04; workers_pnu += 3; workers_turnout += 0.01; new_middle_turnout += 0.01; old_middle_turnout += 0.01; polarization = 1;
+on-arrival: peoples_court = 1; ppp_police -= 1; police_loyalty -= 0.05; scardinaist_strength -= 4; caterinoist_strength += 4; guagentist_strength += 2; pnu_turnout += 0.04; workers_pnu += 3; workers_turnout += 0.01; new_middle_turnout += 0.01; old_middle_turnout += 0.01; polarization = 1;
 
 In a 4-1 ruling, the Supreme Court has found that the Liberty Guard is an illegal organization, obligating the crooked Caterino to ban them. He is yet to either follow the court order or defy it, but we can be fairly confident in which route he will take.
 
