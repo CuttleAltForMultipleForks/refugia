@@ -1,6 +1,6 @@
 title: Constitutional Crisis
 subtitle: A constitutional crisis has erupted over the People's Courts.
-view-if: time >= 6 and peoples_court
+view-if: time >= 6 and peoples_court == 1
 tags: event
 face-image: img/supreme_court.png
 max-visits: 1
