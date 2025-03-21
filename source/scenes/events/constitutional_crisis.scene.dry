@@ -11,7 +11,7 @@ go-to: ppp_pov if party == "PPP"; pnu_pov if party == "PNU"; pcr_pov if party ==
 
 @ppp_pov
 on-arrival: ppp_gov -= 1; pnu_police += 1; pnu_turnout += 0.02; scardinaist_dissent += 4; ppp_turnout -= 0.01; freeholder_turnout += 0.04; old_middle_turnout += 0.02;
-go-to: pnu_armament;
+go-to: pnu_armament
 
 As expected, the <span style="color:rgb(64, 89, 156);">**PNU**</span> courts have, in [? if ppp_judiciary < 2 : two unanimous decisions?][? if ppp_judiciary >= 2 : twp 4-1 decisions ?] found not only the decree establishing the People's Courts as unconstitutional but the very **state of emergency** through which we currently rule by decree. Of course, these actions are taken in a futile attempt to preserve their institutional power and destabilize the revolution so they may uproot it, but all the same this has swung the police back into the <span style="color:rgb(64, 89, 156);">**PNU**</span>'s hands and weakened our hold over the administration as bureaucrats resign and refuse to enforce our "unconstitutional" decrees - it seems the Supreme Court retains some legitimacy, even if only in the eyes of a powerful minority.
 
