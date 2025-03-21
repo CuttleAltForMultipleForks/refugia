@@ -53,12 +53,47 @@ It's something, but the Scardinaists would still prefer we refrained from this c
 @fine 
 on-arrival: caterinoist_dissent += 10; scardinaist_dissent -= 20; scardinaist_strength += 5
 
-The Caterinoists are increduled that the plan we just adopted is now being dropped.
+The Caterinoists are increduled that the plan we just adopted is now being dropped, over Scardinaist protests no less. Regardless, we will spend more time preparing.
 
 @caution 
 on-arrival: caterinoist_dissent += 5; strife -= 1; 
 
 Interesting. It is too soon to act - we will have to observe. The Caterinoists criticize this course of action, but remain committed to fighting off reaction, even if at a slower pace than preferred.
+
+@forte_2
+
+With Scardinaist dissent out of the way, there is the matter of investment into this course of action. We have already built up protests substantially - should we attempt to further bolster our forces?
+
+- @invest: Mobilize every party organization behind this plan!
+- @invest_lesser: Make substantial preparations for the plan.
+- @good: The current protests are enough.
+
+@invest
+subtitle: -2 resources
+choose-if: resources >= 2
+on-arrival: caterinoist_strength += 5; scardinaist_dissent += 5; labor_dissent += 3; resources -= 2; strife += 3; revolutionary_fatigue += 2; lg_militancy += 0.02; lg_strength += 10; pnu_turnout -= 0.02
+
+We mobilize every single one of the <span style="color:rgb(238, 117, 36);">**PPP**</span>'s affiliated organizations behind this plan. The reactionaries must be beaten at all costs.
+
+@invest_lesser
+subtitle: -1 resource
+choose-if: resources >= 1
+on-arrival: scardinaist_dissent += 3; resources -= 1; strife += 1; revolutionary_fatigue += 1; lg_militancy += 0.01; lg_strength += 5; pnu_turnout -= 0.01
+
+This is a very crucial plan, thus it is important we make substantial preparations for it. When the time comes, the <span style="color:rgb(238, 117, 36);">**PPP**</span> will emerge victorious.
+
+@good
+on-arrival: caterinoist_dissent += 5
+
+The current extent of the protests is enough to all but guarantee the success of our plan.
+
+@pnu_pov
+
+Booo 
+
+@pcr_pov
+
+WHataa
 
 # reactionary options: PPP establishes pepoples courts, what do we do? 
 # - supreme court rules unconstitutional, obv
