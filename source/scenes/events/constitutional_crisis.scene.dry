@@ -10,7 +10,7 @@ go-to: ppp_pov if party == "PPP"; pnu_pov if party == "PNU"; pcr_pov if party ==
 = Constitutional Crisis
 
 @ppp_pov
-on-arrival: ppp_gov -= 1; pnu_police += 1; pnu_turnout += 0.02; scardinaist_dissent += 4; ppp_turnout -= 0.01; freeholder_turnout += 0.04; old_middle_turnout += 0.02;
+on-arrival: ppp_gov -= 1; guagentist_strength += 3; pnu_police += 1; pnu_turnout += 0.02; scardinaist_dissent += 4; ppp_turnout -= 0.01; freeholder_turnout += 0.04; old_middle_turnout += 0.02;
 go-to: pnu_armament
 
 As expected, the <span style="color:rgb(64, 89, 156);">**PNU**</span> courts have, in [? if ppp_judiciary < 2 : two unanimous decisions?][? if ppp_judiciary >= 2 : twp 4-1 decisions ?] found not only the decree establishing the People's Courts as unconstitutional but the very **state of emergency** through which we currently rule by decree. Of course, these actions are taken in a futile attempt to preserve their institutional power and destabilize the revolution so they may uproot it, but all the same this has swung the police back into the <span style="color:rgb(64, 89, 156);">**PNU**</span>'s hands and weakened our hold over the administration as bureaucrats resign and refuse to enforce our "unconstitutional" decrees - it seems the Supreme Court retains some legitimacy, even if only in the eyes of a powerful minority.
@@ -27,7 +27,7 @@ Meanwhile, another parallel society has begun to coalesce around the <span style
 
 @piano_forte
 subtitle: Commence **"Piano Forte"**, the culmination of our protests to dismantle the reactionary state apparatus by force.
-on-arrival: scardinaist_dissent += 15; revolutionary_fatigue += strife; strife += 1
+on-arrival: piano_forte_motion = 1; scardinaist_dissent += 15; revolutionary_fatigue += strife; strife += 1
 go-to: scardinaist_protests
 
 @scardinaist_protests
@@ -89,7 +89,61 @@ The current extent of the protests is enough to all but guarantee the success of
 
 @pnu_pov
 
-Booo 
+The <span style="color:rgb(238, 117, 36);">**PPP**</span> has, rather than simply defy our court order as we expected, gone further to decree the establishment of a wholly new court system supposedly laid on top of the existing one, a blatant unconstitutionality given that such a decree goes beyond the legislative realm and into a revision of the constitution, which cannot be done by decree. Nevertheless, the Liberty Guard has taken to zealously enforcing the decree, propping up People's Court after People's Court which overturn the Supreme Court's rulings and allow such travesties as homosexuality. 
+
+- @no_shit: That's unconstitutional, obviously.
+
+@no_shit
+subtitle: The Supreme Court will unanimously rule this.
+on-arrival: pnu_police += 1; pnu_turnout += 0.01; scardinaist_dissent += 2; ppp_turnout -= 0.01; freeholder_turnout += 0.02; old_middle_turnout += 0.01;
+
+Indeed, it is quite blatantly unconstitutional, and with or without <span style="color:rgb(64, 89, 156);">**PNU**</span> influence the Supreme Court will find it as such. However, Guagenti has a plan to use this as an opportunity to rule the very **state of emergency** itself as unconstitutional and order the government to lift it, thereby preventing the president from ruling by decree any further, and delegitimizing any decree he may do.
+
+- @do_that: Follow Guagenti's idea, and **overturn the state of emergency**.
+- @im_stupid: It is best we save our political capital on more meaningful rulings.
+
+@do_that
+on-arrival: ppp_gov -= 1; pnu_turnout += 0.01; scardinaist_dissent += 2; freeholder_turnout += 0.02; old_middle_turnout += 0.01; guagentist_strength += 3
+go-to: establish_or_dont
+
+With a little nudge from Guagenti and the <span style="color:rgb(64, 89, 156);">**PNU**</span>, the Supreme Court further rules that the **state of emergency** itself is unconstitutional, which leads to mass resignations of bureaucrats and civil servants from Caterino's administration as they refuse to enforce illegal decrees from an illegal dictatorship.
+
+However, as tensions heat up, the Trentinists of the <span style="color:rgb(64, 89, 156);">**PNU**</span>'s right-wing have drafted up a plan to, among other things, establish a paramilitary wing, lest the <span style="color:rgb(238, 117, 36);">**PPP**</span> take our confrontation out of the courtrooms and into the streets. 
+
+@im_stupid
+on-arrival: guagentist_dissent += 5; guagentist_strength -= 5
+go-to: establish_or_dont
+
+It is best to preserve the Supreme Court's legitimacy for rulings with potential to genuinely change things, rather than largely performative and ineffectual opinions. 
+
+Regardless, as tensions heat up, the Trentinists of the <span style="color:rgb(64, 89, 156);">**PNU**</span>'s right-wing have drafted up a plan to, among other things, establish a paramilitary wing, lest the <span style="color:rgb(238, 117, 36);">**PPP**</span> take our confrontation out of the courtrooms and into the streets. 
+
+@establish_or_dont
+
+- @rg_establish: Establish the **Refugian Guard**!
+- @rg_dont: Refrain from contributing to increased tensions. We don't want a civil war.
+- @broke: Take a loan from Cimorelli to fund the act, as we lack the resources.
+
+@rg_establish
+subtitle: -[+ parallel_cost +] resources. Pass the "Organizations of the <span style="color:rgb(64, 89, 156);">**PNU**</span> Act".
+choose-if: resources >= parallel_cost
+on-arrival: resources -= parallel_cost; pnu_turnout += 0.03; rg_formed = 1; rg_strength += 30; rg_militancy += 0.3; fascist_strength += 5; business_dissent += 2; guagentist_dissent += 1;
+
+Following a vote in the central committee, the Refugian Guard is established, alongside various other party-affiliated organizations, just in case the Liberty Guard attempts another putsch as they did in Vosallo.
+
+@rg_dont
+subtitle: Vote down the "Organizations of the <span style="color:rgb(64, 89, 156);">**PNU**</span> Act".
+choose-if: fascist_strength+church_strength < guagentist_strength+business_strength
+on-arrival: fascist_dissent += 10; church_dissent += 5; pnu_turnout -= 0.03; scardinaist_dissent += 10; business_strength += 5; 
+
+Choosing the high road of reconciliation over escalation, we vote down the Trentinist and Capuanoist pushes for the party to militarize, instead attempting to portray us as victims and focusing on building sympathy towards us amongst the Scardinaists of the <span style="color:rgb(238, 117, 36);">**PPP**</span>.
+
+@broke
+view-if: resources < parallel_cost
+on-arrival: business_strength += 10; business_strength += 10 if parallel_cost > 2; resources += parallel_cost; church_dissent += 5*parallel_cost; 
+go-to: rg_establish
+
+Maggiorino Cimorelli and the business wing as a whole agrees to bail us out, and finance the establishment of the Refugian Guard. The Church warns against giving him too much power and leverage.
 
 @pcr_pov
 
