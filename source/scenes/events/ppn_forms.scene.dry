@@ -4,7 +4,7 @@ view-if: ppn_trigger
 new-page: true
 max-visits: 1
 on-arrival: ppn_formed = 1; {!
-Q.parties.push('pnu');
+Q.parties.push('ppn');
 
 Q.ppn_turnout = 0.6;
 Q.ppn_leader = "Pirlioni";
