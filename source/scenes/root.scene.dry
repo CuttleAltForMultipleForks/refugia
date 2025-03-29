@@ -197,6 +197,7 @@ Q.parties = ['ppp', 'pnu', 'pcr'];
 
 Q.pdc_formed = 0;
 Q.plr_formed = 0;
+Q.ppn_formed = 0;
 
 Q.ppp_seats = 0;
 Q.pnu_seats = 0;
@@ -289,6 +290,7 @@ Q.old_pnu_seats = 0;
 Q.old_pcr_seats = 0;
 Q.old_pdc_seats = 0;
 Q.old_plr_seats = 0;
+Q.old_ppn_seats = 0;
 
 // levers of power
 Q.ppp_judiciary = 1;

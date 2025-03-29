@@ -575,6 +575,9 @@ td, th {
 .seat.plr {
   fill: #bb538b
 }
+.seat.ppn {
+  fill: #885508
+}
 .tooltip-text {
   text-decoration: underline;
   text-decoration-style: dotted;

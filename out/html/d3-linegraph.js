@@ -16,13 +16,13 @@ function addMonths(date, months) {
 d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataMax, dataMin, additionalMonths) {
     /* params */
     if (!parties) {
-        parties = ['pcr', 'plr', 'ppp', 'pdc', 'pnu'];
+        parties = ['pcr', 'plr', 'ppp', 'pdc', 'pnu', 'ppn'];
     }
     if (!partyColors) {
-        partyColors = {'pcr': '#810B0B', 'plr': '#e455a1', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'};
+        partyColors = {'pcr': '#810B0B', 'plr': '#e455a1', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C', 'ppn': '885508'};
     }
     if (!partyNames) {
-        partyNames = {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'};
+        partyNames = {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU', 'ppn': 'PPN'};
     }
     if (!additionalMonths) {
         additionalMonths = 10;

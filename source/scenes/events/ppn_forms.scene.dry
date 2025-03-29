@@ -1,0 +1,29 @@
+title: Birth of the <span style="color:rgb(136, 85, 8);">**PPN**</span>
+subtitle: The <span style="color:rgb(136, 85, 8);">**PPN**</span> has come into being.
+view-if: ppn_trigger
+new-page: true
+max-visits: 1
+on-arrival: ppn_formed = 1; {!
+Q.parties.push('pnu');
+
+Q.ppn_turnout = 0.6;
+Q.ppn_leader = "Pirlioni";
+Q.workers_ppn = 1;
+Q.new_middle_ppn = 4;
+Q.old_middle_ppn = 8;
+Q.freeholder_ppn = 12;
+Q.peasant_ppn = 6;
+Q.unemployed_ppn = 8;
+
+Q.ppn_relation = 0;
+if (Q.party == "PNU") {
+	Q.ppn_relation += 50;
+}
+Q.ppn_seats = 0;
+
+!}
+tags: event
+
+= <span style="color:rgb(136, 85, 8);">**PPN**</span> forms
+
+It's so over.

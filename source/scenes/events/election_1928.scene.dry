@@ -42,6 +42,7 @@ Q.adjustmentFactors_ppp = 1;
 Q.adjustmentFactors_pnu = 1;
 Q.adjustmentFactors_pcr = 0.99;
 Q.adjustmentFactors_pdc = 0.99;
+Q.adjustmentFactors_ppn = 0.99;
 
 Q.turnout = 0;
 for (var c of Q.classes) {
@@ -185,22 +186,26 @@ for (var state of Q.constituencies) {
             Q[state+'_pdc_normalized'] = 0;
             Q[state+'_pdc_support'] = 0;
         }
-        if (Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && (Q['winning_party_'+state] == "ppp" || Q['winning_party_'+state] == "pnu" || Q['winning_party_'+state] == "pdc")) {
+        if (Q[state+'_ppn_normalized'] === undefined) {
+            Q[state+'_ppn_normalized'] = 0;
+            Q[state+'_ppn_support'] = 0;
+        }
+        if (Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && (Q['winning_party_'+state] == "ppp" || Q['winning_party_'+state] == "pnu" || Q['winning_party_'+state] == "pdc" || Q['winning_party_'+state] == "ppn")) {
             Q['winning_party_'+state] = "plr";
             Q['strategic_voting_4_'+state] = 1;
             highest_support = Q[state+'_plr_normalized']+Q[state+'_pcr_normalized'];
             console.log(`Strategic voting in the second round has lead to the PLR winning ${state} with ${highest_support}`);
-        } else if (Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && (Q['winning_party_'+state] == "pnu" || Q['winning_party_'+state] == "pdc")) {
+        } else if (Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'] >= 0.5 && (Q['winning_party_'+state] == "pnu" || Q['winning_party_'+state] == "pdc" || Q['winning_party_'+state] == "ppn")) {
             Q['winning_party_'+state] = "ppp";
             Q['strategic_voting_'+state] = 1;
             highest_support = Q[state+'_ppp_normalized']+Q[state+'_pcr_normalized']+Q[state+'_plr_normalized'];
             console.log(`Strategic voting in the second round has lead to the PPP winning ${state} with ${highest_support}`);
-        } else if (Q[state+'_ppp_normalized']+Q[state+'_pdc_normalized']+Q[state+'_plr_normalized'] >= 0.5 && Q['winning_party_'+state] == "pnu" && Q.pdc_formed) {
+        } else if (Q[state+'_ppp_normalized']+Q[state+'_pdc_normalized']+Q[state+'_plr_normalized'] >= 0.5 && (Q['winning_party_'+state] == "pnu" || Q['winning_party_'+state] == "ppn") && Q.pdc_formed) {
             Q['winning_party_'+state] = "pdc";
             Q['strategic_voting_pdc_'+state] = 1;
             highest_support = Q[state+'_ppp_normalized']+Q[state+'_pdc_normalized']+Q[state+'_plr_normalized'];
             console.log(`Strategic voting in the second round has lead to the PDC winning ${state} with ${highest_support}`);
-        } else if (Q[state+'_pnu_normalized']+Q[state+'_pdc_normalized'] >= 0.5 && (Q['winning_party_'+state] == "ppp" || Q['winning_party_'+state] == "plr" || Q['winning_party_'+state] == "pcr")) {
+        } else if (Q[state+'_ppn_normalized']+Q[state+'_pnu_normalized']+Q[state+'_pdc_normalized'] >= 0.5 && (Q['winning_party_'+state] == "ppp" || Q['winning_party_'+state] == "plr" || Q['winning_party_'+state] == "pcr")) {
             Q['winning_party_'+state] = "pdc";
             Q['strategic_voting_3_'+state] = 1;
             highest_support = Q[state+'_pdc_normalized']+Q[state+'_pnu_normalized'];
@@ -280,12 +285,14 @@ Q.old_pnu_seats = Q.pnu_seats;
 Q.old_pcr_seats = Q.pcr_seats;
 Q.old_plr_seats = Q.plr_seats;
 Q.old_pdc_seats = Q.pdc_seats;
+Q.old_ppn_seats = Q.ppn_seats;
 
 Q.ppp_seats = 0;
 Q.pnu_seats = 0;
 Q.pcr_seats = 0;
 Q.plr_seats = 0;
 Q.pdc_seats = 0;
+Q.ppn_seats = 0;
 
 // Add seats for each winning party
 for (var state of Q.constituencies) {
@@ -404,6 +411,15 @@ data = data.concat([{
     "seats": Q.pnu_seats,
 }]);
 
+if (Q.ppn_seats && Q.ppn_formed) {
+    data.push({
+        "id": "ppn",
+        "legend": "PPN",
+        "name": "PPN",
+        "seats": Q.ppn_seats,
+    });
+}
+
 if (window && d3) {
     var width = 500;
     var height = 500;
@@ -421,8 +437,8 @@ if (window && d3) {
 
     var lines = d3.linegraph(false, false,
         Q.parties,
-        {'pcr': '#810B0B', 'plr': '#bb538b', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
-        {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
+        {'pcr': '#810B0B', 'plr': '#bb538b', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C', 'ppn': '#885508'},
+        {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU', 'ppn': 'PPN'}
     );
     lines.width(width).height(400);
     d3.select("#election_history").datum(Q.election_records).call(lines);
@@ -430,8 +446,8 @@ if (window && d3) {
     if (!Q.historical_mode) {
         var lines_2 = d3.linegraph(true, true,
             Q.parties,
-            {'pcr': '#810B0B', 'plr': '#bb538b', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C'},
-            {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU'}
+            {'pcr': '#810B0B', 'plr': '#bb538b', 'ppp': '#EE7524', 'pdc': '#a4c13d', 'pnu': '#40599C', 'ppn': '#885508'},
+            {'pcr': 'PCR', 'plr': 'PLR', 'ppp': 'PPP', 'pdc': 'PDC', 'pnu': 'PNU', 'ppn': 'PPN'}
         );
         lines_2.width(width).height(400);
         d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
@@ -456,6 +472,8 @@ go-to: coalition_menu
 [? if pdc_formed : {!<tr><td><div class="box" style='background-color:#a4c13d; outline: 2px; outline-style: solid;'> </div> !} **PDC:** {!</td><td>!} **[+ pdc_votes +]%** {!</td><td>!} **[+ str_votes_change_pdc +]** {!</td><td>!} **[+ pdc_seats +]** {!</td><td>!} **[+ str_change_pdc +]** {!</td></tr>!} ?]
 
 {!<tr><td><div class="box" style='background-color:#40599C; outline: 2px; outline-style: solid;'> </div> !} **PNU:** {!</td><td>!} **[+ pnu_votes +]%** {!</td><td>!} **[+ str_votes_change_pnu +]** {!</td><td>!} **[+ pnu_seats +]** {!</td><td>!} **[+ str_change_pnu +]** {!</td></tr>!}
+
+[? if ppn_formed : {!<tr><td><div class="box" style='background-color:#a4c13d; outline: 2px; outline-style: solid;'> </div> !} **PPN:** {!</td><td>!} **[+ ppn_votes +]%** {!</td><td>!} **[+ str_votes_change_ppn +]** {!</td><td>!} **[+ ppn_seats +]** {!</td><td>!} **[+ str_change_ppn +]** {!</td></tr>!} ?]
 
 {!</table>!}
 
@@ -529,6 +547,18 @@ go-to: coalition_menu
             {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ freeholder_pnu_display +]%{!</td>!}
             {!<td style="background-color: rgba(64, 89, 156, 0.1); font-size: 0.85em;">!}[+ unemployed_pnu_display +]%{!</td>!}
         {!</tr>!}
+
+        [? if ppn_formed : 
+        {!<tr>!}
+            {!<td><span style="color: #885508;"><b>PPN</b></span></td>!}
+            {!<td style="background-color: rgba(136, 85, 8, 0.1); font-size: 0.85em; padding: 10px">!}[+ workers_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(136, 85, 8, 0.1); font-size: 0.85em;">!}[+ new_middle_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(136, 85, 8, 0.1); font-size: 0.85em;">!}[+ old_middle_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(136, 85, 8, 0.1); font-size: 0.85em;">!}[+ peasant_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(136, 85, 8, 0.1); font-size: 0.85em;">!}[+ freeholder_pdc_display +]%{!</td>!}
+            {!<td style="background-color: rgba(136, 85, 8, 0.1); font-size: 0.85em;">!}[+ unemployed_pdc_display +]%{!</td>!}
+        {!</tr>!}
+        ?]
     {!</table>!}
     {!</div>!}
 {!</div>!}
