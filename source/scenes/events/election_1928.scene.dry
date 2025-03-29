@@ -404,12 +404,14 @@ if (Q.pdc_seats && Q.pdc_formed) {
     });
 }
 
-data = data.concat([{
-    "id": "pnu",
-    "legend": "PNU",
-    "name": "PNU",
-    "seats": Q.pnu_seats,
-}]);
+if (Q.pnu_seats) {
+    data.push({
+        "id": "pnu",
+        "legend": "PNU",
+        "name": "PNU",
+        "seats": Q.pnu_seats,
+    });
+}
 
 if (Q.ppn_seats && Q.ppn_formed) {
     data.push({
@@ -473,7 +475,7 @@ go-to: coalition_menu
 
 {!<tr><td><div class="box" style='background-color:#40599C; outline: 2px; outline-style: solid;'> </div> !} **PNU:** {!</td><td>!} **[+ pnu_votes +]%** {!</td><td>!} **[+ str_votes_change_pnu +]** {!</td><td>!} **[+ pnu_seats +]** {!</td><td>!} **[+ str_change_pnu +]** {!</td></tr>!}
 
-[? if ppn_formed : {!<tr><td><div class="box" style='background-color:#a4c13d; outline: 2px; outline-style: solid;'> </div> !} **PPN:** {!</td><td>!} **[+ ppn_votes +]%** {!</td><td>!} **[+ str_votes_change_ppn +]** {!</td><td>!} **[+ ppn_seats +]** {!</td><td>!} **[+ str_change_ppn +]** {!</td></tr>!} ?]
+[? if ppn_formed : {!<tr><td><div class="box" style='background-color:#885508; outline: 2px; outline-style: solid;'> </div> !} **PPN:** {!</td><td>!} **[+ ppn_votes +]%** {!</td><td>!} **[+ str_votes_change_ppn +]** {!</td><td>!} **[+ ppn_seats +]** {!</td><td>!} **[+ str_change_ppn +]** {!</td></tr>!} ?]
 
 {!</table>!}
 
